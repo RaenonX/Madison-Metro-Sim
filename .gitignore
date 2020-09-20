@@ -1,0 +1,8 @@
+# Project Files
+.idea/
+
+# Virtual Environment
+venv/
+
+# Generated map file (by folium)
+map.html
