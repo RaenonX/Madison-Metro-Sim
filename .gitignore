@@ -6,3 +6,10 @@ venv/
 
 # Generated map file (by folium)
 map.html
+
+# pytest cache file
+.pytest_cache/
+
+# Compiled files
+__pycache__
+*.pyc

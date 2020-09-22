@@ -1,0 +1,58 @@
+"""
+Single entry of stop data (stops.csv) in MMT GTFS dataset.
+
+The complete MMT GTFS dataset can be downloaded here:
+http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
+"""
+from dataclasses import dataclass
+from typing import List
+
+from .base import Locational
+
+__all__ = ("MMTStop",)
+
+
+@dataclass
+class MMTStop(Locational):
+    """
+    MMT GTFS stop entry.
+
+    .. note::
+        ``stop_code`` mostly is just a padded ``stop_id``.
+
+        For example, if ``stop_id`` is ``12``, then ``stop_code`` is ``0012``.
+
+        There are exceptional cases for this.
+
+        If the stop is a transfer point, ``stop_code`` will be the abbreviation instead.
+
+        For example, the ``stop_code`` of *South Transfer Point* is ``SoTP`` instead of ``4000``,
+        which is its ``stop_id``.
+    """
+
+    lat: float
+    lon: float
+
+    stop_id: int
+    stop_code: str
+    stop_name: str
+
+    @property
+    def name(self) -> str:
+        """
+        Formatted name of the stop.
+
+        The return will be <stop_name> (<stop_code>).
+        """
+        return f"{self.stop_name} ({self.stop_code})"
+
+    @staticmethod
+    def parse_from_row(row: List[str]):
+        """Parse a single entry into :class:`MMTStop` from a csv row."""
+        stop_id = int(row[0])
+        stop_code = row[1]
+        stop_name = row[2]
+
+        lat, lon = float(row[4]), float(row[5])
+
+        return MMTStop(lat, lon, stop_id, stop_code, stop_name)

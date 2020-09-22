@@ -1,0 +1,34 @@
+name: Madison Metro Sim - CI Tests
+
+on: [ push ]
+
+jobs:
+  pytest:
+    name: Run tests
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest ]
+
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install required packages
+        run: |
+          pip install -r requirements.txt
+
+      - name: Install pytest
+        run: |
+          pip install pytest
+
+      - name: Run tests
+        run: |
+          pytest

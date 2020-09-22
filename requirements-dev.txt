@@ -1,5 +1,12 @@
 # Jupyter notebook
 jupyter
 
+# CQA check
+pydocstyle
+pylint
+
+# CI
+pytest
+
 # Other necessary requirements
 -r requirements.txt
