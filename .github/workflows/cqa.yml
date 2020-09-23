@@ -29,10 +29,18 @@ jobs:
         run: |
           pip install pylint pydocstyle
 
-      - name: pylint checks
+      - name: pydocstyle checks (metro sim)
+        run: |
+          pydocstyle msnmetrosim --count
+
+      - name: pydocstyle checks (report generators)
+        run: |
+          pydocstyle reportgen --count
+
+      - name: pylint checks (metro sim)
         run: |
           pylint msnmetrosim
 
-      - name: pydocstyle checks
+      - name: pylint checks (report generators)
         run: |
-          pydocstyle msnmetrosim --count
+          pylint reportgen
