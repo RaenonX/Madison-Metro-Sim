@@ -1,11 +1,12 @@
 """Functions to generate folium map object."""
 from typing import Tuple
 
-from folium import Map as FoliumMap, Icon, Marker, PolyLine
+from folium import Map as FoliumMap, Icon, Marker, PolyLine, Popup
 from folium.plugins import MarkerCluster
 
 from msnmetrosim.controllers import (
-    MMTRouteDataController, MMTShapeDataController, MMTStopDataController, MMTTripDataController
+    MMTRouteDataController, MMTShapeDataController, MMTStopDataController, MMTTripDataController,
+    RidershipByStopController
 )
 from msnmetrosim.static import MAP_CENTER_COORD, MAP_TILE, MAP_ZOOM_START
 from msnmetrosim.utils import temporary_func
@@ -18,6 +19,7 @@ _routes = MMTRouteDataController.load_csv("mmt_gtfs/routes.csv")
 _shapes = MMTShapeDataController.load_csv("mmt_gtfs/shapes.csv")
 _stops = MMTStopDataController.load_csv("mmt_gtfs/stops.csv")
 _trips = MMTTripDataController.load_csv("mmt_gtfs/trips.csv")
+_ridership_stop = RidershipByStopController.load_csv("ridership/by_stop.csv")
 
 
 def plot_stops(folium_map: FoliumMap, clustered: bool = True):
@@ -34,9 +36,14 @@ def plot_stops(folium_map: FoliumMap, clustered: bool = True):
         parent = folium_map
 
     for stop in _stops.get_all_stops():
+        ridership = _ridership_stop.get_stop_data_by_id(stop.stop_id)
+
+        popup = Popup(f"{stop.name}<br>Weekday ridership: {ridership.weekday if ridership else '(unavailable)'}",
+                      min_width=250, max_width=800)
+
         Marker(
             stop.coordinate,
-            popup=stop.name,
+            popup=popup,
             icon=Icon(color="green", icon_color="white", icon="bus", angle=0,
                       prefix="fa")
         ).add_to(parent)
