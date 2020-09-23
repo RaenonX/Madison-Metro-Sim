@@ -4,9 +4,9 @@ Controller of the MMT GTFS route data.
 The complete MMT GTFS dataset can be downloaded here:
 http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 """
-import csv
 from typing import List, Dict
 
+from msnmetrosim.controllers.base import CSVLoadableController
 from msnmetrosim.models import MMTRoute
 
 __all__ = ("MMTRouteDataController", "RouteIdNotFoundError")
@@ -19,7 +19,7 @@ class RouteIdNotFoundError(KeyError):
         super().__init__(f"Data of route ID <{route_id}> not found")
 
 
-class MMTRouteDataController:
+class MMTRouteDataController(CSVLoadableController):
     """MMT route data controller."""
 
     def _init_dict_by_rid(self, route: MMTRoute):
@@ -27,6 +27,8 @@ class MMTRouteDataController:
         self._dict_by_rid[route.route_id] = route
 
     def __init__(self, routes: List[MMTRoute]):
+        super().__init__(routes)
+
         self._dict_by_rid: Dict[int, MMTRoute] = {}
 
         # Create a dict with route ID as key and route data entry as value
@@ -45,36 +47,5 @@ class MMTRouteDataController:
         return self._dict_by_rid[route_id]
 
     @staticmethod
-    def load_from_file(file_path: str):
-        """
-        Load the route data from route data file.
-
-        This file should be a csv with the following schema:
-
-            (
-                route_id,
-                service_id,
-                agency_id,
-                route_short_name,
-                route_long_name,
-                route_service_name,
-                route_desc,
-                route_type,
-                route_url,
-                route_color,
-                route_text_color,
-                bikes_allowed
-            )
-
-        This file could be found in the MMT GTFS dataset with the name ``routes.csv``.
-        """
-        routes = []
-
-        with open(file_path, "r") as routes_file:
-            csv_reader = csv.reader(routes_file, delimiter=",")
-            next(csv_reader, None)  # Dump header
-
-            for row in csv_reader:
-                routes.append(MMTRoute.parse_from_row(row))
-
-        return MMTRouteDataController(routes)
+    def on_row_read(row: List[str]) -> object:
+        return MMTRoute.parse_from_row(row)

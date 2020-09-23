@@ -122,7 +122,7 @@ class MMTTrip:
 
     @staticmethod
     def parse_from_row(row: List[str]):
-        """Parse a single entry into :class:`MMTTrip` from a csv row."""
+        """Parse a single entry into :class:`MMTTrip` from a row of ``mmt_gtfs/trips.csv``."""
         route_id = int(row[0])
         route_short_name = row[1]
 

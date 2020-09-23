@@ -34,7 +34,7 @@ class MMTShape(Locational):
 
     @staticmethod
     def parse_from_row(row: List[str]):
-        """Parse a single entry into :class:`MMTShape` from a csv row."""
+        """Parse a single entry into :class:`MMTShape` from a row of ``mmt_gtfs/shapes.csv``."""
         shape_id = int(row[0])
         shape_code = row[1]
 

@@ -4,9 +4,9 @@ Controller of the MMT GTFS trip data.
 The complete MMT GTFS dataset can be downloaded here:
 http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 """
-import csv
 from typing import List, Dict
 
+from msnmetrosim.controllers.base import CSVLoadableController
 from msnmetrosim.models import MMTTrip
 from msnmetrosim.utils import temporary_func
 
@@ -20,8 +20,13 @@ class ServiceIdNotFoundError(KeyError):
         super().__init__(f"Data of service ID <{service_id}> not found")
 
 
-class MMTTripDataController:
-    """MMT trip data controller."""
+class MMTTripDataController(CSVLoadableController):
+    """
+    MMT trip data controller.
+
+    Data file that will use this controller:
+    - mmt_gtfs/trips.csv
+    """
 
     def _init_dict_by_serv_id(self, trip: MMTTrip):
         sid = trip.service_id
@@ -32,6 +37,8 @@ class MMTTripDataController:
         self._dict_by_serv_id[sid].append(trip)
 
     def __init__(self, trips: List[MMTTrip]):
+        super().__init__(trips)
+
         self._core: List[MMTTrip] = trips
         self._dict_by_serv_id: Dict[str, List[MMTTrip]] = {}
 
@@ -85,38 +92,5 @@ class MMTTripDataController:
         return ret
 
     @staticmethod
-    def load_from_file(file_path: str):
-        """
-        Load the trip data from trip data file.
-
-        This file should be a csv with the following schema:
-
-            (
-                route_id,
-                route_short_name,
-                service_id,
-                trip_id,
-                trip_headsign,
-                direction_id,
-                direction_name,
-                block_id,
-                shape_id,
-                shape_code,
-                trip_type,
-                trip_sort,
-                wheelchair_accessible,
-                bikes_allowed
-            )
-
-        This file could be found in the MMT GTFS dataset with the name ``trips.csv``.
-        """
-        trips = []
-
-        with open(file_path, "r") as trips_file:
-            csv_reader = csv.reader(trips_file, delimiter=",")
-            next(csv_reader, None)  # Dump header
-
-            for row in csv_reader:
-                trips.append(MMTTrip.parse_from_row(row))
-
-        return MMTTripDataController(trips)
+    def on_row_read(row: List[str]) -> object:
+        return MMTTrip.parse_from_row(row)

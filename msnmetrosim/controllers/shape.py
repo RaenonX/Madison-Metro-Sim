@@ -4,9 +4,9 @@ Controller of the MMT GTFS shape data.
 The complete MMT GTFS dataset can be downloaded here:
 http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 """
-import csv
 from typing import List, Dict, Tuple
 
+from msnmetrosim.controllers.base import CSVLoadableController
 from msnmetrosim.models import MMTShape
 
 __all__ = ("MMTShapeDataController", "ShapeIdNotFoundError")
@@ -19,8 +19,13 @@ class ShapeIdNotFoundError(KeyError):
         super().__init__(f"Data of shape ID <{shape_id}> not found")
 
 
-class MMTShapeDataController:
-    """MMT shape data controller."""
+class MMTShapeDataController(CSVLoadableController):
+    """
+    MMT shape data controller.
+
+    Data file that will use this controller:
+    - mmt_gtfs/shapes.csv
+    """
 
     def _init_dict_by_id(self, shape: MMTShape):
         sid = shape.shape_id
@@ -40,6 +45,8 @@ class MMTShapeDataController:
 
         :param shapes: list of shape data
         """
+        super().__init__(shapes)
+
         self._dict_by_id: Dict[int, List[MMTShape]] = {}
 
         # Create a dict with ID as key and shape data entry as value
@@ -58,23 +65,5 @@ class MMTShapeDataController:
         return [shape.coordinate for shape in self._dict_by_id[shape_id]]
 
     @staticmethod
-    def load_from_file(file_path: str):
-        """
-        Load the shape data from shape data file.
-
-        This file should be a csv with the following schema:
-
-            (shape_id, shape_code, shape_pt_lat, shape_pt_lon, shape_pt_sequence, shape_dist_traveled)
-
-        This file could be found in the MMT GTFS dataset with the name ``shapes.csv``.
-        """
-        shapes = []
-
-        with open(file_path, "r") as shapes_file:
-            csv_reader = csv.reader(shapes_file, delimiter=",")
-            next(csv_reader, None)  # Dump header
-
-            for row in csv_reader:
-                shapes.append(MMTShape.parse_from_row(row))
-
-        return MMTShapeDataController(shapes)
+    def on_row_read(row: List[str]) -> object:
+        return MMTShape.parse_from_row(row)

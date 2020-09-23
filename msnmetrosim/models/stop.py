@@ -48,7 +48,7 @@ class MMTStop(Locational):
 
     @staticmethod
     def parse_from_row(row: List[str]):
-        """Parse a single entry into :class:`MMTStop` from a csv row."""
+        """Parse a single entry into :class:`MMTStop` from a row of ``mmt_gtfs/stops.csv``."""
         stop_id = int(row[0])
         stop_code = row[1]
         stop_name = row[2]
