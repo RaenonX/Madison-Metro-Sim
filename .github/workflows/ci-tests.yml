@@ -2,6 +2,9 @@ name: Madison Metro Sim - CI Tests
 
 on: [ push ]
 
+env:
+  TEST_PERFORMANCE_TOLERANCE: 3.0
+
 jobs:
   pytest:
     name: Run tests
