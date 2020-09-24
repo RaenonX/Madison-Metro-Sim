@@ -98,7 +98,8 @@ class MMTStopDataController(CSVLoadableController):
         """
         Form a search box and return the stops inside it, including the stop right on the border of the box.
 
-        The search box will be centered at ``(center_lat, center_lon)``, with the offset of ``search_range`` at max.
+        The search box will be centered at ``(center_lat, center_lon)``,
+        with the offset of ``search_range`` degree at max.
 
         Unit of ``search_range`` is degree (in latitude and longitude).
         """

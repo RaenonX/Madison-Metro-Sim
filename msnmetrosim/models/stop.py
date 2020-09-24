@@ -7,13 +7,13 @@ http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 from dataclasses import dataclass
 from typing import List
 
-from .base import LocationalModelBase
+from .base import LocationalModelBase, HasCrossModelBase
 
 __all__ = ("MMTStop",)
 
 
 @dataclass
-class MMTStop(LocationalModelBase):
+class MMTStop(HasCrossModelBase, LocationalModelBase):
     """
     MMT GTFS stop entry.
 
@@ -32,6 +32,9 @@ class MMTStop(LocationalModelBase):
 
     lat: float
     lon: float
+
+    primary: str
+    secondary: str
 
     stop_id: int
     stop_code: str
@@ -55,4 +58,7 @@ class MMTStop(LocationalModelBase):
 
         lat, lon = float(row[4]), float(row[5])
 
-        return MMTStop(lat, lon, stop_id, stop_code, stop_name)
+        primary_street = row[13]
+        cross_location = row[15]
+
+        return MMTStop(lat, lon, primary_street, cross_location, stop_id, stop_code, stop_name)

@@ -5,21 +5,50 @@ from folium import Map as FoliumMap, Icon, Marker, PolyLine, Popup
 from folium.plugins import MarkerCluster
 
 from msnmetrosim.controllers import (
-    MMTRouteDataController, MMTShapeDataController, MMTStopDataController, MMTTripDataController,
+    # MMT GTFS data controllers
+    MMTRouteDataController, MMTShapeDataController, MMTStopDataController, MMTStopsAtCrossDataController,
+    MMTTripDataController,
+    # Ridership data controllers
     RidershipByStopController
 )
 from msnmetrosim.static import MAP_CENTER_COORD, MAP_TILE, MAP_ZOOM_START
 from msnmetrosim.utils import temporary_func
 
-__all__ = ("generate_clean_map", "generate_92_wkd_routes_and_stops")
+__all__ = ("generate_clean_map", "generate_92_wkd_routes_and_stops", "generate_92_wkd_routes_and_grouped_stops")
 
 # Preloading the data - be aware that these should be removed if controllers will perform manipulations
 
 _routes = MMTRouteDataController.load_csv("mmt_gtfs/routes.csv")
 _shapes = MMTShapeDataController.load_csv("mmt_gtfs/shapes.csv")
 _stops = MMTStopDataController.load_csv("mmt_gtfs/stops.csv")
+_stops_cross = MMTStopsAtCrossDataController(_stops)
 _trips = MMTTripDataController.load_csv("mmt_gtfs/trips.csv")
 _ridership_stop = RidershipByStopController.load_csv("ridership/by_stop.csv")
+
+
+def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
+    """
+    Plot all the stops grouped by its located cross onto ``folium_map``.
+
+    ``clustered`` determines if the stop will be clustered/expanded upon zoom.
+
+    Could use customized color in the future for better rendering effect.
+    """
+    if clustered:
+        parent = MarkerCluster().add_to(folium_map)
+    else:
+        parent = folium_map
+
+    for stop in _stops_cross.grouped_stops:
+        popup = Popup(f"{stop.primary} & {stop.secondary}<br>{stop.name_list_html}",
+                      min_width=250, max_width=800)
+
+        Marker(
+            stop.coordinate,
+            popup=popup,
+            icon=Icon(color="green", icon_color="white", icon="bus", angle=0,
+                      prefix="fa")
+        ).add_to(parent)
 
 
 def plot_stops(folium_map: FoliumMap, clustered: bool = True):
@@ -90,6 +119,17 @@ def generate_92_wkd_routes_and_stops() -> FoliumMap:
     folium_map = generate_clean_map()
 
     plot_stops(folium_map)
+    plot_92_wkd_routes(folium_map)
+
+    return folium_map
+
+
+@temporary_func
+def generate_92_wkd_routes_and_grouped_stops() -> FoliumMap:
+    """Generate a map with 92_WKD routes and all stops grouped by cross plotted on the map."""
+    folium_map = generate_clean_map()
+
+    plot_stops_by_cross(folium_map)
     plot_92_wkd_routes(folium_map)
 
     return folium_map
