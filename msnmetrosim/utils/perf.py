@@ -2,7 +2,7 @@
 import inspect
 import time
 from dataclasses import dataclass
-from typing import Any, Union, List
+from typing import Any
 
 __all__ = ("time_function",)
 
@@ -30,7 +30,7 @@ class TimingResult:
                f"Line {self.caller_stack.lineno} {self.caller_stack.function} in {self.caller_stack.filename}"
 
 
-def time_function(fn, *args, log: bool = True, count: int = 1, **kwargs) -> Union[List[TimingResult], TimingResult]:
+def time_function(fn, *args, log: bool = True, count: int = 1, **kwargs) -> TimingResult:
     """
     Time the function execution and returns :class:`ExecutionResult`.
 
@@ -39,9 +39,9 @@ def time_function(fn, *args, log: bool = True, count: int = 1, **kwargs) -> Unio
 
     ``count`` must be > 0.
 
-    If ``count`` = 1, the return will be a single :class:`TimingResult`.
+    If ``count`` = 1, the ``TimingResult.return_`` will be a single return.
 
-    If ``count`` > 1, the return will be a list of :class:`TimingResult`.
+    If ``count`` > 1, the ``TimingResult.return_`` will be a list.
 
     Usage:
 
@@ -58,14 +58,18 @@ def time_function(fn, *args, log: bool = True, count: int = 1, **kwargs) -> Unio
     :param kwargs: kwargs for `fn`
     """
     _start_ = time.time_ns()
-    ret = fn(*args, **kwargs)
 
     if count == 1:
+        ret = fn(*args, **kwargs)
         exec_result = TimingResult(return_=ret, execution_ns=time.time_ns() - _start_,
                                    caller_stack=inspect.stack()[1])
     else:
-        exec_result = [TimingResult(return_=ret, execution_ns=time.time_ns() - _start_,
-                                    caller_stack=inspect.stack()[1]) for _ in range(count)]
+        ret = []
+        for _ in range(count):
+            ret.append(fn(*args, **kwargs))
+
+        exec_result = TimingResult(return_=ret, execution_ns=time.time_ns() - _start_,
+                                   caller_stack=inspect.stack()[1])
 
     if log:
         print(exec_result)
