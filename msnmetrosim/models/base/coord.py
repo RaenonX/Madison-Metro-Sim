@@ -5,11 +5,11 @@ from typing import Tuple
 
 from msnmetrosim.utils import distance
 
-__all__ = ("Locational",)
+__all__ = ("LocationalModelBase",)
 
 
 @dataclass
-class Locational(ABC):
+class LocationalModelBase(ABC):
     """Interface for the data entry which contains coordinates."""
 
     lat: float

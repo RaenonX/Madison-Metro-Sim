@@ -7,13 +7,13 @@ http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 from dataclasses import dataclass
 from typing import List
 
-from .base import Locational
+from .base import LocationalModelBase
 
 __all__ = ("MMTStop",)
 
 
 @dataclass
-class MMTStop(Locational):
+class MMTStop(LocationalModelBase):
     """
     MMT GTFS stop entry.
 

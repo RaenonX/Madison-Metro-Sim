@@ -1,2 +1,2 @@
 """Base classes for data entry classes."""
-from .coord import Locational
+from .coord import LocationalModelBase
