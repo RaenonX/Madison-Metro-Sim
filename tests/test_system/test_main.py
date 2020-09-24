@@ -4,6 +4,7 @@ from msnmetrosim.views import generate_clean_map, generate_92_wkd_routes_and_sto
 
 
 def test_gen_clean_map():
+    """Test if a clean map can be generated."""
     generate_clean_map().save("temp.html")
 
     # cleanup
@@ -11,6 +12,7 @@ def test_gen_clean_map():
 
 
 def test_gen_92_wkd_map():
+    """Test if a map with routes and stop of 92_WKD service plan can be generated."""
     generate_92_wkd_routes_and_stops().save("temp.html")
 
     # cleanup
