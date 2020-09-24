@@ -2,6 +2,10 @@
 
 Madison Metro Simulator.
 
+#### Ray's worktime
+
+[![time tracker](https://wakatime.com/badge/github/RaenonX/Madison-Metro-Sim.svg)](https://wakatime.com/badge/github/RaenonX/Madison-Metro-Sim)
+
 ------
 
 ### Introduction
@@ -17,11 +21,21 @@ The intended group of users of this program is its developers and technical user
 
 1. Generate a map.
 
-    ```python
+    ```bash
     py main.py
     ```
 
 2. Open the generated `map.html` file.
+
+------
+
+More map generating functions can be called from `msnmetrosim.views`.
+   
+```python
+from msnmetrosim.views import *
+
+generate_clean_map().save("my_map.html")
+```
 
 ------
 
