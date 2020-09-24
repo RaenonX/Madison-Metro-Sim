@@ -39,7 +39,7 @@ def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
     else:
         parent = folium_map
 
-    for stop in _stops_cross.grouped_stops:
+    for stop in _stops_cross.all_data:
         popup = Popup(f"{stop.primary} & {stop.secondary}<br>{stop.name_list_html}",
                       min_width=250, max_width=800)
 
@@ -64,7 +64,7 @@ def plot_stops(folium_map: FoliumMap, clustered: bool = True):
     else:
         parent = folium_map
 
-    for stop in _stops.get_all_stops():
+    for stop in _stops.all_data:
         ridership = _ridership_stop.get_stop_data_by_id(stop.stop_id)
 
         popup = Popup(f"{stop.name}<br>Weekday ridership: {ridership.weekday if ridership else '(unavailable)'}",

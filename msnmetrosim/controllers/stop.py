@@ -6,7 +6,7 @@ http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 """
 from dataclasses import dataclass, field, InitVar
 from math import isqrt
-from typing import List, Dict, Generator, Tuple
+from typing import List, Dict, Tuple
 
 from msnmetrosim.controllers.base import CSVLoadableController
 from msnmetrosim.models import MMTStop
@@ -131,11 +131,6 @@ class MMTStopDataController(CSVLoadableController):
                 stops_in_box.append(stop)
 
         return stops_in_box
-
-    def get_all_stops(self) -> Generator[MMTStop, None, None]:
-        """Get all the stops in the loaded data."""
-        for stop in self._dict_by_id.values():
-            yield stop
 
     def find_closest_stop(self, lat: float, lon: float) -> ClosestStopResult:
         """Find the closest stop around the location at ``(lat, lon)``."""

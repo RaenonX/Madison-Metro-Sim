@@ -5,15 +5,13 @@ from abc import ABC, abstractmethod
 from typing import List
 
 from msnmetrosim.static import DATA_DIR
+from .holder import DataListHolder
 
 __all__ = ("CSVLoadableController",)
 
 
-class CSVLoadableController(ABC):
+class CSVLoadableController(DataListHolder, ABC):
     """Base class of the controller which can data can be loaded from CSV file."""
-
-    def __init__(self, data: list):
-        self._data = data
 
     @staticmethod
     def get_csv_file_abs_path(file_path: str):

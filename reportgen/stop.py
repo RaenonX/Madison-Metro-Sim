@@ -9,7 +9,7 @@ def get_stops_without_ridership():
     """Print the stops that do not have ridership data."""
     no_data = []
 
-    for stop in _stops.get_all_stops():
+    for stop in _stops.all_data:
         ridership = _ridership_stop.get_stop_data_by_id(stop.stop_id)
         if ridership is None:
             no_data.append(stop)
