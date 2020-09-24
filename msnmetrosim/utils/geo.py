@@ -1,8 +1,9 @@
 """Geographical helper functions."""
+from decimal import Decimal
 from math import asin, sin, cos, sqrt, atan2, radians, degrees
-from typing import Tuple
+from typing import Tuple, Set
 
-__all__ = ("distance", "offset")
+__all__ = ("distance", "offset", "generate_points")
 
 EARTH_R = 6378.137
 """Approximate radius of earth in km. Used to calculate the distance."""
@@ -36,9 +37,9 @@ def distance(p1: Tuple[float, float], p2: Tuple[float, float]):  # pylint: disab
     return EARTH_R * c
 
 
-def offset(coord: Tuple[float, float], offset_dist: float) -> Tuple[float, float]:
+def offset(coord: Tuple[float, float], offset_km: float, bearing: float) -> Tuple[float, float]:
     """
-    Calculate the new coordinate offset from ``coord`` by ``offset_dist`` km.
+    Calculate the new coordinate offset from ``coord`` by ``offset_dist`` km with ``bearing`` degree.
 
     This is using Haversine formula.
 
@@ -48,8 +49,61 @@ def offset(coord: Tuple[float, float], offset_dist: float) -> Tuple[float, float
     lat_1 = radians(coord[0])
     lon_1 = radians(coord[1])
 
-    lat_2 = asin(sin(lat_1) * cos(offset_dist / EARTH_R) + cos(lat_1) * sin(offset_dist / EARTH_R) * cos(radians(90)))
-    lon_2 = lon_1 + atan2(sin(radians(90)) * sin(offset_dist / EARTH_R) * cos(lat_1),
-                          cos(offset_dist / EARTH_R) - sin(lat_1) * sin(lat_2))
+    bearing_rad = radians(bearing)
+
+    lat_2 = asin(sin(lat_1) * cos(offset_km / EARTH_R) + cos(lat_1) * sin(offset_km / EARTH_R) * cos(bearing_rad))
+    lon_2 = lon_1 + atan2(sin(bearing_rad) * sin(offset_km / EARTH_R) * cos(lat_1),
+                          cos(offset_km / EARTH_R) - sin(lat_1) * sin(lat_2))
 
     return degrees(lat_2), degrees(lon_2)
+
+
+def generate_points(center_coord: Tuple[float, float], range_km: float, interval_km: float) \
+        -> Set[Tuple[float, float]]:
+    """
+    Generates coordinates within ``range_km`` km centered at ``center_coord`` in ``interval_km``.
+
+    The generated points will circle around ``center_coord``.
+
+    Count of the points of each layer of the circle
+    will be **n * 8** where **n** is the current layer starting from 0 (center),
+    except that the center point will also being included.
+
+    Requirements
+    ============
+
+    Both ``range_km`` and ``interval_km`` must be > 0.
+
+    If ``interval_km`` > ``range_km``, a set containing only the center coordinates will be returned.
+
+    :raises ValueError: if either ``range_km`` or ``interval_km`` is not > 0.
+    """
+    if range_km <= 0:
+        raise ValueError(f"`range_km` should be > 0: {range_km}")
+
+    if interval_km <= 0:
+        raise ValueError(f"`interval_km` should be > 0: {interval_km}")
+
+    center_lat, center_lon = center_coord
+
+    ret: Set[Tuple[float, float]] = {center_coord}
+
+    # Using/casting numbers to :class:`Decimal` to prevent precision lose on generating the circle
+    range_km = Decimal(str(range_km))
+
+    cur_range = Decimal(str(interval_km))
+    cur_layer = 1
+
+    while cur_range <= range_km:
+        cur_bearing = 0
+        cur_pt_count = cur_layer * 8
+        cur_bearing_interval = 360 / cur_pt_count
+
+        while cur_bearing < 360:
+            ret.add(offset((center_lat, center_lon), cur_layer * interval_km, cur_bearing))
+            cur_bearing += cur_bearing_interval
+
+        cur_range += Decimal(str(interval_km))
+        cur_layer += 1
+
+    return ret

@@ -26,17 +26,21 @@ def test_closest_stop():
 def test_closest_stop_performance():
     """Test if the performance of getting the closest stops is OK."""
     # In Cottage Grove, very distant from the bus stops (unusual case)
-    result = time_function(mmt_stop_controller.find_closest_stop, 43.086601, -89.208467)
-    assert result.execution_ms < 3.5
+    result = time_function(mmt_stop_controller.find_closest_stop, 43.086601, -89.208467, count=1000)
+    assert result.execution_ms < 2500  # Expected to be 1300~1500 ms / 2000 ms on Github Actions
 
     # On Reddan Soccer Park, comparatively distant from the bus stops
-    result = time_function(mmt_stop_controller.find_closest_stop, 43.006027, -89.524661)
-    assert result.execution_ms < 2.5
+    result = time_function(mmt_stop_controller.find_closest_stop, 43.006027, -89.524661, count=1000)
+    assert result.execution_ms < 1500  # Expected to be 1000 ms
 
     # In UW Campus, has a stop very close to this point
-    result = time_function(mmt_stop_controller.find_closest_stop, 43.084163, -89.324808)
-    assert result.execution_ms < 1.5
+    result = time_function(mmt_stop_controller.find_closest_stop, 43.084163, -89.324808, count=1000)
+    assert result.execution_ms < 200  # Expected to be 80~110 ms
 
     # In NW of Lake Monona, on Walgreens, has a stop very close to this point
-    result = time_function(mmt_stop_controller.find_closest_stop, 43.073746, -89.406702)
-    assert result.execution_ms < 1.5
+    result = time_function(mmt_stop_controller.find_closest_stop, 43.073746, -89.406702, count=1000)
+    assert result.execution_ms < 220  # Expected to be 90~130 ms
+
+
+if __name__ == '__main__':
+    test_closest_stop_performance()
