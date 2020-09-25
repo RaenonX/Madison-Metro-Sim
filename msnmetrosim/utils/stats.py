@@ -8,10 +8,15 @@ __all__ = ("DataMetrics",)
 
 @dataclass
 class DataMetrics:
-    """Get the metrics of a series of a data."""
+    """
+    Get the metrics of a series of a data.
+
+    .. note::
+        https://docs.python.org/3/library/statistics.html
+    """
 
     data: InitVar[List[float]]
-    quantile_n: InitVar[int]
+    quantile_n: InitVar[int] = 10
 
     cut_points: List[float] = field(init=False)
     """
