@@ -1,18 +1,15 @@
 """Controller of the MMT GTFS stops grouped by its located cross."""
-from typing import Dict
+from typing import Dict, Optional
 
 from msnmetrosim.models import MMTStopsAtCross
-from .base import DataListHolder
+from .base import LocationalDataController
 from .stop import MMTStopDataController
 
 __all__ = ("MMTStopsAtCrossDataController",)
 
 
-class MMTStopsAtCrossDataController(DataListHolder):
+class MMTStopsAtCrossDataController(LocationalDataController):
     """Controller of the MMT GTFS stops grouped by its located cross."""
-
-    # To be removed after adding more public methods
-    # pylint: disable=too-few-public-methods
 
     def _init_dict_street(self, stop_ctrl: MMTStopDataController):
         # Create an intermediate grouping dict
@@ -33,3 +30,11 @@ class MMTStopsAtCrossDataController(DataListHolder):
         self._init_dict_street(stop_ctrl)
 
         super().__init__(list(self._dict_street.values()))
+
+    def get_grouped_stop_by_street_names(self, street_1: str, street_2: str) -> Optional[MMTStopsAtCross]:
+        """
+        Get the stop located at the cross of ``street_1`` and ``street_2``.
+
+        Returns ``None`` if not found.
+        """
+        return self._dict_street.get(MMTStopsAtCross.calculate_hash(street_1, street_2))

@@ -21,4 +21,9 @@ class HasCrossModelBase(ABC):
         # Out[11]: 1.2402921000000333
         #
         # Primary and secondary streets need to be switchable without changing the outcome
-        return hash((self.primary, self.secondary)) + hash((self.secondary, self.primary))
+        return self.calculate_hash(self.primary, self.secondary)
+
+    @staticmethod
+    def calculate_hash(street_1: str, street_2: str):
+        """Calculate an unique hash ID of a street cross."""
+        return hash((street_1, street_2)) + hash((street_2, street_1))

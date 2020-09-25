@@ -3,6 +3,8 @@
 # Reason of the good names:
 # - _
 #   often used as dummy variable during unpacking
+# - T
+#   often used to for TypeVar
 # - f
 #   often used as a file stream name
 # - i, j, k
@@ -18,7 +20,7 @@
 # - fn
 #   often used to represent a function address
 
-good-names=_,f,i,j,k,s,v,dt,ex,fn,tz
+good-names=_,T,f,i,j,k,s,v,dt,ex,fn,tz
 
 [FORMAT]
 
