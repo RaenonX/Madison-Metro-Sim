@@ -21,7 +21,7 @@ __all__ = ("generate_clean_map", "generate_92_wkd_routes_and_stops", "generate_9
 _routes = MMTRouteDataController.load_csv("mmt_gtfs/routes.csv")
 _shapes = MMTShapeDataController.load_csv("mmt_gtfs/shapes.csv")
 _stops = MMTStopDataController.load_csv("mmt_gtfs/stops.csv")
-_stops_cross = MMTStopsAtCrossDataController(_stops)
+_stops_cross = MMTStopsAtCrossDataController.from_stop_controller(_stops)
 _trips = MMTTripDataController.load_csv("mmt_gtfs/trips.csv")
 _ridership_stop = RidershipByStopController.load_csv("ridership/by_stop.csv")
 

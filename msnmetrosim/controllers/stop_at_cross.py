@@ -1,7 +1,7 @@
 """Controller of the MMT GTFS stops grouped by its located cross."""
-from typing import Dict, Optional
+from typing import Dict, Optional, List
 
-from msnmetrosim.models import MMTStopsAtCross
+from msnmetrosim.models import MMTStop, MMTStopsAtCross
 from .base import LocationalDataController
 from .stop import MMTStopDataController
 
@@ -11,11 +11,11 @@ __all__ = ("MMTStopsAtCrossDataController",)
 class MMTStopsAtCrossDataController(LocationalDataController):
     """Controller of the MMT GTFS stops grouped by its located cross."""
 
-    def _init_dict_street(self, stop_ctrl: MMTStopDataController):
+    def _init_dict_street(self, stop_data: List[MMTStop]):
         # Create an intermediate grouping dict
         temp = {}
 
-        for stop in stop_ctrl.all_data:
+        for stop in stop_data:
             cross_id = stop.unique_cross_id
             if cross_id not in temp:
                 temp[cross_id] = []
@@ -25,9 +25,9 @@ class MMTStopsAtCrossDataController(LocationalDataController):
         for cross_id, stops in temp.items():
             self._dict_street[cross_id] = MMTStopsAtCross(stops[0].primary, stops[0].secondary, stops)
 
-    def __init__(self, stop_ctrl: MMTStopDataController):
+    def __init__(self, stop_data: List[MMTStop]):
         self._dict_street: Dict[int, MMTStopsAtCross] = {}
-        self._init_dict_street(stop_ctrl)
+        self._init_dict_street(stop_data)
 
         super().__init__(list(self._dict_street.values()))
 
@@ -38,3 +38,8 @@ class MMTStopsAtCrossDataController(LocationalDataController):
         Returns ``None`` if not found.
         """
         return self._dict_street.get(MMTStopsAtCross.calculate_hash(street_1, street_2))
+
+    @staticmethod
+    def from_stop_controller(stop_ctrl: MMTStopDataController):
+        """Create an :class:`MMTStopsAtCrossDataController` from :class:`MMTStopDataController`."""
+        return MMTStopsAtCrossDataController(stop_ctrl.all_data)
