@@ -2,9 +2,10 @@
 from abc import ABC
 from dataclasses import dataclass, InitVar, field
 from math import isqrt
-from typing import List, Tuple, TypeVar
+from typing import List, Tuple, TypeVar, Iterable, Optional
 
 from msnmetrosim.models.base import LocationalModelBase
+from msnmetrosim.utils import DataMetrics
 from .holder import DataListHolder
 
 __all__ = ("ClosestDataResult", "LocationalDataController")
@@ -112,6 +113,18 @@ class LocationalDataController(DataListHolder, ABC):
                 data_in_box.append(stop)
 
         return data_in_box
+
+    def get_distance_metrics_to_closest(self, coords: Iterable[Tuple[float, float]], name: Optional[str] = None) \
+            -> DataMetrics:
+        """Get the distance metrics of ``coords`` to the closest data."""
+        # Get the distances from the coords to the closest location/data
+        distances = []
+
+        for coord in coords:
+            distances.append(self.find_closest_data(*coord).distance)
+
+        # Calculate and metrics
+        return DataMetrics(distances, name=name)
 
     def find_closest_data(self, lat: float, lon: float) -> ClosestDataResult:
         """Find the data closest to the location at ``(lat, lon)``."""

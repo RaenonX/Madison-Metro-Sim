@@ -23,6 +23,15 @@ class HasCrossModelBase(ABC):
         # Primary and secondary streets need to be switchable without changing the outcome
         return self.calculate_hash(self.primary, self.secondary)
 
+    @property
+    def cross_name(self):
+        """
+        Get the name of the cross.
+
+        The return will be (<PRIMARY> & <SECONDARY>).
+        """
+        return f"{self.primary} & {self.secondary}"
+
     @staticmethod
     def calculate_hash(street_1: str, street_2: str):
         """Calculate an unique hash ID of a street cross."""

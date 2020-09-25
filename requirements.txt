@@ -1,2 +1,5 @@
 # Interactive map
 folium
+
+# Graph plotting
+matplotlib
