@@ -7,7 +7,7 @@ from folium.plugins import MarkerCluster
 from msnmetrosim.controllers import (
     MMTRouteDataController, MMTShapeDataController, MMTStopDataController, MMTTripDataController
 )
-from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START
+from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START, RESOLUTION_TILE
 from msnmetrosim.utils import temporary_func
 
 __all__ = ("generate_clean_map", "generate_92_wkd_routes_and_stops")
@@ -73,7 +73,8 @@ def generate_clean_map(center_coord: Tuple[float, float] = None,
     """
     return FoliumMap(location=center_coord if center_coord else MAP_MADISON_CENTER_COORD,
                      tiles=tile if tile else MAP_TILE,
-                     zoom_start=zoom_start if zoom_start else MAP_ZOOM_START)
+                     zoom_start=zoom_start if zoom_start else MAP_ZOOM_START,
+                     control_scale=RESOLUTION_TILE)
 
 
 @temporary_func
