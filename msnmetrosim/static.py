@@ -3,14 +3,17 @@
 # Map configurations
 import os
 
-MAP_CENTER_COORD = (43.080171, -89.380797)
+MAP_MADISON_CENTER_COORD = (43.080171, -89.380797)
 """The center coordinates of the map upon open."""
 
-MAP_TILE = "CartoDB dark_matter"
+MAP_TILE = "CartoDB Positron"
 """Map tile style."""
 
-MAP_ZOOM_START = 14
+MAP_ZOOM_START = 12
 """Map zoom scale upon open."""
+
+RESOLUTION_TILE = "@2x"
+"""Map resolution tiles"""
 
 # Data configurations
 
