@@ -40,6 +40,8 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
     stop_code: str
     stop_name: str
 
+    wheelchair_accessible: bool
+
     @property
     def name(self) -> str:
         """
@@ -48,6 +50,14 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
         The return will be <stop_name> (<stop_code>).
         """
         return f"{self.stop_name} ({self.stop_code})"
+
+    def wheelchair_accessible(self) -> bool:
+        """
+        Formatted name of the stop.
+
+        The return will be <stop_name> (<stop_code>).
+        """
+        return self.wheelchair_accessible
 
     @staticmethod
     def parse_from_row(row: List[str]):
@@ -60,5 +70,6 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
 
         primary_street = row[13]
         cross_location = row[15]
+        wheelchair_accessible = bool(int(row[12]))
 
-        return MMTStop(lat, lon, primary_street, cross_location, stop_id, stop_code, stop_name)
+        return MMTStop(lat, lon, primary_street, cross_location, stop_id, stop_code, stop_name, wheelchair_accessible)
