@@ -24,7 +24,8 @@ class MMTStopsAtCrossDataController(LocationalDataController):
             temp[cross_id].append(stop)
 
         for cross_id, stops in temp.items():
-            self._dict_street[cross_id] = MMTStopsAtCross(stops[0].primary, stops[0].secondary, stops)
+            self._dict_street[cross_id] = MMTStopsAtCross(stops[0].primary, stops[0].secondary,
+                                                          stops[0].wheelchair_accessible, stops)
 
     def __init__(self, stop_data: List[MMTStop]):
         self._dict_street: Dict[int, MMTStopsAtCross] = {}
