@@ -36,12 +36,10 @@ def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
     """
 
 
-    # if clustered:
-    #     parent = MarkerCluster().add_to(folium_map)
-    # else:
-    #     parent = folium_map
-
-    parent = folium_map
+    if clustered:
+        parent = MarkerCluster().add_to(folium_map)
+    else:
+        parent = folium_map
 
     for stop in _stops_cross.all_data:
         popup = Popup(f"{stop.primary} & {stop.secondary}<br>{stop.name_list_html}",
@@ -111,7 +109,8 @@ def plot_92_wkd_routes(folium_map: FoliumMap):
 
 def generate_clean_map(center_coord: Tuple[float, float] = None,
                        tile: str = None,
-                       zoom_start: int = None) -> FoliumMap:
+                       zoom_start: int = None,
+                       constrol_scale: str = None) -> FoliumMap:
     """
     Generate a clean map.
 
@@ -120,7 +119,7 @@ def generate_clean_map(center_coord: Tuple[float, float] = None,
     return FoliumMap(location=center_coord if center_coord else MAP_CENTER_COORD,
                      tiles=tile if tile else MAP_TILE,
                      zoom_start=zoom_start if zoom_start else MAP_ZOOM_START,
-                     control_scale=RESOLUTION_TILE)
+                     control_scale=constrol_scale if constrol_scale else RESOLUTION_TILE)
 
 
 @temporary_func
