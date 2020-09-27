@@ -19,3 +19,4 @@ RESOLUTION_TILE = "@2x"
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data")
 """Directory of all data."""
+
