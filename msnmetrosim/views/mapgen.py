@@ -116,7 +116,7 @@ def generate_clean_map(center_coord: Tuple[float, float] = None,
 
     Default configuration will be applied for each value if not specified.
     """
-    return FoliumMap(location=center_coord if center_coord else MAP_CENTER_COORD,
+    return FoliumMap(location=center_coord if center_coord else MAP_MADISON_CENTER_COORD,
                      tiles=tile if tile else MAP_TILE,
                      zoom_start=zoom_start if zoom_start else MAP_ZOOM_START,
                      control_scale=constrol_scale if constrol_scale else RESOLUTION_TILE)

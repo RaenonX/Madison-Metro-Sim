@@ -3,7 +3,7 @@
 # Map configurations
 import os
 
-MAP_CENTER_COORD = (43.080171, -89.380797)
+MAP_MADISON_CENTER_COORD = (43.080171, -89.380797)
 """The center coordinates of the map upon open."""
 
 MAP_TILE = "CartoDB Positron"
