@@ -1,16 +1,13 @@
-"""Get reports related to stop data."""
-from msnmetrosim.controllers import MMTStopDataController, RidershipByStopController
-
-_stops = MMTStopDataController.load_csv("mmt_gtfs/stops.csv")
-_ridership_stop = RidershipByStopController.load_csv("ridership/by_stop.csv")
+"""Get various reports related to stop data."""
+from msnmetrosim.views.controllers import ctrl_stops, ctrl_ridership_stop
 
 
 def get_stops_without_ridership():
     """Print the stops that do not have ridership data."""
     no_data = []
 
-    for stop in _stops.all_data:
-        ridership = _ridership_stop.get_stop_data_by_id(stop.stop_id)
+    for stop in ctrl_stops.all_data:
+        ridership = ctrl_ridership_stop.get_stop_data_by_id(stop.stop_id)
         if ridership is None:
             no_data.append(stop)
 

@@ -1,16 +1,83 @@
-"""Functions for plotting the data."""
+"""Functions for viewing the data of stop removal."""
+from datetime import datetime
 from typing import List, Tuple
 
 import matplotlib.pyplot as plt
 
-from msnmetrosim.controllers import MMTStopDataController, MMTStopsAtCrossDataController
 from msnmetrosim.models.results import CrossStopRemovalResult
 from msnmetrosim.utils import generate_points
+from .controllers import ctrl_stops_cross
 
-__all__ = ("plot_stop_accessibility_diff",)
+# region Static info
 
-_stops = MMTStopDataController.load_csv("mmt_gtfs/stops.csv")
-_stops_cross = MMTStopsAtCrossDataController.from_stop_controller(_stops)
+
+TOP_12_POSITIVE = [
+    ("W Terrace", "5117"),
+    ("N Thompson", "Jana"),
+    ("W Terrace", "Eastpark"),
+    ("N Thompson", "Westwynn"),
+    ("S Whitney", "Gilbert"),
+    ("Hathaway", "Greenwich"),
+    ("Commercial", "North Lawn"),
+    ("Oak", "E Washington"),
+    ("S Gammon", "Gammon"),
+    ("Fish Hatchery", "W Badger"),
+    ("Caddis", "Cahill"),
+    ("Anniversary", "Forest Run")
+]
+
+TOP_12_NEGATIVE = [
+    ("Starr Grass", "S High Point"),
+    ("Pinehurst", "S Greenview"),
+    ("Mckee", "Seminole"),
+    ("Mckee", "Commerce Park"),
+    ("Cremer", "Park And Ride"),
+    ("Mid Town", "Hawks Landing"),
+    ("Moorland", "Manor"),
+    ("E Verona", "Maple Grove"),
+    ("Airport", "Terminal Door 6"),
+    ("W Verona", "Westridge"),
+    ("Woods", "Mid Town"),
+    ("Northern Lights", "Epic Staff C"),
+]
+
+
+# endregion
+
+
+# region Report generating
+
+
+def generate_stop_removal_report(range_km: float, interval_km: float,
+                                 report_path: str = "../reports/0921-report.txt"):
+    """
+    Generate a stop removal report with impact index included.
+
+    This uses ``msnmetrosim.utils.generate_points()`` to generate dummy agents
+    for simulating the accessibility difference,
+
+    The report will be output to ``report_path``.
+    """
+    # Get a list of results of removing each stops
+    results = ctrl_stops_cross.get_all_stop_remove_results(range_km, interval_km)
+
+    # Generate the report to `reports/0921-report.txt`
+    with open(report_path, "w") as f:
+        f.write(f"Report on {datetime.now()} (CDT)\n")
+        f.write("\n")
+        f.write(f"Range: {range_km} km / Interval: {interval_km} km\n")
+
+        # Get each removal results and sort them by impact index
+        # Check the documentation of `impact_index` to get more information
+        for rank, result in enumerate(sorted(results, key=lambda r: r.impact_index, reverse=True), start=1):
+            f.write(f"#{rank} - Remove {result.stop_removed.cross_name}\n")
+            f.write(f"Impact index: {result.impact_index:.4f}\n")
+
+
+# endregion
+
+
+# region Difference histogram plotting
 
 
 def plot_stop_accessibility_diff(subplot, result: CrossStopRemovalResult):
@@ -54,16 +121,16 @@ def generate_accessibility_change_plots(plot_x: int, plot_y: int, results: List[
     return figure
 
 
-def plot_accessibility_impact_results(stops_cross: List[Tuple[str, str]], plot_x: int, plot_y: int,
+def plot_accessibility_impact_results(stops_name: List[Tuple[str, str]], plot_x: int, plot_y: int,
                                       range_km: float, interval_km: float, title: str):
     """
     Plot the accessibility difference of before and after removing the stops onto a figure and return it.
 
-    Each element of ``stops_cross`` contains the first and second street (order doesn't matter) name.
+    Each element of ``stops_name`` contains the first and second street (order doesn't matter) name.
 
     ``plot_x`` x ``plot_y`` must equal to the count of ``stops_cross``.
 
-    :param stops_cross: street pair of the stops to be removed
+    :param stops_name: street pair of the stops to be removed
     :param plot_x: count of plots on x axis
     :param plot_y: count of plots on y axis
     :param range_km: range for the dummy agents to generate in km
@@ -73,24 +140,24 @@ def plot_accessibility_impact_results(stops_cross: List[Tuple[str, str]], plot_x
     # pylint: disable=too-many-arguments
 
     # Get the stops by its streets
-    stops = []
+    stops_at_cross = []
 
-    for primary, secondary in stops_cross:
+    for primary, secondary in stops_name:
         print(f"Getting the stop of {primary} & {secondary}")
-        grouped_stop = _stops_cross.get_grouped_stop_by_street_names(primary, secondary)
+        grouped_stop = ctrl_stops_cross.get_grouped_stop_by_street_names(primary, secondary)
         if not grouped_stop:
             raise ValueError(f"Grouped stop of {primary} & {secondary} not found")
 
-        stops.append(grouped_stop)
+        stops_at_cross.append(grouped_stop)
 
     # Get metrics between before and after removing the stop
     results: List[CrossStopRemovalResult] = []
 
-    for stop in stops:
+    for stop in stops_at_cross:
         print(f"Getting the metrics of {stop.cross_name}")
         agents = generate_points(stop.coordinate, range_km, interval_km)
 
-        result = _stops_cross.get_metrics_of_single_stop_removal(stop.primary, stop.secondary, agents)
+        result = ctrl_stops_cross.get_metrics_of_single_stop_removal(stop.primary, stop.secondary, agents)
         results.append(result)
 
     # Plot the data
@@ -106,22 +173,7 @@ def plot_top_12_positive_impact_results():
 
     ``range_km`` is set to **0.6** and ``interval_km`` is set to **0.05**.
     """
-    stops_cross = [
-        ("W Terrace", "5117"),
-        ("N Thompson", "Jana"),
-        ("W Terrace", "Eastpark"),
-        ("N Thompson", "Westwynn"),
-        ("S Whitney", "Gilbert"),
-        ("Hathaway", "Greenwich"),
-        ("Commercial", "North Lawn"),
-        ("Oak", "E Washington"),
-        ("S Gammon", "Gammon"),
-        ("Fish Hatchery", "W Badger"),
-        ("Caddis", "Cahill"),
-        ("Anniversary", "Forest Run")
-    ]
-
-    figure = plot_accessibility_impact_results(stops_cross, 4, 3, 0.6, 0.05,
+    figure = plot_accessibility_impact_results(TOP_12_POSITIVE, 4, 3, 0.6, 0.05,
                                                "Top 12 stop removals that brings POSITIVE impacts")
     figure.show()
 
@@ -132,24 +184,12 @@ def plot_top_12_negative_impact_results():
 
     ``range_km`` is set to **0.6** and ``interval_km`` is set to **0.05**.
     """
-    stops_cross = [
-        ("Starr Grass", "S High Point"),
-        ("Pinehurst", "S Greenview"),
-        ("Mckee", "Seminole"),
-        ("Mckee", "Commerce Park"),
-        ("Cremer", "Park And Ride"),
-        ("Mid Town", "Hawks Landing"),
-        ("Moorland", "Manor"),
-        ("E Verona", "Maple Grove"),
-        ("Airport", "Terminal Door 6"),
-        ("W Verona", "Westridge"),
-        ("Woods", "Mid Town"),
-        ("Northern Lights", "Epic Staff C"),
-    ]
-
-    figure = plot_accessibility_impact_results(stops_cross, 4, 3, 0.6, 0.05,
+    figure = plot_accessibility_impact_results(TOP_12_NEGATIVE, 4, 3, 0.6, 0.05,
                                                "Top 12 stop removals that brings NEGATIVE impacts")
     figure.show()
+
+
+# endregion
 
 
 if __name__ == '__main__':

@@ -20,14 +20,8 @@ run_cmd_exit_on_err() {
 echo "${CLR_CYN}Checking with pydocstyle (metro sim)...${CLR_NC}"
 run_cmd_exit_on_err "pydocstyle msnmetrosim --count" "pydocstyle check (metro sim)"
 
-echo "${CLR_CYN}Checking with pydocstyle (report generators)...${CLR_NC}"
-run_cmd_exit_on_err "pydocstyle reportgen --count" "pydocstyle check (report generators)"
-
 echo "${CLR_CYN}Checking with pylint (metro sim)...${CLR_NC}"
 run_cmd_exit_on_err "pylint msnmetrosim" "pylint check (metro sim)"
-
-echo "${CLR_CYN}Checking with pylint (report generators)...${CLR_NC}"
-run_cmd_exit_on_err "pylint reportgen" "pylint check (report generators)"
 
 echo "${CLR_CYN}Running code tests...${CLR_NC}"
 run_cmd_exit_on_err pytest "code test"
