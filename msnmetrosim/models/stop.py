@@ -51,14 +51,6 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
         """
         return f"{self.stop_name} ({self.stop_code})"
 
-    def wheelchair_accessible(self) -> bool:
-        """
-        Formatted name of the stop.
-
-        The return will be <stop_name> (<stop_code>).
-        """
-        return self.wheelchair_accessible
-
     @staticmethod
     def parse_from_row(row: List[str]):
         """Parse a single entry into :class:`MMTStop` from a row of ``mmt_gtfs/stops.csv``."""

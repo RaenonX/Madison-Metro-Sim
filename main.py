@@ -1,11 +1,13 @@
 import time
 
-from msnmetrosim.views import generate_92_wkd_routes_and_grouped_stops
+# from msnmetrosim.views import generate_92_wkd_routes_and_grouped_stops
+from msnmetrosim.views import generate_92_wkd_routes_and_stops
 
 
 def main():
     print("Generating map object...")
-    folium_map = generate_92_wkd_routes_and_grouped_stops()
+    # folium_map = generate_92_wkd_routes_and_grouped_stops()
+    folium_map = generate_92_wkd_routes_and_stops()
 
     print("Exporting HTML...")
     folium_map.save("map.html")

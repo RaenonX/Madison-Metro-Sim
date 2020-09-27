@@ -35,7 +35,6 @@ def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
     Could use customized color in the future for better rendering effect.
     """
 
-
     if clustered:
         parent = MarkerCluster().add_to(folium_map)
     else:
@@ -74,13 +73,19 @@ def plot_stops(folium_map: FoliumMap, clustered: bool = True):
     for stop in _stops.all_data:
         ridership = _ridership_stop.get_stop_data_by_id(stop.stop_id)
 
-        popup = Popup(f"{stop.name}<br>Weekday ridership: {ridership.weekday if ridership else '(unavailable)'}",
+        popup = Popup(f"{stop.name}<br>Weekday ridership: {ridership.weekday if ridership else '(unavailable)'}"
+                      f"<br>Wheelchair Accessible: {stop.wheelchair_accessible}",
                       min_width=250, max_width=800)
+
+        if stop.wheelchair_accessible == True:
+            icon_c = "green"
+        else:
+            icon_c = "lightred"
 
         Marker(
             stop.coordinate,
             popup=popup,
-            icon=Icon(color="green", icon_color="white", icon="bus", angle=0,
+            icon=Icon(color=icon_c, icon_color="white", icon="bus", angle=0,
                       prefix="fa")
         ).add_to(parent)
 
