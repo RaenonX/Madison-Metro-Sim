@@ -1,16 +1,19 @@
 """Some static variables. For example: configurations, madison center coordinate, etc."""
-
-# Map configurations
 import os
 
-MAP_CENTER_COORD = (43.080171, -89.380797)
-"""The center coordinates of the map upon open."""
+# Map configurations
 
-MAP_TILE = "CartoDB dark_matter"
+MAP_MADISON_CENTER_COORD = (43.080171, -89.380797)
+"""The center coordinates of the map upon opening."""
+
+MAP_TILE = "CartoDB Positron"
 """Map tile style."""
 
-MAP_ZOOM_START = 14
-"""Map zoom scale upon open."""
+MAP_ZOOM_START = 12
+"""Map zoom scale upon opening."""
+
+CONTROL_SCALE = True
+"""To display a control scale on the map or not."""
 
 # Data configurations
 

@@ -8,7 +8,7 @@ from typing import Tuple
 from folium import Map as FoliumMap, Icon, Marker, PolyLine, Popup
 from folium.plugins import MarkerCluster
 
-from msnmetrosim.static import MAP_CENTER_COORD, MAP_TILE, MAP_ZOOM_START
+from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START, CONTROL_SCALE
 from msnmetrosim.utils import temporary_func
 from .controllers import ctrl_ridership_stop, ctrl_routes, ctrl_shapes, ctrl_stops, ctrl_stops_cross, ctrl_trips
 
@@ -92,15 +92,17 @@ def plot_92_wkd_routes(folium_map: FoliumMap):
 
 def generate_clean_map(center_coord: Tuple[float, float] = None,
                        tile: str = None,
-                       zoom_start: int = None) -> FoliumMap:
+                       zoom_start: int = None,
+                       control_scale: str = None) -> FoliumMap:
     """
     Generate a clean map.
 
     Default configuration will be applied for each value if not specified.
     """
-    return FoliumMap(location=center_coord if center_coord else MAP_CENTER_COORD,
+    return FoliumMap(location=center_coord if center_coord else MAP_MADISON_CENTER_COORD,
                      tiles=tile if tile else MAP_TILE,
-                     zoom_start=zoom_start if zoom_start else MAP_ZOOM_START)
+                     zoom_start=zoom_start if zoom_start else MAP_ZOOM_START,
+                     control_scale=control_scale if control_scale else CONTROL_SCALE)
 
 
 @temporary_func
