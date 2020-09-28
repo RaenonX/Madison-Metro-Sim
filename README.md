@@ -44,3 +44,13 @@ If you are first time running this program, execute the below first
 ```bash
 pip install -r requirements-dev.txt
 ```
+
+### Environment Variables
+
+`TEST_PERFORMANCE_TOLERANCE`
+
+- This is **optional**.
+
+- This determines the performance test tolerance in terms of time.
+
+- More information can be found in `tests/conftest.py`.

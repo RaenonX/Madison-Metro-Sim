@@ -1,4 +1,8 @@
-"""Functions to generate folium map object."""
+"""
+Functions for generating various base maps.
+
+Maps that contain additional information rather than bus routes and stops should be inside a different file.
+"""
 from typing import Tuple
 
 from folium import Map as FoliumMap, Icon, Marker, PolyLine, Popup
@@ -11,19 +15,12 @@ from msnmetrosim.controllers import (
     # Ridership data controllers
     RidershipByStopController
 )
-from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START, RESOLUTION_TILE
+from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START, CONTROL_SCALE
 from msnmetrosim.utils import temporary_func
+from .controllers import ctrl_ridership_stop, ctrl_routes, ctrl_shapes, ctrl_stops, ctrl_stops_cross, ctrl_trips
 
-__all__ = ("generate_clean_map", "generate_92_wkd_routes_and_stops", "generate_92_wkd_routes_and_grouped_stops")
-
-# Preloading the data - be aware that these should be removed if controllers will perform manipulations
-
-_routes = MMTRouteDataController.load_csv("mmt_gtfs/routes.csv")
-_shapes = MMTShapeDataController.load_csv("mmt_gtfs/shapes.csv")
-_stops = MMTStopDataController.load_csv("mmt_gtfs/stops.csv")
-_stops_cross = MMTStopsAtCrossDataController.from_stop_controller(_stops)
-_trips = MMTTripDataController.load_csv("mmt_gtfs/trips.csv")
-_ridership_stop = RidershipByStopController.load_csv("ridership/by_stop.csv")
+__all__ = ("generate_clean_map", "generate_92_wkd_routes", "generate_92_wkd_routes_and_stops",
+           "generate_92_wkd_routes_and_grouped_stops",)
 
 
 def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
@@ -39,7 +36,7 @@ def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
     else:
         parent = folium_map
 
-    for stop in _stops_cross.all_data:
+    for stop in ctrl_stops_cross.all_data:
         popup = Popup(f"{stop.primary} & {stop.secondary}<br>{stop.name_list_html}",
                       min_width=250, max_width=800)
 
@@ -69,8 +66,8 @@ def plot_stops(folium_map: FoliumMap, clustered: bool = True):
     else:
         parent = folium_map
 
-    for stop in _stops.all_data:
-        ridership = _ridership_stop.get_stop_data_by_id(stop.stop_id)
+    for stop in ctrl_stops.all_data:
+        ridership = ctrl_ridership_stop.get_stop_data_by_id(stop.stop_id)
 
         popup = Popup(f"{stop.name}<br>Weekday ridership: {ridership.weekday if ridership else '(unavailable)'}"
                       f"<br>Wheelchair Accessible: {stop.wheelchair_accessible}",
@@ -95,18 +92,18 @@ def plot_shape(folium_map: FoliumMap, shape_id: int, shape_popup: str, shape_col
 
     ``shape_color`` can be any strings that represents color in CSS.
     """
-    shape_coords = _shapes.get_shape_coords_by_id(shape_id)
+    shape_coords = ctrl_shapes.get_shape_coords_by_id(shape_id)
     PolyLine(shape_coords, color=shape_color, popup=shape_popup).add_to(folium_map)
 
 
 @temporary_func
 def plot_92_wkd_routes(folium_map: FoliumMap):
     """Plot all the routes (shapes) available under service ID ``92_WKD`` (Batch #92, weekday plan, presumably)."""
-    shapes = _trips.get_shapes_available_in_service("92_WKD")
+    serv_shapes = ctrl_trips.get_shapes_available_in_service("92_WKD")
 
-    for shape_id, last_trip in shapes.items():
+    for shape_id, last_trip in serv_shapes.items():
         shape_popup = f"{last_trip.route_short_name}<br><b>{last_trip.trip_headsign}</b>"
-        shape_color = _routes.get_route_by_route_id(last_trip.route_id).route_color
+        shape_color = ctrl_routes.get_route_by_route_id(last_trip.route_id).route_color
 
         plot_shape(folium_map, shape_id, shape_popup, shape_color)
 
@@ -114,7 +111,7 @@ def plot_92_wkd_routes(folium_map: FoliumMap):
 def generate_clean_map(center_coord: Tuple[float, float] = None,
                        tile: str = None,
                        zoom_start: int = None,
-                       constrol_scale: str = None) -> FoliumMap:
+                       control_scale: str = None) -> FoliumMap:
     """
     Generate a clean map.
 
@@ -123,16 +120,25 @@ def generate_clean_map(center_coord: Tuple[float, float] = None,
     return FoliumMap(location=center_coord if center_coord else MAP_MADISON_CENTER_COORD,
                      tiles=tile if tile else MAP_TILE,
                      zoom_start=zoom_start if zoom_start else MAP_ZOOM_START,
-                     control_scale=constrol_scale if constrol_scale else RESOLUTION_TILE)
+                     control_scale=control_scale if control_scale else CONTROL_SCALE)
+
+
+@temporary_func
+def generate_92_wkd_routes() -> FoliumMap:
+    """Generate a map with 92_WKD routes plotted on the map."""
+    folium_map = generate_clean_map()
+
+    plot_92_wkd_routes(folium_map)
+
+    return folium_map
 
 
 @temporary_func
 def generate_92_wkd_routes_and_stops() -> FoliumMap:
     """Generate a map with 92_WKD routes and all stops plotted on the map."""
-    folium_map = generate_clean_map()
+    folium_map = generate_92_wkd_routes()
 
     plot_stops(folium_map)
-    plot_92_wkd_routes(folium_map)
 
     return folium_map
 
@@ -140,9 +146,8 @@ def generate_92_wkd_routes_and_stops() -> FoliumMap:
 @temporary_func
 def generate_92_wkd_routes_and_grouped_stops() -> FoliumMap:
     """Generate a map with 92_WKD routes and all stops grouped by cross plotted on the map."""
-    folium_map = generate_clean_map()
+    folium_map = generate_92_wkd_routes()
 
     plot_stops_by_cross(folium_map)
-    plot_92_wkd_routes(folium_map)
 
     return folium_map

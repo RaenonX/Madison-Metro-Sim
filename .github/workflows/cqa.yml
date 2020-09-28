@@ -33,14 +33,6 @@ jobs:
         run: |
           pydocstyle msnmetrosim --count
 
-      - name: pydocstyle checks (report generators)
-        run: |
-          pydocstyle reportgen --count
-
       - name: pylint checks (metro sim)
         run: |
           pylint msnmetrosim
-
-      - name: pylint checks (report generators)
-        run: |
-          pylint reportgen
