@@ -54,5 +54,5 @@ class MMTStopsAtCross(LocationalModelBase, HasCrossModelBase):
 
     @property
     def wheelchair_accessibility(self) -> bool:
-        """return if wheelchair boarding is available at a given stop"""
+        """Return if wheelchair boarding is available at a given stop."""
         return self.wheelchair_accessible

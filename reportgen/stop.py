@@ -57,8 +57,8 @@ def get_travel_time_to_stop():
     plt.savefig("../assets/reports/0921-5.png")  # Save the figure
     plt.show()
 
-    # TODO: Add function for searching the least impactful removal
-    #   - Replace the current content of 0921-04 and 0921-05, and plot it using (plot_stop_removal_difference_metrics)
+    # Add function for searching the least impactful removal
+    # - Replace the current content of 0921-04 and 0921-05, and plot it using (plot_stop_removal_difference_metrics)
 
 
 if __name__ == '__main__':

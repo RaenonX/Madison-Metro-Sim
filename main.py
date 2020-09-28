@@ -17,3 +17,4 @@ if __name__ == '__main__':
     _start = time.time()
     main()
     print(f"Time spent: {(time.time() - _start) * 1000:.3f} ms")
+
