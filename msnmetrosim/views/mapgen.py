@@ -12,7 +12,8 @@ from msnmetrosim.static import MAP_CENTER_COORD, MAP_TILE, MAP_ZOOM_START
 from msnmetrosim.utils import temporary_func
 from .controllers import ctrl_ridership_stop, ctrl_routes, ctrl_shapes, ctrl_stops, ctrl_stops_cross, ctrl_trips
 
-__all__ = ("generate_clean_map", "generate_92_wkd_routes_and_stops", "generate_92_wkd_routes_and_grouped_stops")
+__all__ = ("generate_clean_map", "generate_92_wkd_routes", "generate_92_wkd_routes_and_stops",
+           "generate_92_wkd_routes_and_grouped_stops",)
 
 
 def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
@@ -103,12 +104,21 @@ def generate_clean_map(center_coord: Tuple[float, float] = None,
 
 
 @temporary_func
-def generate_92_wkd_routes_and_stops() -> FoliumMap:
-    """Generate a map with 92_WKD routes and all stops plotted on the map."""
+def generate_92_wkd_routes() -> FoliumMap:
+    """Generate a map with 92_WKD routes plotted on the map."""
     folium_map = generate_clean_map()
 
-    plot_stops(folium_map)
     plot_92_wkd_routes(folium_map)
+
+    return folium_map
+
+
+@temporary_func
+def generate_92_wkd_routes_and_stops() -> FoliumMap:
+    """Generate a map with 92_WKD routes and all stops plotted on the map."""
+    folium_map = generate_92_wkd_routes()
+
+    plot_stops(folium_map)
 
     return folium_map
 
@@ -116,9 +126,8 @@ def generate_92_wkd_routes_and_stops() -> FoliumMap:
 @temporary_func
 def generate_92_wkd_routes_and_grouped_stops() -> FoliumMap:
     """Generate a map with 92_WKD routes and all stops grouped by cross plotted on the map."""
-    folium_map = generate_clean_map()
+    folium_map = generate_92_wkd_routes()
 
     plot_stops_by_cross(folium_map)
-    plot_92_wkd_routes(folium_map)
 
     return folium_map

@@ -3,10 +3,15 @@ from datetime import datetime
 from typing import List, Tuple
 
 import matplotlib.pyplot as plt
+from folium import Map as FoliumMap, Icon, Marker, Popup
 
 from msnmetrosim.models.results import CrossStopRemovalResult
 from msnmetrosim.utils import generate_points
 from .controllers import ctrl_stops_cross
+from .mapgen import generate_92_wkd_routes
+
+__all__ = ("generate_stop_removal_report", "generate_top_12_stops_map",
+           "plot_top_12_positive_impact_results", "plot_top_12_negative_impact_results")
 
 # region Static info
 
@@ -192,6 +197,41 @@ def plot_top_12_negative_impact_results():
 # endregion
 
 
-if __name__ == '__main__':
-    plot_top_12_positive_impact_results()
-    plot_top_12_negative_impact_results()
+# region Stops map plotting
+
+
+def generate_top_12_stops_map() -> FoliumMap:
+    """Plot the locations of the top 12 positive/negative impactful stops on the map."""
+    folium_map = generate_92_wkd_routes()
+
+    # Getting the stop first so that if any of the stop does not exist, it fails faster
+    stops = []
+    for pos, neg in zip(TOP_12_POSITIVE, TOP_12_NEGATIVE):
+        primary, secondary = pos
+
+        stop = ctrl_stops_cross.get_grouped_stop_by_street_names(primary, secondary)
+        if not stop:
+            raise ValueError(f"Grouped stop of {primary} & {secondary} not found")
+        stops.append((stop, True))
+
+        primary, secondary = neg
+
+        stop = ctrl_stops_cross.get_grouped_stop_by_street_names(primary, secondary)
+        if not stop:
+            raise ValueError(f"Grouped stop of {primary} & {secondary} not found")
+        stops.append((stop, False))
+
+    # Plot stops onto map
+    for stop, is_positive in stops:
+        popup = Popup(stop.cross_name, min_width=250, max_width=800)
+
+        Marker(
+            stop.coordinate,
+            popup=popup,
+            icon=Icon(color="green" if is_positive else "red", icon_color="white", icon="bus", angle=0,
+                      prefix="fa")
+        ).add_to(folium_map)
+
+    return folium_map
+
+# endregion
