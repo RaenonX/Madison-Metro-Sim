@@ -20,7 +20,7 @@ def plot_background(figsize=(12, 12)):
     # ax.set_axis_off() # TODO: uncomment this
     return ax
 
-def plot_route(ax=None, route_num=None): # TODO, add bus stop
+def plot_route(ax=None, route_num=None, alpha=None, zorder=None): # TODO, add bus stop
     """
     return an axes object with the route on the plotted on the plot
     :param ax: if not specified, default is lake and madison city plot

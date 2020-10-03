@@ -7,6 +7,11 @@
 #     - factors influencing time travel or
 
 # 1. find overlap routes > some threshold (maybe do directions?)
+     - need asked
+#       - route 2 overlaps with route 8 has roughly 24%
+        - route 8 overlaps with route 2 has > 40%
+     - add in directions to calculation
+        - currently not feasible
 # 2. find their common bus stops and determine if
 #    they can be integrated by calculating their sum
 #    of passenger flow
