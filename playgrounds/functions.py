@@ -25,7 +25,7 @@ def plot_route(ax=None, route_num=None): # TODO, add bus stop
     return an axes object with the route on the plotted on the plot
     :param ax: if not specified, default is lake and madison city plot
     :param route_num: specified route number
-    :return: ax
+    :return: ax with route plotted
     """
     if ax == None:
         ax = plot_background()
@@ -39,14 +39,14 @@ def plot_route(ax=None, route_num=None): # TODO, add bus stop
 
     return ax
 
-def get_number_of_bus_stops(route_num=None):
+def get_bus_stops_of_route(route_num=None):
     """
     If route_num not specified, return the number of bus stops of all routes,
     else return the number of bus stops of the specified route_num.
     Note that an opposite-direction of the same bus stop is counted as twice.
 
     :param route_num: specified route num.
-    :return: the number of bus stops of all routes or the specified route_num.
+    :return: a dictionary, route: num of bus stops
     """
     available_routes = defaultdict(int)
 
@@ -61,7 +61,13 @@ def get_number_of_bus_stops(route_num=None):
     else:
         return available_routes[route_num]
 
-def find_stop_of_route(route_num):
+
+# example code:
+# route_num = 80
+# ax = functions.plot_route(functions.plot_background(), route_num)
+# route_80 = functions.find_stop_of_route(route_num)
+# route_80.set_geometry("geometry").plot(ax=ax, markersize=2, zorder=2)
+def get_stop_locations_of_route(route_num):
     """
     return a dataframe that has all stops of the specified route_num
 
@@ -79,10 +85,45 @@ def find_stop_of_route(route_num):
     return stop_with_route
 
 
+def get_overlap_matrix():
+    """
+    return a DataFrame of each route and the number of overlaps of bus stops of all routes
 
+    :return: a DataFrame of numbers of overlaps
+    """
 
+    available_routes = get_bus_stops_of_route().keys()  # dict
+    md = dict()
 
+    # create a matrix that shows each bus stop's overlap percentage
+    for route_num in available_routes:
+        md[route_num] = defaultdict(int)
+        route_df = get_stop_locations_of_route(route_num)  # df
+        for i in range(len(route_df)):
+            col_route = "".join(list(route_df.loc[i, "Route"])).split(", ")
+            for r in col_route:
+                md[route_num][int(r)] += 1
+        md[route_num] = dict(OrderedDict(sorted(md[route_num].items())))
 
+    df = pd.DataFrame(md, columns=md.keys(), index=md.keys()).fillna(0)
+
+    return df
+
+def get_overlap_matrix_to_perc():
+    """
+    Return a DataFrame of the percentage of each route and the number of overlaps of bus stops of all routes.
+    Reading from row to columns.
+
+    :return: a DataFrame of percentages of overlaps.
+    """
+    df = get_overlap_matrix()
+    bus_stop_sum = get_bus_stops_of_route()
+
+    df_perc = pd.DataFrame(columns=df.columns, index=df.columns)
+    for col in df.columns:
+        df_perc[col] = df[col] / bus_stop_sum[col]
+
+    return df_perc.T
 
 
 
