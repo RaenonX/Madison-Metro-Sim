@@ -1,9 +1,13 @@
 import sys
 import geopandas as gpd
 import pandas as pd
+import matplotlib.pyplot as plt
+import os
+
 from collections import defaultdict, OrderedDict
 
 stops = gpd.read_file("../data_andy/Bus_Stops_and_Routes_Info/Metro_Transit_Bus_Stops-shp")
+
 
 def plot_background(figsize=(12, 12)):
     """
@@ -20,7 +24,7 @@ def plot_background(figsize=(12, 12)):
     # ax.set_axis_off() # TODO: uncomment this
     return ax
 
-def plot_route(ax=None, route_num=None, alpha=None, zorder=None): # TODO, add bus stop
+def plot_route(ax=None, route_num=None, **kwargs): # TODO, add bus stop
     """
     return an axes object with the route on the plotted on the plot
     :param ax: if not specified, default is lake and madison city plot
@@ -32,10 +36,10 @@ def plot_route(ax=None, route_num=None, alpha=None, zorder=None): # TODO, add bu
     colored_routes = gpd.read_file("../data_andy/Bus_Stops_and_Routes_Info/colored_routes-shp")
     if route_num != None:
         wanted = colored_routes[colored_routes["route_shor"] == route_num]
-        wanted.plot(color=wanted["route_colo"], ax=ax)
+        wanted.plot(color=wanted["route_colo"], ax=ax, **kwargs)
 
     else:
-        colored_routes.plot(color=colored_routes["route_colo"], ax=ax)
+        colored_routes.plot(color=colored_routes["route_colo"], ax=ax, **kwargs)
 
     return ax
 
@@ -91,23 +95,30 @@ def get_overlap_matrix():
 
     :return: a DataFrame of numbers of overlaps
     """
+    if os.path.exists("../data_andy/route_overlap/matrix_nums.csv"):
+        df = pd.read_csv("../data_andy/route_overlap/matrix_nums.csv").set_index("Unnamed: 0")
+        df.index.names = [None]
+        df.columns = [int(c) for c in df.columns]
+        df.index = [int(i) for i in df.index]
+        return df
+    else:
+        available_routes = get_bus_stops_of_route().keys()  # dict
+        md = dict()
 
-    available_routes = get_bus_stops_of_route().keys()  # dict
-    md = dict()
+        # create a matrix that shows each bus stop's overlap percentage
+        for route_num in available_routes:
+            md[route_num] = defaultdict(int)
+            route_df = get_stop_locations_of_route(route_num)  # df
+            for i in range(len(route_df)):
+                col_route = "".join(list(route_df.loc[i, "Route"])).split(", ")
+                for r in col_route:
+                    md[route_num][int(r)] += 1
+            md[route_num] = dict(OrderedDict(sorted(md[route_num].items())))
 
-    # create a matrix that shows each bus stop's overlap percentage
-    for route_num in available_routes:
-        md[route_num] = defaultdict(int)
-        route_df = get_stop_locations_of_route(route_num)  # df
-        for i in range(len(route_df)):
-            col_route = "".join(list(route_df.loc[i, "Route"])).split(", ")
-            for r in col_route:
-                md[route_num][int(r)] += 1
-        md[route_num] = dict(OrderedDict(sorted(md[route_num].items())))
+        df = pd.DataFrame(md, columns=md.keys(), index=md.keys()).fillna(0)
 
-    df = pd.DataFrame(md, columns=md.keys(), index=md.keys()).fillna(0)
-
-    return df
+        df.to_csv(path_or_buf="../data_andy/route_overlap/matrix_nums.csv")
+        return df
 
 def get_overlap_matrix_to_perc():
     """
@@ -116,14 +127,48 @@ def get_overlap_matrix_to_perc():
 
     :return: a DataFrame of percentages of overlaps.
     """
-    df = get_overlap_matrix()
-    bus_stop_sum = get_bus_stops_of_route()
+    if os.path.exists("../data_andy/route_overlap/matrix_perc.csv"):
+        df = pd.read_csv("../data_andy/route_overlap/matrix_perc.csv").set_index("Unnamed: 0")
+        df.index.names = [None]
+        df.columns = [int(c) for c in df.columns]
+        df.index = [int(i) for i in df.index]
+        return df
+    else:
+        df = get_overlap_matrix()
+        bus_stop_sum = get_bus_stops_of_route()
 
-    df_perc = pd.DataFrame(columns=df.columns, index=df.columns)
-    for col in df.columns:
-        df_perc[col] = df[col] / bus_stop_sum[col]
+        df_perc = pd.DataFrame(columns=df.columns, index=df.columns)
+        for col in df.columns:
+            df_perc[col] = df[col] / bus_stop_sum[col]
+        df_perc.T.to_csv(path_or_buf="../data_andy/route_overlap/matrix_perc.csv")
+        return df_perc.T
 
-    return df_perc.T
+def generate_color_map(threshold, savefig=False):
+    """
+    generate a colormap of the overlapping percentages of each route
+
+    :param threshold: specified threshold
+    :param savefig:
+    :return:
+    """
+    plt.rcParams["font.size"] = 10
+    plt.rcParams['xtick.bottom'] = plt.rcParams['xtick.labelbottom'] = False
+    plt.rcParams['xtick.top'] = plt.rcParams['xtick.labeltop'] = True
+
+    matrix_perc = get_overlap_matrix_to_perc()
+    m = matrix_perc.to_numpy()
+    fig = plt.figure(figsize=(14, 12))
+    # img = plt.imshow(m, cmap = 'viridis', interpolation='nearest', vmax=threshold)
+    img = plt.imshow(m, cmap=plt.cm.Blues, interpolation='nearest', vmax=threshold)
+
+    plt.xticks(range(len(matrix_perc.index)), matrix_perc.index)
+    plt.yticks(range(len(matrix_perc.columns)), matrix_perc.columns)
+    plt.title('Overlap percentage of all stops for each route', y=1.05, fontsize=16)
+    plt.colorbar(img)
+
+    if savefig:
+        plt.savefig("../report_andy/try.png", dpi=300, bbox_inches='tight')
+        # plt.savefig("../report_andy/Overlap_Percentage_cmap_viridis.png", dpi=300, bbox_inches='tight')
 
 
 
