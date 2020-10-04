@@ -7,6 +7,7 @@ import os
 from collections import defaultdict, OrderedDict
 
 stops = gpd.read_file("../data_andy/Bus_Stops_and_Routes_Info/Metro_Transit_Bus_Stops-shp")
+colored_routes = gpd.read_file("../data_andy/Bus_Stops_and_Routes_Info/colored_routes-shp")
 
 
 def plot_background(figsize=(12, 12)):
@@ -24,26 +25,76 @@ def plot_background(figsize=(12, 12)):
     # ax.set_axis_off() # TODO: uncomment this
     return ax
 
-def plot_route(ax=None, route_num=None, **kwargs): # TODO, add bus stop
+def plot_route(ax=None, route_num=None, **kwargs):
     """
-    return an axes object with the route on the plotted on the plot
+    return an axes object with the route (already colored) on the plot
+
     :param ax: if not specified, default is lake and madison city plot
     :param route_num: specified route number
+    :param kwargs: plot setting
     :return: ax with route plotted
     """
-    if ax == None:
-        ax = plot_background()
-    colored_routes = gpd.read_file("../data_andy/Bus_Stops_and_Routes_Info/colored_routes-shp")
-    if route_num != None:
-        wanted = colored_routes[colored_routes["route_shor"] == route_num]
-        wanted.plot(color=wanted["route_colo"], ax=ax, **kwargs)
+    if route_num == None:
+        colored_routes.plot(ax=ax, color=colored_routes["route_colo"]  , **kwargs)
+        return ax
 
-    else:
-        colored_routes.plot(color=colored_routes["route_colo"], ax=ax, **kwargs)
+    wanted = colored_routes[colored_routes["route_shor"] == route_num]
+    wanted.plot(color=wanted["route_colo"], ax=ax, **kwargs)
+    return ax
+
+def plot_stops(ax, route_num, **kwargs):
+    """
+    This functions adds bus stops to the given axes object and returns ax.
+
+    :param ax: axes object to plot.
+    :param route_num: specified route number
+    :param kwargs: plot setting
+    :return: ax with bus stops plotted
+    """
+    if ax == None:
+        plot_route(ax=ax, route_num=route_num)
+
+    color = colored_routes[colored_routes["route_shor"] == route_num]["route_colo"].iloc[0] # color determined by colored_route
+    route = get_stop_info_of_route(route_num)
+    route.plot.scatter(ax=ax, x=["stop_lon"], y=["stop_lat"], color=color, **kwargs)
 
     return ax
 
-def get_bus_stops_of_route(route_num=None):
+# TODO: add a fake legend to display relative size of boarding
+# reference:
+# https://jakevdp.github.io/PythonDataScienceHandbook/04.06-customizing-legends.html
+def plot_stops_sized(ax, route_num, day_type, **kwargs):
+    """
+    This functions adds bus stops to the given axes object sized by the number of boarding
+    per each stop and returns ax.
+
+    :param ax: axes object to plot.
+    :param route_num: specified route number
+    :param day_type: wkd, sat, sun
+    :param kwargs: plot setting
+    :return: ax with bus stops sized by boarding plotted
+    """
+
+    df = 0
+    if day_type == "wkd":
+        df = gpd.read_file("../data_andy/Daily_Boardings_Based_on_Routes_and_Bus_Stops/Metro_Transit_Ridership_by_Route_Weekday-shp")
+    elif day_type == "sat":
+        df = gpd.read_file("../data_andy/Daily_Boardings_Based_on_Routes_and_Bus_Stops/Metro_Transit_Ridership_by_Route_Saturday-shp")
+    elif day_type == "sun":
+        df = gpd.read_file("../data_andy/Daily_Boardings_Based_on_Routes_and_Bus_Stops/Metro_Transit_Ridership_by_Route_Sunday-shp")
+    else:
+        return "day_type not found"
+
+    df_route = pd.DataFrame(df)
+    df_route = df_route[df_route["Route"] == route_num]
+    color = colored_routes[colored_routes["route_shor"] == route_num]["route_colo"].iloc[0] # color determined by colored_route
+
+    df_route.plot.scatter(ax=ax, x=["Lon"], y=["Lat"], s=df_route["DailyBoard"] * 2, color=color, **kwargs)
+    # plt.legend(loc="upper left", frameon=False, fontsize=14, ncol=2)
+    return ax
+
+
+def get_num_stops_of_route(route_num=None):
     """
     If route_num not specified, return the number of bus stops of all routes,
     else return the number of bus stops of the specified route_num.
@@ -66,12 +117,8 @@ def get_bus_stops_of_route(route_num=None):
         return available_routes[route_num]
 
 
-# example code:
-# route_num = 80
-# ax = functions.plot_route(functions.plot_background(), route_num)
-# route_80 = functions.find_stop_of_route(route_num)
-# route_80.set_geometry("geometry").plot(ax=ax, markersize=2, zorder=2)
-def get_stop_locations_of_route(route_num):
+
+def get_stop_info_of_route(route_num):
     """
     return a dataframe that has all stops of the specified route_num
 
@@ -102,13 +149,13 @@ def get_overlap_matrix():
         df.index = [int(i) for i in df.index]
         return df
     else:
-        available_routes = get_bus_stops_of_route().keys()  # dict
+        available_routes = get_num_stops_of_route().keys()  # dict
         md = dict()
 
         # create a matrix that shows each bus stop's overlap percentage
         for route_num in available_routes:
             md[route_num] = defaultdict(int)
-            route_df = get_stop_locations_of_route(route_num)  # df
+            route_df = get_stop_info_of_route(route_num)  # df
             for i in range(len(route_df)):
                 col_route = "".join(list(route_df.loc[i, "Route"])).split(", ")
                 for r in col_route:
@@ -135,7 +182,7 @@ def get_overlap_matrix_to_perc():
         return df
     else:
         df = get_overlap_matrix()
-        bus_stop_sum = get_bus_stops_of_route()
+        bus_stop_sum = get_num_stops_of_route()
 
         df_perc = pd.DataFrame(columns=df.columns, index=df.columns)
         for col in df.columns:
@@ -143,7 +190,9 @@ def get_overlap_matrix_to_perc():
         df_perc.T.to_csv(path_or_buf="../data_andy/route_overlap/matrix_perc.csv")
         return df_perc.T
 
-def generate_color_map(threshold, savefig=False):
+
+# need to be improved
+def generate_color_map(threshold, savefig=False, filename=None):
     """
     generate a colormap of the overlapping percentages of each route
 
@@ -152,7 +201,7 @@ def generate_color_map(threshold, savefig=False):
     :return:
     """
     plt.rcParams["font.size"] = 10
-    plt.rcParams['xtick.bottom'] = plt.rcParams['xtick.labelbottom'] = False
+    # plt.rcParams['xtick.bottom'] = plt.rcParams['xtick.labelbottom'] = False
     plt.rcParams['xtick.top'] = plt.rcParams['xtick.labeltop'] = True
 
     matrix_perc = get_overlap_matrix_to_perc()
@@ -162,13 +211,38 @@ def generate_color_map(threshold, savefig=False):
     img = plt.imshow(m, cmap=plt.cm.Blues, interpolation='nearest', vmax=threshold)
 
     plt.xticks(range(len(matrix_perc.index)), matrix_perc.index)
+    plt.ylabel("Current Available Routes in Madison", fontsize=16)
     plt.yticks(range(len(matrix_perc.columns)), matrix_perc.columns)
-    plt.title('Overlap percentage of all stops for each route', y=1.05, fontsize=16)
-    plt.colorbar(img)
+    plt.title('Overlap Percentage of All Stops For Each Route', y=1.05, fontsize=16)
+    plt.colorbar(img, label="Overlapping Percentage of Each Route")
 
     if savefig:
-        plt.savefig("../report_andy/try.png", dpi=300, bbox_inches='tight')
-        # plt.savefig("../report_andy/Overlap_Percentage_cmap_viridis.png", dpi=300, bbox_inches='tight')
+        plt.savefig("../report_andy/Oct_5th/" + filename, dpi=300, bbox_inches='tight')
+        # plt.savefig("../report_andy/Oct_5th/Overlap_Percentage_cmap_viridis.png", dpi=300, bbox_inches='tight')
+
+    # Improvement
+    # savefig = True
+    # filename = "Number_of_Overlaps_cmap_YlGn.png"
+    # threshold = 40
+    #
+    # plt.rcParams["font.size"] = 10
+    # # plt.rcParams['xtick.bottom'] = plt.rcParams['xtick.labelbottom'] = False
+    # plt.rcParams['xtick.top'] = plt.rcParams['xtick.labeltop'] = True
+    #
+    # matrix_num = functions.get_overlap_matrix()
+    # m = matrix_num.to_numpy()
+    # fig = plt.figure(figsize=(14, 12))
+    # # img = plt.imshow(m, cmap = 'viridis', interpolation='nearest', vmax=threshold)
+    # img = plt.imshow(m, cmap=plt.cm.YlGn, interpolation='nearest', vmax=threshold)
+    #
+    # plt.xticks(range(len(matrix_num.index)), matrix_num.index)
+    # plt.ylabel("Current Available Routes in Madison", fontsize=16)
+    # plt.yticks(range(len(matrix_num.columns)), matrix_num.columns)
+    # plt.title('Number of Overlaps for Each Route', y=1.05, fontsize=16)
+    # plt.colorbar(img, label="Number of Overlaps")
+    #
+    # if savefig:
+    #     plt.savefig("../report_andy/Oct_5th/" + filename, dpi=300, bbox_inches='tight')
 
 
 
