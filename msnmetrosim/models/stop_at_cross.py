@@ -19,6 +19,7 @@ class MMTStopsAtCross(LocationalModelBase, HasCrossModelBase):
 
     primary: str
     secondary: str
+    wheelchair_accessible: bool
 
     stops: List[MMTStop]
 
@@ -43,8 +44,15 @@ class MMTStopsAtCross(LocationalModelBase, HasCrossModelBase):
         ret = ["<ul>"]
 
         for stop in self.stops:
+            self.wheelchair_accessible = stop.wheelchair_accessible
             ret.append(f"<li>{stop.name}</li>")
+            ret.append(f"<li>Wheelchair Accessible: {self.wheelchair_accessible}</li>")
 
         ret.append("</ul>")
 
         return "".join(ret)
+
+    @property
+    def wheelchair_accessibility(self) -> bool:
+        """Return if wheelchair boarding is available at a given stop."""
+        return self.wheelchair_accessible

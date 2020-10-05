@@ -30,6 +30,8 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
         which is its ``stop_id``.
     """
 
+    # pylint: disable=too-many-instance-attributes
+
     lat: float
     lon: float
 
@@ -39,6 +41,8 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
     stop_id: int
     stop_code: str
     stop_name: str
+
+    wheelchair_accessible: bool
 
     @property
     def name(self) -> str:
@@ -52,6 +56,7 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
     @staticmethod
     def parse_from_row(row: List[str]):
         """Parse a single entry into :class:`MMTStop` from a row of ``mmt_gtfs/stops.csv``."""
+        # pylint: disable=too-many-instance-attributes
         stop_id = int(row[0])
         stop_code = row[1]
         stop_name = row[2]
@@ -60,5 +65,6 @@ class MMTStop(HasCrossModelBase, LocationalModelBase):
 
         primary_street = row[13]
         cross_location = row[15]
+        wheelchair_accessible = bool(int(row[12]))
 
-        return MMTStop(lat, lon, primary_street, cross_location, stop_id, stop_code, stop_name)
+        return MMTStop(lat, lon, primary_street, cross_location, stop_id, stop_code, stop_name, wheelchair_accessible)

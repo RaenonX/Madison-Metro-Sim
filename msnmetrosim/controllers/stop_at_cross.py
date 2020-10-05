@@ -25,7 +25,8 @@ class MMTStopsAtCrossDataController(LocationalDataController):
             temp[cross_id].append(stop)
 
         for cross_id, stops in temp.items():
-            self._dict_street[cross_id] = MMTStopsAtCross(stops[0].primary, stops[0].secondary, stops)
+            self._dict_street[cross_id] = MMTStopsAtCross(stops[0].primary, stops[0].secondary,
+                                                          stops[0].wheelchair_accessible, stops)
 
     def __init__(self, stop_data: List[MMTStop]):
         self._dict_street: Dict[int, MMTStopsAtCross] = {}
@@ -70,7 +71,7 @@ class MMTStopsAtCrossDataController(LocationalDataController):
         Try to remove each stops one by one, and return the results of the removal.
 
         This function uses ``msnmetrosim.utils.generate_points()``
-        to generate simulated agents and to calculate the accessibility impact.
+         to generate simulated agents and to calculate the accessibility impact.
 
         The ``center_coord`` of ``msnmetrosim.utils.generate_points()`` will be the coordinates of the stop.
 
