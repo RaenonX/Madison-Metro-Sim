@@ -25,9 +25,6 @@ class MMTStopDataController(LocationalDataController, CSVLoadableController):
         self._dict_by_id[stop.stop_id] = stop
 
     def __init__(self, stops: List[MMTStop]):
-        # Sort the data by lat, lon
-        stops = list(sorted(stops, key=lambda stop_data: stop_data.lat))
-
         super().__init__(stops)
 
         self._dict_by_id: Dict[int, MMTStop] = {}
