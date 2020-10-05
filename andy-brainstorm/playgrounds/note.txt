@@ -1,4 +1,0 @@
-Trips[route_short_name] = current available routes
-
-Metro_Transit_Ridership_by_Route_Weekday["StopID"] == Metro_Transit_Bus_Stops["stop_id"]
-    - missing a bus stop with ID
