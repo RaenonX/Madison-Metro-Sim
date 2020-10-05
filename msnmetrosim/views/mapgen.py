@@ -8,13 +8,6 @@ from typing import Tuple
 from folium import Map as FoliumMap, Icon, Marker, PolyLine, Popup
 from folium.plugins import MarkerCluster
 
-from msnmetrosim.controllers import (
-    # MMT GTFS data controllers
-    MMTRouteDataController, MMTShapeDataController, MMTStopDataController, MMTStopsAtCrossDataController,
-    MMTTripDataController,
-    # Ridership data controllers
-    RidershipByStopController
-)
 from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START, CONTROL_SCALE
 from msnmetrosim.utils import temporary_func
 from .controllers import ctrl_ridership_stop, ctrl_routes, ctrl_shapes, ctrl_stops, ctrl_stops_cross, ctrl_trips

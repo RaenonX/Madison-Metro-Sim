@@ -26,7 +26,7 @@ class MMTStopsAtCrossDataController(LocationalDataController):
 
         for cross_id, stops in temp.items():
             self._dict_street[cross_id] = MMTStopsAtCross(stops[0].primary, stops[0].secondary,
-                                                          stop.wheelchair_accessible, stops)
+                                                          stops[0].wheelchair_accessible, stops)
 
     def __init__(self, stop_data: List[MMTStop]):
         self._dict_street: Dict[int, MMTStopsAtCross] = {}
@@ -37,6 +37,7 @@ class MMTStopsAtCrossDataController(LocationalDataController):
     def get_grouped_stop_by_street_names(self, street_1: str, street_2: str) -> Optional[MMTStopsAtCross]:
         """
         Get the stop located at the cross of ``street_1`` and ``street_2``.
+
         Returns ``None`` if not found.
         """
         return self._dict_street.get(MMTStopsAtCross.calculate_hash(street_1, street_2))
@@ -45,7 +46,9 @@ class MMTStopsAtCrossDataController(LocationalDataController):
             -> CrossStopRemovalResult:
         """
         Get the accessibility difference metrics of removing a single stop at ``(street_1, street_2)``.
+
         ``agents`` is a list of coordinates representing each agent for calculating the distance metrics.
+
         :raises ValueError: if no stop is located at `(street_1, street_2)`
         """
         # Get the stop to be removed
@@ -66,12 +69,17 @@ class MMTStopsAtCrossDataController(LocationalDataController):
     def get_all_stop_remove_results(self, range_km: float, interval_km: float) -> List[CrossStopRemovalResult]:
         """
         Try to remove each stops one by one, and return the results of the removal.
+
         This function uses ``msnmetrosim.utils.generate_points()``
-        to generate simulated agents and to calculate the accessibility impact.
+         to generate simulated agents and to calculate the accessibility impact.
+
         The ``center_coord`` of ``msnmetrosim.utils.generate_points()`` will be the coordinates of the stop.
+
         Check the documentation of ``msnmetrosim.utils.generate_points()``
         for more information on ``range_km`` and ``interval_km``.
+
         WARNING: This method could be very expensive.
+
         For 1153 records, it takes ~5 mins to run.
         """
         # ThreadPoolExecutor won't help on performance boosting
