@@ -6,8 +6,8 @@ import os
 
 from collections import defaultdict, OrderedDict
 
-stops = gpd.read_file("../data_andy/Bus_Stops_and_Routes_Info/Metro_Transit_Bus_Stops-shp")
-colored_routes = gpd.read_file("../data_andy/Bus_Stops_and_Routes_Info/colored_routes-shp")
+stops = gpd.read_file("../../../data/bus_route_stop_info/stops-shp")
+colored_routes = gpd.read_file("../../../data/bus_route_stop_info/routes_colored-shp")
 
 
 def plot_background(figsize=(12, 12)):
@@ -16,8 +16,8 @@ def plot_background(figsize=(12, 12)):
     :param figsize: adjust plot size
     :return: ax
     """
-    water = gpd.read_file("../data_andy/Plot_Background/water-shp")
-    city = gpd.read_file("../data_andy/Plot_Background/madison-shp")
+    water = gpd.read_file("../../../data/plot/background/water-shp")
+    city = gpd.read_file("../../../data/plot/background/madison-shp")
 
     ax = water.plot(figsize=figsize, color="lightblue")
     city.plot(color="0.85", ax=ax)
@@ -77,11 +77,11 @@ def plot_stops_sized(ax, route_num, day_type, **kwargs):
 
     df = 0
     if day_type == "wkd":
-        df = gpd.read_file("../data_andy/Daily_Boardings_Based_on_Routes_and_Bus_Stops/Metro_Transit_Ridership_by_Route_Weekday-shp")
+        df = gpd.read_file("../../../data/ridership/by_stop_and_route/weekday-shp")
     elif day_type == "sat":
-        df = gpd.read_file("../data_andy/Daily_Boardings_Based_on_Routes_and_Bus_Stops/Metro_Transit_Ridership_by_Route_Saturday-shp")
+        df = gpd.read_file("../../../data/ridership/by_stop_and_route/saturday-shp")
     elif day_type == "sun":
-        df = gpd.read_file("../data_andy/Daily_Boardings_Based_on_Routes_and_Bus_Stops/Metro_Transit_Ridership_by_Route_Sunday-shp")
+        df = gpd.read_file("../../../data/ridership/by_stop_and_route/sunday-shp")
     else:
         return "day_type not found"
 
@@ -142,8 +142,8 @@ def get_overlap_matrix():
 
     :return: a DataFrame of numbers of overlaps
     """
-    if os.path.exists("../data_andy/route_overlap/matrix_nums.csv"):
-        df = pd.read_csv("../data_andy/route_overlap/matrix_nums.csv").set_index("Unnamed: 0")
+    if os.path.exists("../../../data/temp/matrix_nums.csv"):
+        df = pd.read_csv("../../../data/temp/matrix_nums.csv").set_index("Unnamed: 0")
         df.index.names = [None]
         df.columns = [int(c) for c in df.columns]
         df.index = [int(i) for i in df.index]
@@ -164,7 +164,7 @@ def get_overlap_matrix():
 
         df = pd.DataFrame(md, columns=md.keys(), index=md.keys()).fillna(0)
 
-        df.to_csv(path_or_buf="../data_andy/route_overlap/matrix_nums.csv")
+        df.to_csv(path_or_buf="../../../data/temp/matrix_nums.csv")
         return df
 
 def get_overlap_matrix_to_perc():
@@ -174,8 +174,8 @@ def get_overlap_matrix_to_perc():
 
     :return: a DataFrame of percentages of overlaps.
     """
-    if os.path.exists("../data_andy/route_overlap/matrix_perc.csv"):
-        df = pd.read_csv("../data_andy/route_overlap/matrix_perc.csv").set_index("Unnamed: 0")
+    if os.path.exists("../../../data/temp/matrix_perc.csv"):
+        df = pd.read_csv("../../../data/temp/matrix_perc.csv").set_index("Unnamed: 0")
         df.index.names = [None]
         df.columns = [int(c) for c in df.columns]
         df.index = [int(i) for i in df.index]
@@ -187,7 +187,7 @@ def get_overlap_matrix_to_perc():
         df_perc = pd.DataFrame(columns=df.columns, index=df.columns)
         for col in df.columns:
             df_perc[col] = df[col] / bus_stop_sum[col]
-        df_perc.T.to_csv(path_or_buf="../data_andy/route_overlap/matrix_perc.csv")
+        df_perc.T.to_csv(path_or_buf="../../../data/temp/matrix_perc.csv")
         return df_perc.T
 
 
@@ -217,8 +217,8 @@ def generate_color_map(threshold, savefig=False, filename=None):
     plt.colorbar(img, label="Overlapping Percentage of Each Route")
 
     if savefig:
-        plt.savefig("../report_andy/Oct_5th/" + filename, dpi=300, bbox_inches='tight')
-        # plt.savefig("../report_andy/Oct_5th/Overlap_Percentage_cmap_viridis.png", dpi=300, bbox_inches='tight')
+        plt.savefig("../brainstorm_report" + filename, dpi=300, bbox_inches='tight')
+        # plt.savefig("../brainstorm_report", dpi=300, bbox_inches='tight')
 
     # Improvement
     # savefig = True
