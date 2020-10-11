@@ -3,7 +3,7 @@ from typing import Dict, Optional, List, Tuple
 
 from msnmetrosim.models import MMTStop, MMTStopsAtCross
 from msnmetrosim.models.results import CrossStopRemovalResult
-from msnmetrosim.utils import generate_points
+from msnmetrosim.utils import generate_points, Progress
 from .base import LocationalDataController
 from .population import PopulationDataController
 from .stop import MMTStopDataController
@@ -102,10 +102,10 @@ class MMTStopsAtCrossDataController(LocationalDataController):
         ret: List[CrossStopRemovalResult] = []
 
         total_count = len(self.all_data)
+        progress = Progress(total_count)
+        progress.start()
 
-        for idx, stop in enumerate(self.all_data):
-            print(f"{idx} / {total_count} ({idx / total_count:.2%})")
-
+        for stop in self.all_data:
             stop: MMTStopsAtCross
             agents: List[Tuple[float, float]]
             weights: Optional[List[float]]
@@ -121,6 +121,9 @@ class MMTStopsAtCrossDataController(LocationalDataController):
             rm_result = self.get_metrics_of_single_stop_removal(stop.primary, stop.secondary, agents, weights)
 
             ret.append(rm_result)
+
+            progress.rec_completed_one()
+            print(progress)
 
         return ret
 
