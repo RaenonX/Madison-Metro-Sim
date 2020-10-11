@@ -84,6 +84,8 @@ class MMTStopsAtCrossDataController(LocationalDataController):
         """
         # ThreadPoolExecutor won't help on performance boosting
         # OPTIMIZE: Try to reduce the calculation time of this
+        #   - Each agent is expanding its circle to find the closest stop
+        #   - Change the above to each stop expanding its circle to "touch" the closest agent instead?
         ret: List[CrossStopRemovalResult] = []
 
         total_count = len(self.all_data)
