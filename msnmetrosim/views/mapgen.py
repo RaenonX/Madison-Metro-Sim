@@ -3,17 +3,17 @@ Functions for generating various base maps.
 
 Maps that contain additional information rather than bus routes and stops should be inside a different file.
 """
-from typing import Tuple
+from typing import Tuple, List
 
-from folium import Map as FoliumMap, Icon, Marker, PolyLine, Popup
+from folium import Map as FoliumMap, Icon, Marker, Circle, PolyLine, Popup
 from folium.plugins import MarkerCluster
 
 from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START, CONTROL_SCALE
 from msnmetrosim.utils import temporary_func
 from .controllers import ctrl_ridership_stop, ctrl_routes, ctrl_shapes, ctrl_stops, ctrl_stops_cross, ctrl_trips
 
-__all__ = ("generate_clean_map", "generate_92_wkd_routes", "generate_92_wkd_routes_and_stops",
-           "generate_92_wkd_routes_and_grouped_stops",)
+__all__ = ("generate_clean_map", "generate_map_with_points",
+           "generate_92_wkd_routes", "generate_92_wkd_routes_and_stops", "generate_92_wkd_routes_and_grouped_stops",)
 
 
 def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
@@ -89,6 +89,11 @@ def plot_shape(folium_map: FoliumMap, shape_id: int, shape_popup: str, shape_col
     PolyLine(shape_coords, color=shape_color, popup=shape_popup).add_to(folium_map)
 
 
+def plot_point(folium_map: FoliumMap, coord: Tuple[float, float]):
+    """Plot points at ``coord`` on ``folium_map``."""
+    Circle(coord, 2).add_to(folium_map)
+
+
 @temporary_func
 def plot_92_wkd_routes(folium_map: FoliumMap):
     """Plot all the routes (shapes) available under service ID ``92_WKD`` (Batch #92, weekday plan, presumably)."""
@@ -99,6 +104,20 @@ def plot_92_wkd_routes(folium_map: FoliumMap):
         shape_color = ctrl_routes.get_route_by_route_id(last_trip.route_id).route_color
 
         plot_shape(folium_map, shape_id, shape_popup, shape_color)
+
+
+def generate_map_with_points(coords: List[Tuple[float, float]],
+                             center_coord: Tuple[float, float] = None,
+                             tile: str = None,
+                             zoom_start: int = None,
+                             control_scale: str = None) -> FoliumMap:
+    """Generate a clean map with ``coords`` as points on it."""
+    folium_map = generate_clean_map(center_coord, tile, zoom_start, control_scale)
+
+    for coord in coords:
+        plot_point(folium_map, coord)
+
+    return folium_map
 
 
 def generate_clean_map(center_coord: Tuple[float, float] = None,
