@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from msnmetrosim.utils import generate_points
 from msnmetrosim.views.controllers import ctrl_stops, ctrl_stops_cross, ctrl_ridership_stop
 
-__all__ = ("get_stops_without_ridership", "get_travel_time_to_stop")
+__all__ = ("get_stops_without_ridership", "get_distance_to_stop")
 
 
 def get_stops_without_ridership():
@@ -24,7 +24,7 @@ def get_stops_without_ridership():
         print(stop_without_ridership)
 
 
-def get_travel_time_to_stop():
+def get_distance_to_stop():
     """Get the travel time to ``target_stop``."""
     # Controllers to traverse
     target_stop = ctrl_stops_cross.get_grouped_stop_by_street_names("Inwood", "Open Wood")
