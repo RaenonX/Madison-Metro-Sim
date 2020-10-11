@@ -3,3 +3,6 @@ folium
 
 # Graph plotting
 matplotlib
+
+# Calculation
+numpy
