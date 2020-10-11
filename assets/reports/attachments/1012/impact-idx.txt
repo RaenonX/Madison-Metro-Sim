@@ -1,0 +1,2310 @@
+Report on 2020-10-11 16:46:43.546974 (CDT)
+
+Range: 0.6 km / Interval: 0.05 km
+
+#1 - Remove W Terrace & Eastpark
+Impact index: 0.9184
+#2 - Remove Waldorf & Mansion Hill
+Impact index: 0.6723
+#3 - Remove N Thompson & Jana
+Impact index: 0.6414
+#4 - Remove N Fair Oaks & Lexington
+Impact index: 0.5006
+#5 - Remove N Thompson & Westwynn
+Impact index: 0.4268
+#6 - Remove Eastpark & Broadview
+Impact index: 0.2680
+#7 - Remove S Whitney & Gilbert
+Impact index: 0.2396
+#8 - Remove North Transfer Point & Huxley
+Impact index: 0.1730
+#9 - Remove Rayovac & Exact
+Impact index: 0.1617
+#10 - Remove S Whitney & Kroncke
+Impact index: 0.1453
+#11 - Remove Anniversary & Forest Run
+Impact index: 0.0960
+#12 - Remove Hathaway & Schroeder
+Impact index: 0.0948
+#13 - Remove Fish Hatchery & W Badger
+Impact index: 0.0880
+#14 - Remove W Terrace & 5117
+Impact index: 0.0819
+#15 - Remove Oak & E Washington
+Impact index: 0.0646
+#16 - Remove N Sherman & Farragut
+Impact index: 0.0511
+#17 - Remove Winnebago & Lafollette
+Impact index: 0.0494
+#18 - Remove N Sherman & Thackeray
+Impact index: 0.0446
+#19 - Remove Allied & Jenewein
+Impact index: 0.0432
+#20 - Remove S Mills & Regent
+Impact index: 0.0410
+#21 - Remove Hathaway & Greenwich
+Impact index: 0.0282
+#22 - Remove S Whitney & Medical
+Impact index: 0.0276
+#23 - Remove Gilbert & Gilbert
+Impact index: 0.0184
+#24 - Remove Carling & Allied
+Impact index: 0.0164
+#25 - Remove S Allen & Regent
+Impact index: 0.0156
+#26 - Remove Commercial & North Lawn
+Impact index: 0.0142
+#27 - Remove Division & Eastwood
+Impact index: 0.0109
+#28 - Remove Regent & N Orchard
+Impact index: 0.0082
+#29 - Remove Regent & N Randall
+Impact index: 0.0082
+#30 - Remove School & Fulton
+Impact index: 0.0069
+#31 - Remove Dempsey & Maher
+Impact index: 0.0061
+#32 - Remove Packers & Scott
+Impact index: 0.0053
+#33 - Remove Mendota & University
+Impact index: 0.0050
+#34 - Remove Regent & N Mills
+Impact index: 0.0049
+#35 - Remove Eagle Heights & Lot F
+Impact index: 0.0048
+#36 - Remove University & Branch
+Impact index: 0.0038
+#37 - Remove Park & Elmwood
+Impact index: 0.0037
+#38 - Remove Research Park & E Cheryl
+Impact index: 0.0000
+#39 - Remove S Fish Hatchery & Cheryl
+Impact index: 0.0000
+#40 - Remove E Cheryl & S Fish Hatchery
+Impact index: 0.0000
+#41 - Remove Mickelson & S Fish Hatchery
+Impact index: 0.0000
+#42 - Remove Manchester & Westin
+Impact index: 0.0000
+#43 - Remove Mickelson & Walkway
+Impact index: 0.0000
+#44 - Remove Westin & Maple Grove
+Impact index: 0.0000
+#45 - Remove Manchester & Thornebury
+Impact index: 0.0000
+#46 - Remove S Fish Hatchery & Brendan
+Impact index: 0.0000
+#47 - Remove Mickelson & Brendan
+Impact index: 0.0000
+#48 - Remove Brendan & Chapel Valley
+Impact index: 0.0000
+#49 - Remove S Whitney & Raymond
+Impact index: 0.0000
+#50 - Remove D'onofrio & Mineral Point
+Impact index: 0.0000
+#51 - Remove Toepfer & Mineral Point
+Impact index: 0.0000
+#52 - Remove Pflaum & Alder
+Impact index: 0.0000
+#53 - Remove N Bassett & W Dayton
+Impact index: 0.0000
+#54 - Remove Nakoosa & Walmart
+Impact index: 0.0000
+#55 - Remove International & American
+Impact index: 0.0000
+#56 - Remove Zeier & E Springs
+Impact index: 0.0000
+#57 - Remove Packers & Elka
+Impact index: 0.0000
+#58 - Remove N Sherman & Trailsway
+Impact index: 0.0000
+#59 - Remove Zeier & Shopko
+Impact index: 0.0000
+#60 - Remove East Towne & E Springs
+Impact index: 0.0000
+#61 - Remove E Washington & E Springs
+Impact index: 0.0000
+#62 - Remove E Washington N & 4822
+Impact index: 0.0000
+#63 - Remove Wheeler & Ilene
+Impact index: 0.0000
+#64 - Remove Mohawk & Nakoma
+Impact index: -0.0003
+#65 - Remove Lake Mendota & Eagle Heights
+Impact index: -0.0003
+#66 - Remove Junction & Elderberry
+Impact index: -0.0003
+#67 - Remove Hardrock & Mckee
+Impact index: -0.0003
+#68 - Remove M L K Junior & City-county
+Impact index: -0.0004
+#69 - Remove Heartland & Deming
+Impact index: -0.0004
+#70 - Remove Langley & Dell
+Impact index: -0.0007
+#71 - Remove Eagle Heights & Lot E
+Impact index: -0.0012
+#72 - Remove E Washington & S First
+Impact index: -0.0016
+#73 - Remove Regent & S Randall
+Impact index: -0.0020
+#74 - Remove Regent & N Allen
+Impact index: -0.0027
+#75 - Remove W Washington & N Fairchild
+Impact index: -0.0029
+#76 - Remove W Washington & N Henry
+Impact index: -0.0037
+#77 - Remove S Webster & E Main
+Impact index: -0.0040
+#78 - Remove North & E Washington
+Impact index: -0.0042
+#79 - Remove Mckenna & Lancaster
+Impact index: -0.0046
+#80 - Remove State & W Gorham
+Impact index: -0.0048
+#81 - Remove Britta & Verona E
+Impact index: -0.0050
+#82 - Remove Hammersley & Rae
+Impact index: -0.0050
+#83 - Remove North & E Mifflin
+Impact index: -0.0054
+#84 - Remove W Washington & N Bedford
+Impact index: -0.0054
+#85 - Remove J Q Hammons & Holiday
+Impact index: -0.0054
+#86 - Remove W Washington & N Bassett
+Impact index: -0.0055
+#87 - Remove E Washington & S Fourth
+Impact index: -0.0057
+#88 - Remove Wheeler & Delaware
+Impact index: -0.0060
+#89 - Remove Fourier & 1233
+Impact index: -0.0061
+#90 - Remove Wheeler & Wheeler
+Impact index: -0.0062
+#91 - Remove W Johnson & N Broom
+Impact index: -0.0065
+#92 - Remove Lake Point & 1531
+Impact index: -0.0066
+#93 - Remove Excelsior & Deming
+Impact index: -0.0067
+#94 - Remove W Doty & M L K Junior
+Impact index: -0.0067
+#95 - Remove Northport & Kennedy
+Impact index: -0.0070
+#96 - Remove N Hamilton & E Gorham
+Impact index: -0.0084
+#97 - Remove Muir Field & Lancaster
+Impact index: -0.0089
+#98 - Remove Muir Field & Gladstone
+Impact index: -0.0091
+#99 - Remove N Segoe & Kelab
+Impact index: -0.0096
+#100 - Remove Muir Field & Lindfield
+Impact index: -0.0097
+#101 - Remove E Washington N & E Springs
+Impact index: -0.0102
+#102 - Remove International & Anderson
+Impact index: -0.0107
+#103 - Remove N Lake & Langdon
+Impact index: -0.0110
+#104 - Remove J Q Hammons & Greenway Station
+Impact index: -0.0111
+#105 - Remove E Washington & Independence
+Impact index: -0.0114
+#106 - Remove Crossroads & 2801
+Impact index: -0.0115
+#107 - Remove E Washington & N Second
+Impact index: -0.0117
+#108 - Remove Regent & N Prospect
+Impact index: -0.0128
+#109 - Remove University Bay & Lot 60
+Impact index: -0.0128
+#110 - Remove W Washington & S Henry
+Impact index: -0.0129
+#111 - Remove Atwood & Division
+Impact index: -0.0136
+#112 - Remove Tompkins & Alder
+Impact index: -0.0136
+#113 - Remove E Johnson & N Baldwin
+Impact index: -0.0138
+#114 - Remove S Midvale & Nakoma
+Impact index: -0.0144
+#115 - Remove Raymond & Reetz
+Impact index: -0.0146
+#116 - Remove Northland & Judy
+Impact index: -0.0148
+#117 - Remove E Washington & S Second
+Impact index: -0.0149
+#118 - Remove Ganser & D'onofrio
+Impact index: -0.0150
+#119 - Remove N Allen & University
+Impact index: -0.0152
+#120 - Remove Delaware & Esch
+Impact index: -0.0154
+#121 - Remove N Broom & W Gorham
+Impact index: -0.0156
+#122 - Remove State & W Dayton
+Impact index: -0.0160
+#123 - Remove Deming & Country Inn
+Impact index: -0.0163
+#124 - Remove E Wilson & M L K Junior
+Impact index: -0.0163
+#125 - Remove Manchester & Hartford
+Impact index: -0.0179
+#126 - Remove Regent & S Segoe
+Impact index: -0.0179
+#127 - Remove Northland & Delaware
+Impact index: -0.0180
+#128 - Remove S Bassett & W Washington
+Impact index: -0.0191
+#129 - Remove S Gammon & Gammon
+Impact index: -0.0193
+#130 - Remove Milwaukee & N Bryan
+Impact index: -0.0198
+#131 - Remove Ganser & Mineral Point
+Impact index: -0.0202
+#132 - Remove Merryturn & Spicebush
+Impact index: -0.0207
+#133 - Remove Fitchrona & King James
+Impact index: -0.0209
+#134 - Remove Randolph & Westward
+Impact index: -0.0211
+#135 - Remove Independence & East Towne
+Impact index: -0.0217
+#136 - Remove E Olin & Colby
+Impact index: -0.0220
+#137 - Remove Forest Run & Hayes
+Impact index: -0.0228
+#138 - Remove E Washington N & 4810
+Impact index: -0.0229
+#139 - Remove E Washington & N First
+Impact index: -0.0239
+#140 - Remove S Rosa & Regent
+Impact index: -0.0241
+#141 - Remove Wyalusing & Reston Heights
+Impact index: -0.0242
+#142 - Remove W Washington & N Broom
+Impact index: -0.0254
+#143 - Remove E Doty & S Pinckney
+Impact index: -0.0256
+#144 - Remove Aberg & Loftsgordan
+Impact index: -0.0269
+#145 - Remove S Allen & Rowley
+Impact index: -0.0270
+#146 - Remove S Broom & W Washington
+Impact index: -0.0272
+#147 - Remove W Washington & S Carroll
+Impact index: -0.0274
+#148 - Remove Excelsior & A F S C M E
+Impact index: -0.0275
+#149 - Remove Schroeder & Forward
+Impact index: -0.0278
+#150 - Remove State & N Lake
+Impact index: -0.0284
+#151 - Remove State & W Johnson
+Impact index: -0.0293
+#152 - Remove W Gorham & N Henry
+Impact index: -0.0294
+#153 - Remove N Segoe & 518
+Impact index: -0.0311
+#154 - Remove W Washington & S Bedford
+Impact index: -0.0314
+#155 - Remove Excelsior & Associated Bank
+Impact index: -0.0319
+#156 - Remove State & N Frances
+Impact index: -0.0325
+#157 - Remove Regent & N Owen
+Impact index: -0.0333
+#158 - Remove W Main & S Carroll
+Impact index: -0.0340
+#159 - Remove N Franklin & E Johnson
+Impact index: -0.0348
+#160 - Remove Milwaukee & N Fair Oaks
+Impact index: -0.0349
+#161 - Remove E Dayton & Wisconsin
+Impact index: -0.0354
+#162 - Remove City View & High Crossing
+Impact index: -0.0354
+#163 - Remove E Johnson & N Blair
+Impact index: -0.0360
+#164 - Remove State & W Gilman
+Impact index: -0.0361
+#165 - Remove East Towne & Zeier
+Impact index: -0.0362
+#166 - Remove S Allen & Commonwealth
+Impact index: -0.0365
+#167 - Remove Milwaukee & S Bryan
+Impact index: -0.0367
+#168 - Remove Milwaukee & N Marquette
+Impact index: -0.0370
+#169 - Remove W Johnson & N Frances
+Impact index: -0.0373
+#170 - Remove Melody & Stuart
+Impact index: -0.0375
+#171 - Remove Excelsior & John Deere
+Impact index: -0.0377
+#172 - Remove E Washington & N Webster
+Impact index: -0.0377
+#173 - Remove N Midvale & Regent
+Impact index: -0.0382
+#174 - Remove Regent & S Orchard
+Impact index: -0.0389
+#175 - Remove Regent & Price
+Impact index: -0.0389
+#176 - Remove Prairie & Hammersley
+Impact index: -0.0391
+#177 - Remove N Charter & University
+Impact index: -0.0392
+#178 - Remove N Hamilton & E Johnson
+Impact index: -0.0404
+#179 - Remove Kings Mill & E Buckeye
+Impact index: -0.0406
+#180 - Remove Independence & Dwight
+Impact index: -0.0412
+#181 - Remove University Row & University
+Impact index: -0.0412
+#182 - Remove W Johnson & N Park
+Impact index: -0.0424
+#183 - Remove S Sprecher & Wyalusing
+Impact index: -0.0424
+#184 - Remove N Segoe & Regent
+Impact index: -0.0424
+#185 - Remove University & N Orchard
+Impact index: -0.0428
+#186 - Remove E Washington & N Fourth
+Impact index: -0.0430
+#187 - Remove Helene & Britta
+Impact index: -0.0432
+#188 - Remove Regent & S Prospect
+Impact index: -0.0438
+#189 - Remove State & N Fairchild
+Impact index: -0.0442
+#190 - Remove N Lake & W Johnson
+Impact index: -0.0443
+#191 - Remove University & Parmenter
+Impact index: -0.0445
+#192 - Remove Bluff & Ridge
+Impact index: -0.0456
+#193 - Remove S Park & W Olin
+Impact index: -0.0456
+#194 - Remove Red Arrow & Jenewein
+Impact index: -0.0467
+#195 - Remove S Broom & W Doty
+Impact index: -0.0468
+#196 - Remove Verona & Highway Ramp
+Impact index: -0.0474
+#197 - Remove Raymond & Leland
+Impact index: -0.0475
+#198 - Remove E Springs & High Crossing
+Impact index: -0.0476
+#199 - Remove E Cheryl & Woods Hollow
+Impact index: -0.0476
+#200 - Remove Regent & Highland
+Impact index: -0.0476
+#201 - Remove Continental & E Washington
+Impact index: -0.0479
+#202 - Remove Londonderry & Dryden
+Impact index: -0.0481
+#203 - Remove Regent & Vista
+Impact index: -0.0482
+#204 - Remove Rimrock & Moorland
+Impact index: -0.0484
+#205 - Remove Fisher & Dane
+Impact index: -0.0487
+#206 - Remove Junction & Pick N Save
+Impact index: -0.0492
+#207 - Remove Carnwood & Maple Grove
+Impact index: -0.0496
+#208 - Remove N Sherman & Northport
+Impact index: -0.0499
+#209 - Remove W Johnson & N Mills
+Impact index: -0.0499
+#210 - Remove E Gorham & N Baldwin
+Impact index: -0.0508
+#211 - Remove Fish Hatchery & Pike
+Impact index: -0.0511
+#212 - Remove Aberg & Ruskin
+Impact index: -0.0511
+#213 - Remove N Carroll & W Mifflin
+Impact index: -0.0514
+#214 - Remove W Olin & Colby
+Impact index: -0.0516
+#215 - Remove Cottontail & Dell
+Impact index: -0.0517
+#216 - Remove Commercial N & N Fair Oaks
+Impact index: -0.0523
+#217 - Remove S Fairchild & W Main
+Impact index: -0.0523
+#218 - Remove E Washington & N Sixth
+Impact index: -0.0534
+#219 - Remove W Johnson & N Charter
+Impact index: -0.0543
+#220 - Remove University & N Randall
+Impact index: -0.0549
+#221 - Remove Kendall & Ridge
+Impact index: -0.0562
+#222 - Remove Science & U W Health
+Impact index: -0.0566
+#223 - Remove King James & Williamsburg
+Impact index: -0.0575
+#224 - Remove N Sherman & Lake View
+Impact index: -0.0577
+#225 - Remove S Whitney & 126
+Impact index: -0.0580
+#226 - Remove N Sherman & Logan
+Impact index: -0.0586
+#227 - Remove N Broom & W Dayton
+Impact index: -0.0594
+#228 - Remove E Johnson & N Butler
+Impact index: -0.0595
+#229 - Remove Watts & S Burberry
+Impact index: -0.0602
+#230 - Remove Pheasant Ridge & E Badger
+Impact index: -0.0602
+#231 - Remove Regent & S Owen
+Impact index: -0.0604
+#232 - Remove Observatory & N Charter
+Impact index: -0.0623
+#233 - Remove Allied & Thurston
+Impact index: -0.0624
+#234 - Remove Pheasant Ridge & Quail Run
+Impact index: -0.0626
+#235 - Remove Atwood & Garrison
+Impact index: -0.0631
+#236 - Remove Wheeler & Golf View
+Impact index: -0.0634
+#237 - Remove Lake Mendota & Lot P
+Impact index: -0.0636
+#238 - Remove Williamson & Rogers
+Impact index: -0.0638
+#239 - Remove Allied & Lovell
+Impact index: -0.0646
+#240 - Remove E Wilson & S Franklin
+Impact index: -0.0647
+#241 - Remove Regent & N Park
+Impact index: -0.0654
+#242 - Remove N Midvale & Hilldale Row
+Impact index: -0.0668
+#243 - Remove N Lake & University
+Impact index: -0.0676
+#244 - Remove Linden & N Charter
+Impact index: -0.0677
+#245 - Remove S Park & Meriter
+Impact index: -0.0684
+#246 - Remove Reetz & Black Oak
+Impact index: -0.0684
+#247 - Remove S Whitney & Regent
+Impact index: -0.0703
+#248 - Remove S Park & Burr Oak
+Impact index: -0.0704
+#249 - Remove N Rosa & Regent
+Impact index: -0.0708
+#250 - Remove N Bedford & W Mifflin
+Impact index: -0.0719
+#251 - Remove Excelsior & 8417
+Impact index: -0.0724
+#252 - Remove E Washington & S Webster
+Impact index: -0.0731
+#253 - Remove Heather & Hilldale Mall
+Impact index: -0.0733
+#254 - Remove W Dayton & N Frances
+Impact index: -0.0735
+#255 - Remove Jenifer & Williamson
+Impact index: -0.0739
+#256 - Remove E Mifflin & N Pinckney
+Impact index: -0.0748
+#257 - Remove S Thompson & 1306
+Impact index: -0.0751
+#258 - Remove University & University Bay
+Impact index: -0.0758
+#259 - Remove School & Northland
+Impact index: -0.0767
+#260 - Remove Schroeder & Rayovac
+Impact index: -0.0774
+#261 - Remove Starr Grass & Waldorf
+Impact index: -0.0794
+#262 - Remove S Butler & E Main
+Impact index: -0.0802
+#263 - Remove Deming & Park Bank
+Impact index: -0.0805
+#264 - Remove Odana & Burlington Coat
+Impact index: -0.0814
+#265 - Remove E Washington & N Blair
+Impact index: -0.0821
+#266 - Remove Beltline S & Seminole
+Impact index: -0.0827
+#267 - Remove Turner & Pflaum
+Impact index: -0.0844
+#268 - Remove Lake Point & Weber
+Impact index: -0.0851
+#269 - Remove Old Middleton & Old Sauk
+Impact index: -0.0851
+#270 - Remove Hayes & Morningside
+Impact index: -0.0857
+#271 - Remove Northport & Northside Town
+Impact index: -0.0871
+#272 - Remove S Park & Regent
+Impact index: -0.0871
+#273 - Remove University Bay & Lot 76
+Impact index: -0.0875
+#274 - Remove Fish Hatchery & Appleton
+Impact index: -0.0877
+#275 - Remove S Sixth & E Washington
+Impact index: -0.0884
+#276 - Remove W Dayton & N Lake
+Impact index: -0.0895
+#277 - Remove Odana & Frederick
+Impact index: -0.0898
+#278 - Remove International & Elder Care
+Impact index: -0.0899
+#279 - Remove American & Buttonwood
+Impact index: -0.0903
+#280 - Remove Mineral Point & S Gammon
+Impact index: -0.0904
+#281 - Remove Winnebago & S First
+Impact index: -0.0909
+#282 - Remove Mineral Point & Randolph
+Impact index: -0.0914
+#283 - Remove N Webster & E Mifflin
+Impact index: -0.0915
+#284 - Remove Marsh & Lot 76
+Impact index: -0.0915
+#285 - Remove Mineral Point & S Junction
+Impact index: -0.0927
+#286 - Remove E Main & S Pinckney
+Impact index: -0.0933
+#287 - Remove W Johnson & Wisconsin
+Impact index: -0.0937
+#288 - Remove W Gorham & Wisconsin
+Impact index: -0.0954
+#289 - Remove Deming & J Q Hammons
+Impact index: -0.0970
+#290 - Remove W Badger & Fiedler
+Impact index: -0.0998
+#291 - Remove Verona E & Atticus
+Impact index: -0.0998
+#292 - Remove Regent & N Breese
+Impact index: -0.1002
+#293 - Remove S Midvale & Cherokee
+Impact index: -0.1003
+#294 - Remove Babcock & Linden
+Impact index: -0.1008
+#295 - Remove Mckenna & Hammersley
+Impact index: -0.1023
+#296 - Remove North & Hoard
+Impact index: -0.1023
+#297 - Remove Winnebago & Linden
+Impact index: -0.1023
+#298 - Remove N Mills & W Dayton
+Impact index: -0.1024
+#299 - Remove Winnebago & S Fourth
+Impact index: -0.1031
+#300 - Remove University & Maple
+Impact index: -0.1034
+#301 - Remove Milwaukee & S Marquette
+Impact index: -0.1038
+#302 - Remove Buttonwood & American Family
+Impact index: -0.1039
+#303 - Remove S Broom & W Wilson
+Impact index: -0.1046
+#304 - Remove Capital & Baker
+Impact index: -0.1052
+#305 - Remove N Park & W Dayton
+Impact index: -0.1054
+#306 - Remove Carnwood & Muir Field
+Impact index: -0.1060
+#307 - Remove Fourier & La Petite
+Impact index: -0.1062
+#308 - Remove N Thompson & Sycamore
+Impact index: -0.1067
+#309 - Remove King James & Anton
+Impact index: -0.1073
+#310 - Remove Northport & School
+Impact index: -0.1085
+#311 - Remove Crossroads & 2910
+Impact index: -0.1092
+#312 - Remove Verona W & Summit
+Impact index: -0.1104
+#313 - Remove E Washington & N Baldwin
+Impact index: -0.1113
+#314 - Remove Odana & Charles
+Impact index: -0.1114
+#315 - Remove Park Lawn & Franklin
+Impact index: -0.1136
+#316 - Remove N Park & State
+Impact index: -0.1145
+#317 - Remove University & N Frances
+Impact index: -0.1147
+#318 - Remove Jenifer & S Ingersoll
+Impact index: -0.1148
+#319 - Remove Waterford & Manchester
+Impact index: -0.1152
+#320 - Remove E Washington & Zeier
+Impact index: -0.1153
+#321 - Remove Regent & Meadow
+Impact index: -0.1157
+#322 - Remove Odana & Town Center
+Impact index: -0.1159
+#323 - Remove Allen & Lake
+Impact index: -0.1160
+#324 - Remove Delaware & Tennessee
+Impact index: -0.1163
+#325 - Remove S Fair Oaks & Milwaukee
+Impact index: -0.1171
+#326 - Remove University & Park
+Impact index: -0.1183
+#327 - Remove Langdon & N Henry
+Impact index: -0.1198
+#328 - Remove N Franklin & University
+Impact index: -0.1199
+#329 - Remove Milwaukee & E Washington
+Impact index: -0.1202
+#330 - Remove Monroe & Spooner
+Impact index: -0.1218
+#331 - Remove S Whitney & Westgate
+Impact index: -0.1222
+#332 - Remove S Thompson & Milwaukee
+Impact index: -0.1226
+#333 - Remove Greenway & Deming
+Impact index: -0.1230
+#334 - Remove Anniversary & Hayes
+Impact index: -0.1231
+#335 - Remove N Thompson & Lien
+Impact index: -0.1231
+#336 - Remove Old Middleton & N Whitney
+Impact index: -0.1235
+#337 - Remove Walter & Hargrove
+Impact index: -0.1236
+#338 - Remove University & Walnut
+Impact index: -0.1245
+#339 - Remove E Gorham & N Blair
+Impact index: -0.1247
+#340 - Remove Sheboygan & N Segoe
+Impact index: -0.1248
+#341 - Remove E Johnson & N Seventh
+Impact index: -0.1257
+#342 - Remove Crystal & Diamond
+Impact index: -0.1285
+#343 - Remove N Mills & Spring
+Impact index: -0.1285
+#344 - Remove Davies & Major
+Impact index: -0.1300
+#345 - Remove Mohawk & Danbury
+Impact index: -0.1303
+#346 - Remove N Park & University
+Impact index: -0.1310
+#347 - Remove Watts & N Burberry
+Impact index: -0.1311
+#348 - Remove Verona W & Beltline S
+Impact index: -0.1326
+#349 - Remove S First & E Main
+Impact index: -0.1328
+#350 - Remove Eagan & E Washington
+Impact index: -0.1330
+#351 - Remove Beltline S & Sergenians
+Impact index: -0.1332
+#352 - Remove Regent & Glen
+Impact index: -0.1338
+#353 - Remove W Olin & Lowell
+Impact index: -0.1339
+#354 - Remove E Washington & S Baldwin
+Impact index: -0.1362
+#355 - Remove Todd & Beltline S
+Impact index: -0.1383
+#356 - Remove E Washington & N Marquette
+Impact index: -0.1392
+#357 - Remove Roth & Ruskin
+Impact index: -0.1396
+#358 - Remove University & Lakeview
+Impact index: -0.1410
+#359 - Remove Lake Point & 1566
+Impact index: -0.1429
+#360 - Remove Inwood & Open Wood
+Impact index: -0.1430
+#361 - Remove Hayes & Dawn
+Impact index: -0.1434
+#362 - Remove Atwood & Evergreen
+Impact index: -0.1435
+#363 - Remove Highland & Marsh
+Impact index: -0.1450
+#364 - Remove Junction & Prairie Towne
+Impact index: -0.1454
+#365 - Remove W Wilson & S Carroll
+Impact index: -0.1457
+#366 - Remove E Washington & S Blair
+Impact index: -0.1468
+#367 - Remove E Wilson & King
+Impact index: -0.1478
+#368 - Remove N Mills & University
+Impact index: -0.1496
+#369 - Remove N Park & Spring
+Impact index: -0.1511
+#370 - Remove N Thompson & Waywood
+Impact index: -0.1523
+#371 - Remove Dempsey & Gary
+Impact index: -0.1524
+#372 - Remove Merryturn & Queensbridge
+Impact index: -0.1528
+#373 - Remove Jenifer & S Paterson
+Impact index: -0.1536
+#374 - Remove Mohawk & Whenona
+Impact index: -0.1564
+#375 - Remove Observatory & Bascom
+Impact index: -0.1566
+#376 - Remove N Stoughton E & N Stoughton
+Impact index: -0.1587
+#377 - Remove Gilson & W Olin
+Impact index: -0.1589
+#378 - Remove Atwood & Ohio
+Impact index: -0.1596
+#379 - Remove Monroe & S Breese
+Impact index: -0.1606
+#380 - Remove Campus & Babcock
+Impact index: -0.1606
+#381 - Remove Regent & N Whitney
+Impact index: -0.1614
+#382 - Remove Old Middleton & Norman
+Impact index: -0.1632
+#383 - Remove Terrace & Middleton
+Impact index: -0.1646
+#384 - Remove Jenifer & S Baldwin
+Impact index: -0.1648
+#385 - Remove Excelsior & Fourier
+Impact index: -0.1650
+#386 - Remove N Randall & Engineering
+Impact index: -0.1679
+#387 - Remove W Doty & S Henry
+Impact index: -0.1690
+#388 - Remove S Thompson & 1309
+Impact index: -0.1699
+#389 - Remove American & American Family
+Impact index: -0.1702
+#390 - Remove Fish Hatchery & Greenway
+Impact index: -0.1703
+#391 - Remove Commercial & North
+Impact index: -0.1710
+#392 - Remove S High Point & Big Sky
+Impact index: -0.1717
+#393 - Remove Monroe & Stockton
+Impact index: -0.1721
+#394 - Remove N Thompson & Kurt
+Impact index: -0.1735
+#395 - Remove Linden & Henry
+Impact index: -0.1772
+#396 - Remove Regent & Rock
+Impact index: -0.1809
+#397 - Remove Jenifer & S Few
+Impact index: -0.1815
+#398 - Remove Piping Rock & Hathaway
+Impact index: -0.1829
+#399 - Remove Beltline S & Underpass
+Impact index: -0.1836
+#400 - Remove Milwaukee & N Thompson
+Impact index: -0.1859
+#401 - Remove Milwaukee & Milo
+Impact index: -0.1869
+#402 - Remove Eagan & East Towne
+Impact index: -0.1870
+#403 - Remove Fitchrona & Kapec
+Impact index: -0.1880
+#404 - Remove Reetz & Flad
+Impact index: -0.1883
+#405 - Remove Seminole & Doncaster
+Impact index: -0.1913
+#406 - Remove Hammersley & Brookwood
+Impact index: -0.1917
+#407 - Remove Red Arrow & Pawnee
+Impact index: -0.1919
+#408 - Remove Commonwealth & Gregory
+Impact index: -0.1927
+#409 - Remove Verona E & Red Arrow
+Impact index: -0.1941
+#410 - Remove Park & Hubbard
+Impact index: -0.1950
+#411 - Remove S Park & Beld
+Impact index: -0.1952
+#412 - Remove Lovell & Chalet Gardens
+Impact index: -0.1977
+#413 - Remove Pflaum & Camden
+Impact index: -0.1985
+#414 - Remove Badger & Nob Hill
+Impact index: -0.1991
+#415 - Remove Milwaukee & Swanton
+Impact index: -0.1991
+#416 - Remove Acewood & Cottage Grove
+Impact index: -0.1995
+#417 - Remove Deer Valley & Pheasant Ridge
+Impact index: -0.1998
+#418 - Remove N Sherman & Mayfield
+Impact index: -0.2001
+#419 - Remove S Bassett & W Doty
+Impact index: -0.2006
+#420 - Remove Wright & Madison College
+Impact index: -0.2016
+#421 - Remove University & Bristol
+Impact index: -0.2019
+#422 - Remove Fortune & Sweeney
+Impact index: -0.2032
+#423 - Remove International & Economy Lot
+Impact index: -0.2034
+#424 - Remove North Star & Sharpsburg
+Impact index: -0.2048
+#425 - Remove Brandenburg & Freese
+Impact index: -0.2052
+#426 - Remove E Washington & N Livingston
+Impact index: -0.2064
+#427 - Remove Packers & Manley
+Impact index: -0.2074
+#428 - Remove E Rusk & N Rusk
+Impact index: -0.2079
+#429 - Remove Brookwood & Piping Rock
+Impact index: -0.2095
+#430 - Remove S High Point & Mineral Point
+Impact index: -0.2097
+#431 - Remove S Mills & Mound
+Impact index: -0.2107
+#432 - Remove W Dayton & N Orchard
+Impact index: -0.2110
+#433 - Remove Bluff & N Blackhawk
+Impact index: -0.2112
+#434 - Remove N Sherman & Aberg
+Impact index: -0.2136
+#435 - Remove Regent & Kenosha
+Impact index: -0.2140
+#436 - Remove Tokay & Frederick
+Impact index: -0.2143
+#437 - Remove Odana & Smart Motors
+Impact index: -0.2146
+#438 - Remove N Midvale & Heather
+Impact index: -0.2157
+#439 - Remove S Midvale & Midvale School
+Impact index: -0.2190
+#440 - Remove Fish Hatchery & Post
+Impact index: -0.2202
+#441 - Remove Deming & Holiday
+Impact index: -0.2227
+#442 - Remove Branch & Pheasant
+Impact index: -0.2230
+#443 - Remove Post & Coho
+Impact index: -0.2257
+#444 - Remove N Allen & Chamberlain
+Impact index: -0.2260
+#445 - Remove Carnwood & Mckenna
+Impact index: -0.2270
+#446 - Remove E Washington & E Johnson
+Impact index: -0.2276
+#447 - Remove Valor & Eagles Perch
+Impact index: -0.2286
+#448 - Remove Commercial & Kedzie
+Impact index: -0.2301
+#449 - Remove Old Middleton & S Highlands
+Impact index: -0.2306
+#450 - Remove Greenway & Bryant
+Impact index: -0.2311
+#451 - Remove University Bay & Marshall
+Impact index: -0.2313
+#452 - Remove International & Darwin
+Impact index: -0.2318
+#453 - Remove W Broadway & Hoboken
+Impact index: -0.2322
+#454 - Remove Schroeder & Highway Ramp
+Impact index: -0.2325
+#455 - Remove Eagle Heights & Shelter
+Impact index: -0.2363
+#456 - Remove W Olin & Hickory
+Impact index: -0.2368
+#457 - Remove Merryturn & Kevins
+Impact index: -0.2410
+#458 - Remove Winnebago & Atwood
+Impact index: -0.2416
+#459 - Remove E Olin & Expo
+Impact index: -0.2436
+#460 - Remove Toepfer & Saint Clair
+Impact index: -0.2456
+#461 - Remove S Sprecher & Dominion
+Impact index: -0.2458
+#462 - Remove Koster & Ardmore
+Impact index: -0.2458
+#463 - Remove Wyalusing & Aztalan
+Impact index: -0.2459
+#464 - Remove W Towne Ring & Chilis
+Impact index: -0.2468
+#465 - Remove Hargrove & Tulane
+Impact index: -0.2478
+#466 - Remove S Whitney & Marathon
+Impact index: -0.2479
+#467 - Remove King James & King James
+Impact index: -0.2528
+#468 - Remove Observatory & Liz Waters
+Impact index: -0.2541
+#469 - Remove J Q Hammons & Greenway
+Impact index: -0.2542
+#470 - Remove Anderson & Madison College
+Impact index: -0.2548
+#471 - Remove Dempsey & Rockwell
+Impact index: -0.2577
+#472 - Remove Market & Deming
+Impact index: -0.2583
+#473 - Remove Atwood & Margaret
+Impact index: -0.2586
+#474 - Remove Northport & Barby
+Impact index: -0.2606
+#475 - Remove Dempsey & Cottage Grove
+Impact index: -0.2644
+#476 - Remove N Thompson & Commercial
+Impact index: -0.2655
+#477 - Remove Monroe & Van Buren
+Impact index: -0.2661
+#478 - Remove Monroe & S Prospect
+Impact index: -0.2671
+#479 - Remove Walter & Richard
+Impact index: -0.2687
+#480 - Remove Carling & Verona E
+Impact index: -0.2687
+#481 - Remove High Crossing & Crossroads
+Impact index: -0.2743
+#482 - Remove Melody & Independence
+Impact index: -0.2752
+#483 - Remove Grandview & Kingston
+Impact index: -0.2753
+#484 - Remove Nakoma & Whenona
+Impact index: -0.2753
+#485 - Remove Science & Science
+Impact index: -0.2798
+#486 - Remove Dominion & Galileo
+Impact index: -0.2799
+#487 - Remove S Thompson & Orlando Bell
+Impact index: -0.2818
+#488 - Remove Troy & School
+Impact index: -0.2857
+#489 - Remove Old Middleton & N Highlands
+Impact index: -0.2863
+#490 - Remove Davies & Maher
+Impact index: -0.2863
+#491 - Remove Mckenna & Yorktown
+Impact index: -0.2890
+#492 - Remove Cottage Grove & Inwood
+Impact index: -0.2891
+#493 - Remove Inner & Gettysburg
+Impact index: -0.2893
+#494 - Remove Troy & Forster
+Impact index: -0.2921
+#495 - Remove Jenifer & S Livingston
+Impact index: -0.2925
+#496 - Remove S Whitney & Odana
+Impact index: -0.2927
+#497 - Remove S Ingersoll & E Washington
+Impact index: -0.2929
+#498 - Remove W Wilson & S Hamilton
+Impact index: -0.2935
+#499 - Remove E Johnson & N Blount
+Impact index: -0.2938
+#500 - Remove Londonderry & Packers
+Impact index: -0.2939
+#501 - Remove Langdon & N Park
+Impact index: -0.2949
+#502 - Remove E Johnson & N Ingersoll
+Impact index: -0.2973
+#503 - Remove Franklin & Bristol
+Impact index: -0.3020
+#504 - Remove Stewart & Latham
+Impact index: -0.3021
+#505 - Remove N Stoughton E & Orin
+Impact index: -0.3024
+#506 - Remove Cottage Grove & Meadowlark
+Impact index: -0.3026
+#507 - Remove E Johnson & N Livingston
+Impact index: -0.3032
+#508 - Remove N Sherman & Roth
+Impact index: -0.3034
+#509 - Remove Williamson & S Blount
+Impact index: -0.3042
+#510 - Remove Fish Hatchery & Wingra
+Impact index: -0.3066
+#511 - Remove E Washington & N Paterson
+Impact index: -0.3075
+#512 - Remove Troy & Crosswalk
+Impact index: -0.3101
+#513 - Remove E Washington & N Ingersoll
+Impact index: -0.3103
+#514 - Remove Highland & V A Hospital
+Impact index: -0.3110
+#515 - Remove Walnut & G Pinchot
+Impact index: -0.3116
+#516 - Remove Sheboygan & N Whitney
+Impact index: -0.3116
+#517 - Remove Tompkins & Maher
+Impact index: -0.3119
+#518 - Remove Lien & Zeier
+Impact index: -0.3127
+#519 - Remove Troy & Karstens
+Impact index: -0.3128
+#520 - Remove Winnebago & Riverside
+Impact index: -0.3135
+#521 - Remove Gilson & Cedar
+Impact index: -0.3135
+#522 - Remove University & N Whitney
+Impact index: -0.3146
+#523 - Remove S Stoughton W & Pflaum
+Impact index: -0.3151
+#524 - Remove Marsh & Lot 60
+Impact index: -0.3161
+#525 - Remove E Washington & S Livingston
+Impact index: -0.3170
+#526 - Remove Toepfer & Birch
+Impact index: -0.3172
+#527 - Remove Odana & Tokay
+Impact index: -0.3181
+#528 - Remove Muir Field & Silverton
+Impact index: -0.3209
+#529 - Remove E Washington & S Paterson
+Impact index: -0.3211
+#530 - Remove Old Middleton & N Rosa
+Impact index: -0.3221
+#531 - Remove Toepfer & Tokay
+Impact index: -0.3223
+#532 - Remove Williamson & S Dickinson
+Impact index: -0.3235
+#533 - Remove E Johnson & N Third
+Impact index: -0.3236
+#534 - Remove Turner & Buckeye
+Impact index: -0.3251
+#535 - Remove Schroeder & Chapel Hill
+Impact index: -0.3255
+#536 - Remove Atwood & S Fair Oaks
+Impact index: -0.3274
+#537 - Remove Old Sauk & Samuel
+Impact index: -0.3280
+#538 - Remove Packers & International
+Impact index: -0.3289
+#539 - Remove E Gorham & N Butler
+Impact index: -0.3294
+#540 - Remove Cottage Grove & Ellen
+Impact index: -0.3318
+#541 - Remove Odana & Seneca
+Impact index: -0.3322
+#542 - Remove Prairie & Raymond
+Impact index: -0.3348
+#543 - Remove Bluff & Palomino
+Impact index: -0.3353
+#544 - Remove Greenway & Deer Creek
+Impact index: -0.3393
+#545 - Remove Old Sauk & Saukdale
+Impact index: -0.3398
+#546 - Remove Whenona & Beltline S
+Impact index: -0.3419
+#547 - Remove International & Air Freight
+Impact index: -0.3420
+#548 - Remove Oakridge & Welch
+Impact index: -0.3460
+#549 - Remove W Washington & Regent
+Impact index: -0.3474
+#550 - Remove Lake Mendota & Lot N
+Impact index: -0.3474
+#551 - Remove Turner & Allis
+Impact index: -0.3477
+#552 - Remove N Thompson & Golden Leaf
+Impact index: -0.3487
+#553 - Remove Northland & Mandrake
+Impact index: -0.3524
+#554 - Remove Dempsey & Dennett
+Impact index: -0.3532
+#555 - Remove Raymond & Westchester
+Impact index: -0.3557
+#556 - Remove D'onofrio & West Towne
+Impact index: -0.3563
+#557 - Remove Franklin & Parmenter
+Impact index: -0.3569
+#558 - Remove Manitowish & Comanche
+Impact index: -0.3572
+#559 - Remove N Breese & University
+Impact index: -0.3586
+#560 - Remove Hammersley & Whitcomb
+Impact index: -0.3601
+#561 - Remove Coho & Beltline S
+Impact index: -0.3605
+#562 - Remove University & Highland
+Impact index: -0.3609
+#563 - Remove Mineral Point & S Westfield
+Impact index: -0.3629
+#564 - Remove Bartillon & Kinsman
+Impact index: -0.3635
+#565 - Remove E Johnson & N Paterson
+Impact index: -0.3648
+#566 - Remove Oakridge & Maple
+Impact index: -0.3663
+#567 - Remove Anderson & Wright
+Impact index: -0.3672
+#568 - Remove Fordem & Mcguire
+Impact index: -0.3706
+#569 - Remove E Johnson & Fordem
+Impact index: -0.3708
+#570 - Remove Tokay & U W Health
+Impact index: -0.3737
+#571 - Remove E Gorham & N Ingersoll
+Impact index: -0.3775
+#572 - Remove S Midvale & Tokay
+Impact index: -0.3795
+#573 - Remove S Park & Erin
+Impact index: -0.3807
+#574 - Remove University & Forest
+Impact index: -0.3814
+#575 - Remove Tokay & S Segoe
+Impact index: -0.3832
+#576 - Remove E Washington & Portage
+Impact index: -0.3839
+#577 - Remove Sheboygan & State Office
+Impact index: -0.3867
+#578 - Remove Regent & Spooner
+Impact index: -0.3874
+#579 - Remove Valor & Valor
+Impact index: -0.3905
+#580 - Remove Odana & Anthony
+Impact index: -0.3930
+#581 - Remove Commonwealth & Rugby
+Impact index: -0.3933
+#582 - Remove Bluff & Hoyt
+Impact index: -0.3943
+#583 - Remove Dominion & Traveler
+Impact index: -0.3951
+#584 - Remove Walter & Milwaukee
+Impact index: -0.3967
+#585 - Remove Wyalusing & Summertown
+Impact index: -0.3969
+#586 - Remove North Star & Copernicus
+Impact index: -0.3980
+#587 - Remove W Broadway & W P S
+Impact index: -0.3986
+#588 - Remove North & E Johnson
+Impact index: -0.3986
+#589 - Remove N Rusk & Nygard
+Impact index: -0.3991
+#590 - Remove E Johnson & N Sixth
+Impact index: -0.3992
+#591 - Remove Dempsey & Pinney
+Impact index: -0.3996
+#592 - Remove Fourier & Deming
+Impact index: -0.3999
+#593 - Remove W Washington & Brittingham
+Impact index: -0.4008
+#594 - Remove Forest Run & Forest Ridge
+Impact index: -0.4027
+#595 - Remove Spaight & S Dickinson
+Impact index: -0.4030
+#596 - Remove Grandview & Beltline S
+Impact index: -0.4038
+#597 - Remove S Rosa & Stadium
+Impact index: -0.4043
+#598 - Remove Red Arrow & Thurston
+Impact index: -0.4051
+#599 - Remove N Sherman & Sunfield
+Impact index: -0.4074
+#600 - Remove E Cheryl & Agrace
+Impact index: -0.4086
+#601 - Remove Prairie & Jacobs
+Impact index: -0.4102
+#602 - Remove Jenifer & S Brearly
+Impact index: -0.4105
+#603 - Remove Greenway & Le Silve
+Impact index: -0.4136
+#604 - Remove Fisher & Bram
+Impact index: -0.4143
+#605 - Remove Oak & Commercial
+Impact index: -0.4153
+#606 - Remove Monroe & Commonwealth
+Impact index: -0.4163
+#607 - Remove Amnicon & Aztalan
+Impact index: -0.4170
+#608 - Remove East Towne Mall & E Towne
+Impact index: -0.4202
+#609 - Remove University & Grand
+Impact index: -0.4216
+#610 - Remove Atwood & Waubesa
+Impact index: -0.4223
+#611 - Remove Offshore & Nautilus
+Impact index: -0.4253
+#612 - Remove Pflaum & Herro
+Impact index: -0.4309
+#613 - Remove Deming & Gialamas
+Impact index: -0.4340
+#614 - Remove Watts & Sky Ridge
+Impact index: -0.4349
+#615 - Remove E Buckeye & Twilight
+Impact index: -0.4355
+#616 - Remove E Gorham & N Livingston
+Impact index: -0.4366
+#617 - Remove Hammersley & Saalsaa
+Impact index: -0.4376
+#618 - Remove Milwaukee & Leon
+Impact index: -0.4406
+#619 - Remove Watts & Princeton Club
+Impact index: -0.4438
+#620 - Remove Inner & Colony
+Impact index: -0.4463
+#621 - Remove Highland & Observatory
+Impact index: -0.4479
+#622 - Remove Post & Latham
+Impact index: -0.4483
+#623 - Remove N Thompson & Oak Valley
+Impact index: -0.4521
+#624 - Remove University & Mayflower
+Impact index: -0.4524
+#625 - Remove Prairie & Maple Valley
+Impact index: -0.4538
+#626 - Remove Greenway & Aspen
+Impact index: -0.4541
+#627 - Remove Acewood & Martha
+Impact index: -0.4565
+#628 - Remove S Rosa & Driftwood
+Impact index: -0.4596
+#629 - Remove S Midvale & Mineral Point
+Impact index: -0.4611
+#630 - Remove Vondron & Mustang
+Impact index: -0.4612
+#631 - Remove W Wilson & S Bassett
+Impact index: -0.4629
+#632 - Remove E Johnson & N Dickinson
+Impact index: -0.4663
+#633 - Remove Odana & Huron
+Impact index: -0.4665
+#634 - Remove Todd & Greenway
+Impact index: -0.4693
+#635 - Remove Milwaukee & Corry
+Impact index: -0.4701
+#636 - Remove Agriculture & Pflaum
+Impact index: -0.4705
+#637 - Remove Rimrock & Kent
+Impact index: -0.4716
+#638 - Remove Driveway & Prairie Towne
+Impact index: -0.4722
+#639 - Remove Struck & Watts
+Impact index: -0.4723
+#640 - Remove E Gorham & N Paterson
+Impact index: -0.4732
+#641 - Remove Junction & Old Sauk
+Impact index: -0.4781
+#642 - Remove E Terrace & Herzing
+Impact index: -0.4797
+#643 - Remove Northport & Warner Park
+Impact index: -0.4822
+#644 - Remove Troy & Goodland
+Impact index: -0.4843
+#645 - Remove Oakridge & Miller
+Impact index: -0.4843
+#646 - Remove S Thompson & Vondron
+Impact index: -0.4893
+#647 - Remove S Segoe & Waukesha
+Impact index: -0.4900
+#648 - Remove Milwaukee & Starkweather
+Impact index: -0.4922
+#649 - Remove Deming & John Deere
+Impact index: -0.4969
+#650 - Remove Terrace & Parmenter
+Impact index: -0.4975
+#651 - Remove Sheboygan & Eau Claire
+Impact index: -0.4988
+#652 - Remove N Fair Oaks & E Washington
+Impact index: -0.5000
+#653 - Remove University & Flambeau
+Impact index: -0.5006
+#654 - Remove Fish Hatchery & Midland
+Impact index: -0.5018
+#655 - Remove Fish Hatchery & Plaenert
+Impact index: -0.5038
+#656 - Remove W Washington & Southwest
+Impact index: -0.5060
+#657 - Remove N Thompson & Mesta
+Impact index: -0.5072
+#658 - Remove S Gammon & Watts
+Impact index: -0.5084
+#659 - Remove Mineral Point & Robin
+Impact index: -0.5107
+#660 - Remove Tompkins & Herro
+Impact index: -0.5121
+#661 - Remove W Olin & Lake
+Impact index: -0.5142
+#662 - Remove Junction & City Center W
+Impact index: -0.5161
+#663 - Remove North & Toussaint
+Impact index: -0.5188
+#664 - Remove Mid Town & S Pleasant View
+Impact index: -0.5193
+#665 - Remove Dutch Mill & Ellestad
+Impact index: -0.5219
+#666 - Remove Atwood & Olbrich
+Impact index: -0.5234
+#667 - Remove Walter & Dawes
+Impact index: -0.5237
+#668 - Remove S Thompson & Forge
+Impact index: -0.5250
+#669 - Remove Deming & Murphy
+Impact index: -0.5257
+#670 - Remove Burning Wood & Arapahoe
+Impact index: -0.5281
+#671 - Remove Nakoma & Waban
+Impact index: -0.5298
+#672 - Remove N Breese & Hoyt
+Impact index: -0.5302
+#673 - Remove Cottage Grove & S Thompson
+Impact index: -0.5305
+#674 - Remove Deming & Terrace
+Impact index: -0.5314
+#675 - Remove Northport & Dryden
+Impact index: -0.5344
+#676 - Remove Sherman & Mcguire
+Impact index: -0.5349
+#677 - Remove W Verona & N Main
+Impact index: -0.5351
+#678 - Remove Watts & Woodmans
+Impact index: -0.5359
+#679 - Remove Lake Point & Hoboken
+Impact index: -0.5369
+#680 - Remove Greenway & Applegate
+Impact index: -0.5372
+#681 - Remove Mineral Point & S Segoe
+Impact index: -0.5386
+#682 - Remove Hammersley & S Whitney
+Impact index: -0.5392
+#683 - Remove Fitchrona & Target
+Impact index: -0.5421
+#684 - Remove Commercial S & N Fair Oaks
+Impact index: -0.5423
+#685 - Remove Kendall & N Franklin
+Impact index: -0.5427
+#686 - Remove D'onofrio & S High Point
+Impact index: -0.5431
+#687 - Remove S Thompson & Droster
+Impact index: -0.5439
+#688 - Remove Park Lawn & Maywood
+Impact index: -0.5442
+#689 - Remove Ski & Girl Scouts
+Impact index: -0.5445
+#690 - Remove S Park & Buick
+Impact index: -0.5471
+#691 - Remove University Green & Pleasant View
+Impact index: -0.5478
+#692 - Remove S Whitney & Bartlett
+Impact index: -0.5480
+#693 - Remove E Johnson & N Fourth
+Impact index: -0.5485
+#694 - Remove Observatory & Elm
+Impact index: -0.5490
+#695 - Remove Odana & S Segoe
+Impact index: -0.5501
+#696 - Remove S Gammon & Odana
+Impact index: -0.5502
+#697 - Remove Branch & Franklin
+Impact index: -0.5519
+#698 - Remove Milwaukee & Kurt
+Impact index: -0.5519
+#699 - Remove Reetz & Marvin
+Impact index: -0.5521
+#700 - Remove Tokay & Wedgewood
+Impact index: -0.5529
+#701 - Remove E Badger & Rimrock
+Impact index: -0.5562
+#702 - Remove Discovery & Parmenter
+Impact index: -0.5585
+#703 - Remove Pflaum & Seiferth
+Impact index: -0.5597
+#704 - Remove Troy & Lerdahl
+Impact index: -0.5623
+#705 - Remove Murphy & Green
+Impact index: -0.5636
+#706 - Remove Commonwealth & Leonard
+Impact index: -0.5644
+#707 - Remove Donna & Park
+Impact index: -0.5654
+#708 - Remove Middleton & South
+Impact index: -0.5692
+#709 - Remove Watts & Commerce
+Impact index: -0.5694
+#710 - Remove Turner & Ruth
+Impact index: -0.5705
+#711 - Remove Mendota & Gateway
+Impact index: -0.5732
+#712 - Remove Tennyson & N Sherman
+Impact index: -0.5820
+#713 - Remove W Badger & Cypress
+Impact index: -0.5830
+#714 - Remove N Pleasant View & E T C Building
+Impact index: -0.5909
+#715 - Remove Buckeye & Camden
+Impact index: -0.5922
+#716 - Remove Fitchrona & Hy-vee
+Impact index: -0.5939
+#717 - Remove S Park & Wingra
+Impact index: -0.5950
+#718 - Remove E Verona & S Main
+Impact index: -0.5964
+#719 - Remove S Park & W Washington
+Impact index: -0.6042
+#720 - Remove High Ridge & Cahill
+Impact index: -0.6050
+#721 - Remove N First & E Johnson
+Impact index: -0.6050
+#722 - Remove Nakoma & Spring
+Impact index: -0.6063
+#723 - Remove Tokay & Chatham
+Impact index: -0.6066
+#724 - Remove Anderson & Hoffman
+Impact index: -0.6104
+#725 - Remove Old Sauk & Excelsior
+Impact index: -0.6137
+#726 - Remove Lien & Parkside
+Impact index: -0.6151
+#727 - Remove Market & Aspen
+Impact index: -0.6155
+#728 - Remove Allen & Mendota
+Impact index: -0.6156
+#729 - Remove Kinsman & N Stoughton
+Impact index: -0.6213
+#730 - Remove W Washington & Park View
+Impact index: -0.6228
+#731 - Remove Speedway & S Franklin
+Impact index: -0.6230
+#732 - Remove Milwaukee & North Star
+Impact index: -0.6269
+#733 - Remove E Springs & Pet Smart
+Impact index: -0.6282
+#734 - Remove Division & Oakridge
+Impact index: -0.6303
+#735 - Remove Fish Hatchery & Traceway
+Impact index: -0.6318
+#736 - Remove Beld & Gilson
+Impact index: -0.6318
+#737 - Remove E Buckeye & S Stoughton E
+Impact index: -0.6319
+#738 - Remove Post & Leopold
+Impact index: -0.6353
+#739 - Remove S Whitney & South Hill
+Impact index: -0.6367
+#740 - Remove E Cheryl & Big Bluestem
+Impact index: -0.6384
+#741 - Remove N Sherman & Fordem
+Impact index: -0.6391
+#742 - Remove University & Princeton
+Impact index: -0.6438
+#743 - Remove Cottage Grove & Flora
+Impact index: -0.6460
+#744 - Remove Parmenter & Lee
+Impact index: -0.6463
+#745 - Remove Vondron & E Buckeye
+Impact index: -0.6491
+#746 - Remove Park & Pheasant Branch
+Impact index: -0.6492
+#747 - Remove Oakridge & Evergreen
+Impact index: -0.6497
+#748 - Remove Lien & E Washington
+Impact index: -0.6515
+#749 - Remove Beltline S & Highway Ramp
+Impact index: -0.6557
+#750 - Remove Old Middleton & Eau Claire
+Impact index: -0.6590
+#751 - Remove Sawmill & Ramsgate
+Impact index: -0.6591
+#752 - Remove Dempsey & Hynek
+Impact index: -0.6600
+#753 - Remove S Whitney & Tolman
+Impact index: -0.6613
+#754 - Remove Parview & Murphy
+Impact index: -0.6625
+#755 - Remove West Towne & Kohls
+Impact index: -0.6708
+#756 - Remove Portage & Rieder
+Impact index: -0.6721
+#757 - Remove Junction & Mineral Point
+Impact index: -0.6726
+#758 - Remove Crescent & Red Arrow
+Impact index: -0.6731
+#759 - Remove Walnut & Observatory
+Impact index: -0.6751
+#760 - Remove E Buckeye & Woodvale
+Impact index: -0.6776
+#761 - Remove Moorland & Badger
+Impact index: -0.6791
+#762 - Remove Post & Todd
+Impact index: -0.6800
+#763 - Remove Odana & Medical
+Impact index: -0.6817
+#764 - Remove Starker & Angel Crest
+Impact index: -0.6829
+#765 - Remove E Gorham & N Blount
+Impact index: -0.6829
+#766 - Remove Observatory & Babcock
+Impact index: -0.6853
+#767 - Remove W Towne Ring & W Towne Mall
+Impact index: -0.6862
+#768 - Remove Mckenna & Pilgrim
+Impact index: -0.6898
+#769 - Remove Hardrock & Limestone
+Impact index: -0.6913
+#770 - Remove Swanton & Easley
+Impact index: -0.6914
+#771 - Remove Merryturn & Sudbury
+Impact index: -0.6945
+#772 - Remove Fordem & Lakewood
+Impact index: -0.6953
+#773 - Remove Prairie & Pioneer
+Impact index: -0.6960
+#774 - Remove Todd & Pelham
+Impact index: -0.7011
+#775 - Remove Crawford & Helene
+Impact index: -0.7031
+#776 - Remove Tokay & Charles
+Impact index: -0.7046
+#777 - Remove E Washington & Lexington
+Impact index: -0.7110
+#778 - Remove Montclair & Pleasant View
+Impact index: -0.7132
+#779 - Remove Monroe & Knickerbocker
+Impact index: -0.7135
+#780 - Remove S Thompson & Grafton
+Impact index: -0.7209
+#781 - Remove S Gammon & Schroeder
+Impact index: -0.7225
+#782 - Remove Science & S Whitney
+Impact index: -0.7228
+#783 - Remove Regent & Rennebohm
+Impact index: -0.7231
+#784 - Remove Mineral Point & Westmorland
+Impact index: -0.7257
+#785 - Remove E Washington & Mendota
+Impact index: -0.7272
+#786 - Remove Mineral Point & Memorial High
+Impact index: -0.7299
+#787 - Remove Allen & Century
+Impact index: -0.7327
+#788 - Remove S Whitney & Piping Rock
+Impact index: -0.7373
+#789 - Remove Tennyson & Eliot
+Impact index: -0.7408
+#790 - Remove Pilgrim & Prairie
+Impact index: -0.7481
+#791 - Remove E Washington & Yahara
+Impact index: -0.7545
+#792 - Remove Fourier & J Q Hammons
+Impact index: -0.7597
+#793 - Remove Old Sauk & N Westfield
+Impact index: -0.7611
+#794 - Remove Beltline N & Todd
+Impact index: -0.7630
+#795 - Remove Science & 505
+Impact index: -0.7668
+#796 - Remove Shopko & Aberg
+Impact index: -0.7708
+#797 - Remove School & Havey
+Impact index: -0.7718
+#798 - Remove Wright & Straubel
+Impact index: -0.7741
+#799 - Remove Monroe & Glenway
+Impact index: -0.7873
+#800 - Remove West Transfer Point & Tokay
+Impact index: -0.7915
+#801 - Remove Donna & Northbrook
+Impact index: -0.8040
+#802 - Remove South Transfer Point & S Park
+Impact index: -0.8071
+#803 - Remove S Whitney & Schroeder
+Impact index: -0.8081
+#804 - Remove N Thompson & Meadows
+Impact index: -0.8101
+#805 - Remove Lien & Thierer
+Impact index: -0.8105
+#806 - Remove S Stoughton E & Dean East
+Impact index: -0.8111
+#807 - Remove Severn & S Thompson
+Impact index: -0.8142
+#808 - Remove Research Park & Lacy
+Impact index: -0.8149
+#809 - Remove Prairie & Lomax
+Impact index: -0.8232
+#810 - Remove Raymond & Gilbert
+Impact index: -0.8233
+#811 - Remove Atwood & Cottage Grove
+Impact index: -0.8246
+#812 - Remove Buckeye & Lakeview
+Impact index: -0.8378
+#813 - Remove S Thompson & Rustic Wood
+Impact index: -0.8472
+#814 - Remove Mineral Point & Berwyn
+Impact index: -0.8493
+#815 - Remove Atwood & Oakridge
+Impact index: -0.8513
+#816 - Remove Mineral Point & S Owen
+Impact index: -0.8566
+#817 - Remove Raymond & Lewon
+Impact index: -0.8584
+#818 - Remove Watts & Walmart
+Impact index: -0.8597
+#819 - Remove University & Ridge
+Impact index: -0.8617
+#820 - Remove Capital & Old Middleton
+Impact index: -0.8653
+#821 - Remove Hammersley & Frisch
+Impact index: -0.8680
+#822 - Remove N Thompson & Swanton
+Impact index: -0.8739
+#823 - Remove Atlas & Argosy
+Impact index: -0.8805
+#824 - Remove University & N Blackhawk
+Impact index: -0.8821
+#825 - Remove South Towne & Royal
+Impact index: -0.8823
+#826 - Remove E Cheryl & Crinkle Root
+Impact index: -0.8827
+#827 - Remove Tree & S Gammon
+Impact index: -0.8904
+#828 - Remove Delaware & N Sherman
+Impact index: -0.8912
+#829 - Remove North Star & Dominion
+Impact index: -0.8962
+#830 - Remove Dempsey & Overpass
+Impact index: -0.8965
+#831 - Remove Speedway & Highland
+Impact index: -0.9007
+#832 - Remove Crossroads & Wall
+Impact index: -0.9048
+#833 - Remove Offshore & Yellowstone
+Impact index: -0.9063
+#834 - Remove Odana & Dearholt
+Impact index: -0.9121
+#835 - Remove Parmenter & Century
+Impact index: -0.9132
+#836 - Remove Raymond & Mckenna
+Impact index: -0.9148
+#837 - Remove J Q Hammons & Houlihans
+Impact index: -0.9178
+#838 - Remove Tompkins & Groveland
+Impact index: -0.9217
+#839 - Remove Century & Branch
+Impact index: -0.9218
+#840 - Remove E Buckeye & Dondee
+Impact index: -0.9231
+#841 - Remove Parmenter & Donna
+Impact index: -0.9246
+#842 - Remove S Thompson & E Buckeye
+Impact index: -0.9255
+#843 - Remove Pilgrim & Sara
+Impact index: -0.9258
+#844 - Remove Speedway & Glenway
+Impact index: -0.9308
+#845 - Remove North Star & Orion
+Impact index: -0.9342
+#846 - Remove Acewood & Goldfinch
+Impact index: -0.9408
+#847 - Remove Delaware & Dakota
+Impact index: -0.9410
+#848 - Remove Menomonie & Comanche
+Impact index: -0.9456
+#849 - Remove Greenway & Coho
+Impact index: -0.9458
+#850 - Remove Starker & Woodvale
+Impact index: -0.9518
+#851 - Remove Pilgrim & Pilgrim
+Impact index: -0.9597
+#852 - Remove Milwaukee & Rustic
+Impact index: -0.9661
+#853 - Remove Muir Field & Tucson
+Impact index: -0.9675
+#854 - Remove S Midvale & Odana
+Impact index: -0.9700
+#855 - Remove Schroeder & Saybrook
+Impact index: -0.9701
+#856 - Remove Schroeder & White Oaks
+Impact index: -0.9748
+#857 - Remove Branch & Maywood
+Impact index: -0.9779
+#858 - Remove N Fair Oaks & Chicago
+Impact index: -0.9796
+#859 - Remove S Park & Fish Hatchery
+Impact index: -0.9798
+#860 - Remove Mineral Point & Grand Canyon
+Impact index: -0.9900
+#861 - Remove Vondron & D A T C P Building
+Impact index: -0.9938
+#862 - Remove Chalet Gardens & Verona E
+Impact index: -0.9972
+#863 - Remove Mckenna & Elver Park
+Impact index: -0.9992
+#864 - Remove Northport & Troy
+Impact index: -1.0007
+#865 - Remove Buckeye & Davies
+Impact index: -1.0010
+#866 - Remove W Broadway & Bridge
+Impact index: -1.0068
+#867 - Remove Cottage Grove & Drexel
+Impact index: -1.0088
+#868 - Remove Koster & Bram
+Impact index: -1.0140
+#869 - Remove N Sherman & Commercial
+Impact index: -1.0170
+#870 - Remove Rimrock & Maloney
+Impact index: -1.0185
+#871 - Remove Rogers & Rutledge
+Impact index: -1.0198
+#872 - Remove E Washington & Melvin
+Impact index: -1.0212
+#873 - Remove S Park & Park House
+Impact index: -1.0244
+#874 - Remove Lake Mendota & Lot Q
+Impact index: -1.0246
+#875 - Remove Hoepker & Legacy
+Impact index: -1.0248
+#876 - Remove Odana & Grand Canyon
+Impact index: -1.0252
+#877 - Remove E Washington & Macarthur
+Impact index: -1.0346
+#878 - Remove Tokay & U W Research Park
+Impact index: -1.0385
+#879 - Remove University Bay & Picnic Point
+Impact index: -1.0442
+#880 - Remove Milwaukee & Daffodil
+Impact index: -1.0473
+#881 - Remove Post & Traceway
+Impact index: -1.0487
+#882 - Remove Marsh & Voges
+Impact index: -1.0507
+#883 - Remove Royal Wulff & High Ridge
+Impact index: -1.0520
+#884 - Remove Agriculture & Dairy
+Impact index: -1.0523
+#885 - Remove Junction & U W Health
+Impact index: -1.0532
+#886 - Remove E Washington & Wright
+Impact index: -1.0562
+#887 - Remove Pflaum & Groveland
+Impact index: -1.0680
+#888 - Remove S Sprecher & Sharpsburg
+Impact index: -1.0774
+#889 - Remove Vondron & Dolores
+Impact index: -1.0800
+#890 - Remove Manitowish & Burning Wood
+Impact index: -1.0824
+#891 - Remove Masthead & Island
+Impact index: -1.0832
+#892 - Remove Merryturn & Retana
+Impact index: -1.0844
+#893 - Remove Mckee & Kapec
+Impact index: -1.0858
+#894 - Remove O'keeffe & Prairie
+Impact index: -1.0870
+#895 - Remove Commercial & Redland
+Impact index: -1.0882
+#896 - Remove Wyalusing & Stockbridge
+Impact index: -1.0932
+#897 - Remove S Fair Oaks & Capital City
+Impact index: -1.0970
+#898 - Remove City View & Wall
+Impact index: -1.0977
+#899 - Remove University & Shorewood
+Impact index: -1.0997
+#900 - Remove Mohawk & Seminole
+Impact index: -1.1056
+#901 - Remove Acewood & Agate
+Impact index: -1.1098
+#902 - Remove E Washington & Aberg
+Impact index: -1.1122
+#903 - Remove University & Spring Harbor
+Impact index: -1.1124
+#904 - Remove University & Norman
+Impact index: -1.1130
+#905 - Remove N Pleasant View & Fairway
+Impact index: -1.1149
+#906 - Remove Acewood & Onyx
+Impact index: -1.1184
+#907 - Remove Fish Hatchery & Emil
+Impact index: -1.1279
+#908 - Remove Mineral Point & Island
+Impact index: -1.1280
+#909 - Remove N High Point & Sauk Creek
+Impact index: -1.1340
+#910 - Remove S Whitney & Mineral Point
+Impact index: -1.1353
+#911 - Remove Great Gray & Owl Creek
+Impact index: -1.1583
+#912 - Remove Beltline S & Landmark
+Impact index: -1.1667
+#913 - Remove Cottage Grove & North Star
+Impact index: -1.1718
+#914 - Remove Raymond & Frisch
+Impact index: -1.1767
+#915 - Remove E Cheryl & No Oaks
+Impact index: -1.1779
+#916 - Remove Eagle Heights & Lot M
+Impact index: -1.1814
+#917 - Remove Shopko & Pick N Save
+Impact index: -1.1909
+#918 - Remove N Midvale & University
+Impact index: -1.1936
+#919 - Remove Sherman & N Thornton
+Impact index: -1.2091
+#920 - Remove Lake Mendota & Lot R
+Impact index: -1.2093
+#921 - Remove Northport & Goodland
+Impact index: -1.2126
+#922 - Remove Milwaukee & Portland
+Impact index: -1.2154
+#923 - Remove Milwaukee & Dempsey
+Impact index: -1.2194
+#924 - Remove E Buckeye & Ellen
+Impact index: -1.2252
+#925 - Remove Moorland & Fell
+Impact index: -1.2282
+#926 - Remove Gialamas & Greenway
+Impact index: -1.2387
+#927 - Remove Owl Creek & Voges
+Impact index: -1.2395
+#928 - Remove Beltline S & River Bend
+Impact index: -1.2410
+#929 - Remove Crescent & Allied
+Impact index: -1.2442
+#930 - Remove Tree & S High Point
+Impact index: -1.2490
+#931 - Remove Milwaukee & Summertown
+Impact index: -1.2570
+#932 - Remove E Washington & Reindahl
+Impact index: -1.2585
+#933 - Remove Allen & Marshall Park
+Impact index: -1.2626
+#934 - Remove Raymond & Cameron
+Impact index: -1.2643
+#935 - Remove Turner & Hob
+Impact index: -1.2763
+#936 - Remove Walsh & Commercial
+Impact index: -1.2784
+#937 - Remove Eastpark & E Terrace
+Impact index: -1.2788
+#938 - Remove Northbrook & Century
+Impact index: -1.2874
+#939 - Remove S Mills & Vilas
+Impact index: -1.2906
+#940 - Remove Lake Mendota & University Bay
+Impact index: -1.2959
+#941 - Remove Randolph & Tree
+Impact index: -1.3041
+#942 - Remove S Segoe & Richland
+Impact index: -1.3047
+#943 - Remove Caddis & Cahill
+Impact index: -1.3069
+#944 - Remove American & Tancho
+Impact index: -1.3127
+#945 - Remove N Sherman & Oxford
+Impact index: -1.3127
+#946 - Remove Beltline N & Culvers
+Impact index: -1.3137
+#947 - Remove Watts & S Junction
+Impact index: -1.3198
+#948 - Remove Monroe & Chapman
+Impact index: -1.3213
+#949 - Remove Old Sauk & Everglade
+Impact index: -1.3261
+#950 - Remove Green & Meadow Ridge
+Impact index: -1.3268
+#951 - Remove Old Sauk & N Gammon
+Impact index: -1.3307
+#952 - Remove Mineral Point & Racine
+Impact index: -1.3353
+#953 - Remove N High Point & Old Sauk
+Impact index: -1.3361
+#954 - Remove N Rosa & Marconi
+Impact index: -1.3367
+#955 - Remove Packers & Schlimgen
+Impact index: -1.3466
+#956 - Remove Mineral Point & Yellowstone
+Impact index: -1.3517
+#957 - Remove Hammersley & Lewon
+Impact index: -1.3525
+#958 - Remove Speedway & Hillcrest
+Impact index: -1.3554
+#959 - Remove S Thompson & Blacksmith
+Impact index: -1.3570
+#960 - Remove Troy & Harper
+Impact index: -1.3575
+#961 - Remove Atwood & Walter
+Impact index: -1.3710
+#962 - Remove E Terrace & U W Health
+Impact index: -1.3733
+#963 - Remove Acewood & Starker
+Impact index: -1.3862
+#964 - Remove Schroeder & Struck
+Impact index: -1.3891
+#965 - Remove Pflaum & Advance
+Impact index: -1.4054
+#966 - Remove Tokay & Hilltop
+Impact index: -1.4107
+#967 - Remove Fish Hatchery & High Ridge
+Impact index: -1.4168
+#968 - Remove City View & Burke
+Impact index: -1.4193
+#969 - Remove E Rusk & Rimrock
+Impact index: -1.4232
+#970 - Remove Beltline N & Rockys
+Impact index: -1.4268
+#971 - Remove Lien & Eagan
+Impact index: -1.4355
+#972 - Remove Old Middleton & Gettle
+Impact index: -1.4370
+#973 - Remove Park & South
+Impact index: -1.4392
+#974 - Remove Portage & Derek
+Impact index: -1.4401
+#975 - Remove Portage & Village
+Impact index: -1.4410
+#976 - Remove Portage & Tomscot
+Impact index: -1.4472
+#977 - Remove Atlas & Neptune
+Impact index: -1.4554
+#978 - Remove American Family & A F I Building
+Impact index: -1.4645
+#979 - Remove Observatory & Easterday
+Impact index: -1.4748
+#980 - Remove Century & Park
+Impact index: -1.4823
+#981 - Remove World Dairy & Dairy
+Impact index: -1.4897
+#982 - Remove Eastpark & Biltmore
+Impact index: -1.5207
+#983 - Remove Odana & Wedgewood
+Impact index: -1.5242
+#984 - Remove Packers & Commercial
+Impact index: -1.5264
+#985 - Remove Biltmore & Buttonwood
+Impact index: -1.5306
+#986 - Remove Odana & Research Park
+Impact index: -1.5357
+#987 - Remove E Washington & Schmedeman
+Impact index: -1.5420
+#988 - Remove Acewood & Leo
+Impact index: -1.5437
+#989 - Remove Grandview & Sandwood
+Impact index: -1.5487
+#990 - Remove University & Allen
+Impact index: -1.5504
+#991 - Remove Monroe & Leonard
+Impact index: -1.5525
+#992 - Remove Highland & Waisman
+Impact index: -1.5622
+#993 - Remove Langley & Cottontail
+Impact index: -1.5703
+#994 - Remove Hayes & Portage
+Impact index: -1.5793
+#995 - Remove Capital & University
+Impact index: -1.5858
+#996 - Remove Dennett & Ring
+Impact index: -1.5888
+#997 - Remove S Midvale & Yuma
+Impact index: -1.5934
+#998 - Remove Lake Point & Bridge
+Impact index: -1.5968
+#999 - Remove Century & Marina
+Impact index: -1.6065
+#1000 - Remove Deming & Blackhawk
+Impact index: -1.6126
+#1001 - Remove Sherman & Sherman
+Impact index: -1.6160
+#1002 - Remove Old Sauk & Widgeon
+Impact index: -1.6211
+#1003 - Remove S Gammon & Colony
+Impact index: -1.6265
+#1004 - Remove Odana & Hilltop
+Impact index: -1.6374
+#1005 - Remove Old Sauk & Crestwood School
+Impact index: -1.6509
+#1006 - Remove Regent & Eau Claire
+Impact index: -1.6612
+#1007 - Remove Crawford & Whenona
+Impact index: -1.6635
+#1008 - Remove Mckenna & Park Heights
+Impact index: -1.6735
+#1009 - Remove Murphy & Eagle
+Impact index: -1.6768
+#1010 - Remove Nakoma & Huron
+Impact index: -1.6924
+#1011 - Remove Fish Hatchery & Caddis
+Impact index: -1.6967
+#1012 - Remove Pflaum & Daniels
+Impact index: -1.7006
+#1013 - Remove Heartland & Old Sauk
+Impact index: -1.7107
+#1014 - Remove Mineral Point & S Rosa
+Impact index: -1.7130
+#1015 - Remove Prairie & Waterford
+Impact index: -1.7373
+#1016 - Remove Ski & Deer Valley
+Impact index: -1.7417
+#1017 - Remove Hammersley & Gilbert
+Impact index: -1.7634
+#1018 - Remove Rutledge & Walton
+Impact index: -1.7877
+#1019 - Remove N Sherman & Melrose
+Impact index: -1.8099
+#1020 - Remove Marsh & Kipp
+Impact index: -1.8195
+#1021 - Remove Tompkins & S Stoughton W
+Impact index: -1.8236
+#1022 - Remove Milwaukee & Walbridge
+Impact index: -1.8243
+#1023 - Remove Freese & Siggelkow
+Impact index: -1.8521
+#1024 - Remove Helgesen & S Stoughton E
+Impact index: -1.8528
+#1025 - Remove Valley Ridge & South Ridge
+Impact index: -1.8536
+#1026 - Remove Manchester & Mckee
+Impact index: -1.8557
+#1027 - Remove Knutson & Northport
+Impact index: -1.8598
+#1028 - Remove Century & Donna
+Impact index: -1.8667
+#1029 - Remove S High Point & Watts
+Impact index: -1.8730
+#1030 - Remove University & Gateway
+Impact index: -1.8896
+#1031 - Remove Tree & S Westfield
+Impact index: -1.9071
+#1032 - Remove Valor & Meinders
+Impact index: -1.9122
+#1033 - Remove Starker & Vondron
+Impact index: -1.9257
+#1034 - Remove Old Sauk & Yosemite
+Impact index: -1.9355
+#1035 - Remove Terrace & N High Point
+Impact index: -1.9386
+#1036 - Remove Reetz & Hammersley
+Impact index: -1.9458
+#1037 - Remove Post & Watford
+Impact index: -1.9529
+#1038 - Remove Allen & Maywood
+Impact index: -1.9684
+#1039 - Remove Deming & Discovery
+Impact index: -1.9962
+#1040 - Remove Post & Index
+Impact index: -2.0227
+#1041 - Remove Cottage Grove & Atlas
+Impact index: -2.0420
+#1042 - Remove Odana & Potomac
+Impact index: -2.1079
+#1043 - Remove N Sherman & Northside Town
+Impact index: -2.1669
+#1044 - Remove Inner & Yellowstone
+Impact index: -2.1886
+#1045 - Remove Agriculture & World Dairy
+Impact index: -2.1963
+#1046 - Remove Watford & Stewart
+Impact index: -2.2121
+#1047 - Remove Century & Valley Ridge
+Impact index: -2.2194
+#1048 - Remove University & Heim
+Impact index: -2.2285
+#1049 - Remove Wheeler & Comanche
+Impact index: -2.2406
+#1050 - Remove Williamsburg & S Whitney
+Impact index: -2.2502
+#1051 - Remove East Transfer Point & W Corporate
+Impact index: -2.2617
+#1052 - Remove Raymond & Canterbury
+Impact index: -2.2705
+#1053 - Remove Packers & Tennyson
+Impact index: -2.2925
+#1054 - Remove Fitchrona & Mckee
+Impact index: -2.3123
+#1055 - Remove N Gammon & Fortune
+Impact index: -2.3314
+#1056 - Remove Langdon & Wisconsin
+Impact index: -2.4193
+#1057 - Remove Quarry & Research
+Impact index: -2.4721
+#1058 - Remove Mckee & Seminole
+Impact index: -2.4801
+#1059 - Remove Nakoma & Seminole
+Impact index: -2.4811
+#1060 - Remove South Towne & Industrial
+Impact index: -2.4877
+#1061 - Remove Mckenna & Morraine View
+Impact index: -2.5102
+#1062 - Remove Hoepker & Prairie Lakes
+Impact index: -2.5207
+#1063 - Remove Helgesen & Advance
+Impact index: -2.5480
+#1064 - Remove Lacy & S Fish Hatchery
+Impact index: -2.5536
+#1065 - Remove E Springs & Plumbers 75
+Impact index: -2.5879
+#1066 - Remove Mckee & Tanglewood
+Impact index: -2.5984
+#1067 - Remove Melody & Portage
+Impact index: -2.6029
+#1068 - Remove Mckee & Muir Field
+Impact index: -2.6375
+#1069 - Remove John Nolen & E Olin
+Impact index: -2.6501
+#1070 - Remove Main & Highway Ramp
+Impact index: -2.6805
+#1071 - Remove American & Eastpark
+Impact index: -2.6817
+#1072 - Remove Voss & Middleton
+Impact index: -2.7175
+#1073 - Remove Century & Baskerville
+Impact index: -2.7422
+#1074 - Remove Troy & North
+Impact index: -2.7726
+#1075 - Remove Femrite & Dutch Mill
+Impact index: -2.7830
+#1076 - Remove Century & Laura
+Impact index: -2.7843
+#1077 - Remove Fish Hatchery & Carver
+Impact index: -2.8029
+#1078 - Remove Eastpark & Park And Ride
+Impact index: -2.8094
+#1079 - Remove Milwaukee & Milky
+Impact index: -2.8175
+#1080 - Remove O'keeffe & Wild Iris
+Impact index: -2.8331
+#1081 - Remove Fish Hatchery & Catalpa
+Impact index: -2.8558
+#1082 - Remove Blue Aster & Legacy
+Impact index: -2.8774
+#1083 - Remove N Segoe & University
+Impact index: -2.9015
+#1084 - Remove Nakoosa & Commercial
+Impact index: -2.9123
+#1085 - Remove O'keeffe & Summerfield
+Impact index: -2.9948
+#1086 - Remove Sawmill & N Westfield
+Impact index: -3.0222
+#1087 - Remove O'keeffe & New Town
+Impact index: -3.0278
+#1088 - Remove Sawmill & N Gammon
+Impact index: -3.0442
+#1089 - Remove Buckeye & Monona
+Impact index: -3.0611
+#1090 - Remove Old Sauk & Ozark
+Impact index: -3.1758
+#1091 - Remove Anderson & Pankratz
+Impact index: -3.1907
+#1092 - Remove W Broadway & Frazier
+Impact index: -3.2774
+#1093 - Remove Eastpark & U W Health
+Impact index: -3.3961
+#1094 - Remove American & A F I Headquarters
+Impact index: -3.4150
+#1095 - Remove N High Point & Greenway
+Impact index: -3.4439
+#1096 - Remove N Baldwin & Sherman
+Impact index: -3.4934
+#1097 - Remove Amnicon & Cottage Grove
+Impact index: -3.5439
+#1098 - Remove N High Point & Brule
+Impact index: -3.5835
+#1099 - Remove Valor & Star Spangled
+Impact index: -3.6558
+#1100 - Remove Nob Hill & W E A Building
+Impact index: -3.7158
+#1101 - Remove E Cheryl & Lacy
+Impact index: -3.8058
+#1102 - Remove Blue Aster & Grand
+Impact index: -3.8434
+#1103 - Remove Lacy & Central Park
+Impact index: -3.8506
+#1104 - Remove N Sherman & Schlimgen
+Impact index: -3.8918
+#1105 - Remove Erin & S Mills
+Impact index: -3.9604
+#1106 - Remove W Verona & Legion
+Impact index: -4.0314
+#1107 - Remove Wright & Kinsman
+Impact index: -4.0499
+#1108 - Remove Agriculture & Femrite
+Impact index: -4.1811
+#1109 - Remove Maple Grove & Mckee
+Impact index: -4.2143
+#1110 - Remove Moorland & Wayland
+Impact index: -4.2360
+#1111 - Remove W Verona & Half Mile
+Impact index: -4.3954
+#1112 - Remove Crossroads & City View
+Impact index: -4.4137
+#1113 - Remove Industrial & Royal
+Impact index: -4.4969
+#1114 - Remove Walsh & Nakoosa
+Impact index: -4.5142
+#1115 - Remove Rimrock & John Nolen
+Impact index: -4.6199
+#1116 - Remove N Sherman & Wheeler
+Impact index: -4.8081
+#1117 - Remove Agriculture & Tradewinds
+Impact index: -4.9009
+#1118 - Remove South Ridge & County Q
+Impact index: -5.1497
+#1119 - Remove O'keeffe & Brown Bear
+Impact index: -5.2294
+#1120 - Remove Main & Thompson
+Impact index: -5.3730
+#1121 - Remove Anderson & Pearson
+Impact index: -5.4297
+#1122 - Remove O'keeffe & Linnerud
+Impact index: -5.8390
+#1123 - Remove E Verona & Hometown
+Impact index: -5.8575
+#1124 - Remove Marsh & Calico
+Impact index: -5.8654
+#1125 - Remove Marsh & Yesterday
+Impact index: -5.9690
+#1126 - Remove Fish Hatchery & Cahill
+Impact index: -6.1881
+#1127 - Remove Muir Field & Raymond
+Impact index: -6.2220
+#1128 - Remove Airport & Nursery
+Impact index: -6.2346
+#1129 - Remove N Pleasant View & Airport
+Impact index: -6.4345
+#1130 - Remove E Verona & Enterprise
+Impact index: -6.5395
+#1131 - Remove Rimrock & Anderberg
+Impact index: -6.6568
+#1132 - Remove Mckee & Osmundsen
+Impact index: -6.7856
+#1133 - Remove Mckee & Richardson
+Impact index: -6.8701
+#1134 - Remove Menomonie & Chinook
+Impact index: -7.0524
+#1135 - Remove Dutch Mill & Park And Ride
+Impact index: -7.0965
+#1136 - Remove Mid Town & Waldorf
+Impact index: -7.4303
+#1137 - Remove Hoepker & Merchant
+Impact index: -7.6552
+#1138 - Remove Airport & Deming
+Impact index: -7.6797
+#1139 - Remove Main & Grand
+Impact index: -8.0738
+#1140 - Remove Chapel Valley & Mckee
+Impact index: -8.3032
+#1141 - Remove John Nolen & Lakeside
+Impact index: -8.6534
+#1142 - Remove High Crossing & Cross Hill
+Impact index: -10.0662
+#1143 - Remove Starr Grass & S High Point
+Impact index: -10.1341
+#1144 - Remove Pinehurst & S Greenview
+Impact index: -10.3738
+#1145 - Remove Mid Town & Hawks Landing
+Impact index: -10.9224
+#1146 - Remove Cremer & Park And Ride
+Impact index: -10.9750
+#1147 - Remove Mckee & Commerce Park
+Impact index: -11.4614
+#1148 - Remove E Verona & Maple Grove
+Impact index: -14.5518
+#1149 - Remove Airport & Terminal Door 6
+Impact index: -14.8515
+#1150 - Remove W Verona & Westridge
+Impact index: -15.0556
+#1151 - Remove Moorland & Manor
+Impact index: -15.6618
+#1152 - Remove Woods & Mid Town
+Impact index: -17.2903
+#1153 - Remove Northern Lights & Epic Staff C
+Impact index: -45.7132

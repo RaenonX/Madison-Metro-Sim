@@ -1,4 +1,7 @@
 Report on 2020-09-27 07:55:57.191470 (CDT)
+
+Range: 0.6 km / Interval: 0.05 km
+
 #1 - Remove W Terrace & 5117
 Impact index: 0.7459
 #2 - Remove N Thompson & Jana
