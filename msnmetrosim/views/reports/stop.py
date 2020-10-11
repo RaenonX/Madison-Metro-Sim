@@ -34,8 +34,8 @@ def get_distance_to_stop():
     sim_agents = generate_points(target_stop.coordinate, 0.5, 0.02)
 
     # Get the distance metrics
-    metrics_original = ctrl_stops_cross.get_distance_metrics_to_closest(sim_agents, "Original")
-    metrics_after = stop_cross_no_target.get_distance_metrics_to_closest(sim_agents, "Original")
+    metrics_original = ctrl_stops_cross.get_distance_metrics_to_closest(sim_agents, name="Original")
+    metrics_after = stop_cross_no_target.get_distance_metrics_to_closest(sim_agents, name="Original")
 
     # ----- Plot histogram
     # https://datavizpyr.com/overlapping-histograms-with-matplotlib-in-python/
