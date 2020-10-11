@@ -1,4 +1,5 @@
 """Various models representing the data entry."""
+from .population import PopulationWard
 from .ridership import RidershipByStop
 from .route import MMTRoute
 from .shape import MMTShape

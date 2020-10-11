@@ -7,7 +7,7 @@ from folium import Map as FoliumMap, Icon, Marker, Popup
 
 from msnmetrosim.models.results import CrossStopRemovalResult
 from msnmetrosim.utils import generate_points
-from .controllers import ctrl_stops_cross
+from .controllers import ctrl_stops_cross, ctrl_population
 from .mapgen import generate_92_wkd_routes
 
 __all__ = ("generate_stop_removal_report", "generate_top_12_stops_map",
@@ -16,7 +16,7 @@ __all__ = ("generate_stop_removal_report", "generate_top_12_stops_map",
 # region Static info
 
 
-TOP_12_POSITIVE = [
+TOP_12_POSITIVE_DUMMY = [
     ("W Terrace", "5117"),
     ("N Thompson", "Jana"),
     ("W Terrace", "Eastpark"),
@@ -31,7 +31,7 @@ TOP_12_POSITIVE = [
     ("Anniversary", "Forest Run")
 ]
 
-TOP_12_NEGATIVE = [
+TOP_12_NEGATIVE_DUMMY = [
     ("Starr Grass", "S High Point"),
     ("Pinehurst", "S Greenview"),
     ("Mckee", "Seminole"),
@@ -53,8 +53,8 @@ TOP_12_NEGATIVE = [
 # region Report generating
 
 
-def generate_stop_removal_report(range_km: float, interval_km: float,
-                                 report_path: str = "../reports/0921-report.txt"):
+def generate_stop_removal_report(range_km: float, interval_km: float, /,
+                                 report_path: str = "stop-rm-report.txt", use_population_data: bool = True):
     """
     Generate a stop removal report with impact index included.
 
@@ -64,13 +64,15 @@ def generate_stop_removal_report(range_km: float, interval_km: float,
     The report will be output to ``report_path``.
     """
     # Get a list of results of removing each stops
-    results = ctrl_stops_cross.get_all_stop_remove_results(range_km, interval_km)
+    results = ctrl_stops_cross.get_all_stop_remove_results(range_km, interval_km,
+                                                           ctrl_population if use_population_data else None)
 
-    # Generate the report to `reports/0921-report.txt`
+    # Generate the report to `report_path`
     with open(report_path, "w") as f:
-        f.write(f"Report on {datetime.now()} (CDT)\n")
+        f.write(f"Report generated at {datetime.now()} (CDT)\n")
         f.write("\n")
         f.write(f"Range: {range_km} km / Interval: {interval_km} km\n")
+        f.write("\n")
 
         # Get each removal results and sort them by impact index
         # Check the documentation of `impact_index` to get more information
@@ -178,7 +180,7 @@ def plot_top_12_positive_impact_results():
 
     ``range_km`` is set to **0.6** and ``interval_km`` is set to **0.05**.
     """
-    figure = plot_accessibility_impact_results(TOP_12_POSITIVE, 4, 3, 0.6, 0.05,
+    figure = plot_accessibility_impact_results(TOP_12_POSITIVE_DUMMY, 4, 3, 0.6, 0.05,
                                                "Top 12 stop removals that brings POSITIVE impacts")
     figure.show()
 
@@ -189,7 +191,7 @@ def plot_top_12_negative_impact_results():
 
     ``range_km`` is set to **0.6** and ``interval_km`` is set to **0.05**.
     """
-    figure = plot_accessibility_impact_results(TOP_12_NEGATIVE, 4, 3, 0.6, 0.05,
+    figure = plot_accessibility_impact_results(TOP_12_NEGATIVE_DUMMY, 4, 3, 0.6, 0.05,
                                                "Top 12 stop removals that brings NEGATIVE impacts")
     figure.show()
 
@@ -206,7 +208,7 @@ def generate_top_12_stops_map() -> FoliumMap:
 
     # Getting the stop first so that if any of the stop does not exist, it fails faster
     stops = []
-    for pos, neg in zip(TOP_12_POSITIVE, TOP_12_NEGATIVE):
+    for pos, neg in zip(TOP_12_POSITIVE_DUMMY, TOP_12_NEGATIVE_DUMMY):
         primary, secondary = pos
 
         stop = ctrl_stops_cross.get_grouped_stop_by_street_names(primary, secondary)
