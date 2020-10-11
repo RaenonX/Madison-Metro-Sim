@@ -10,7 +10,7 @@ stops = gpd.read_file("../../../data/bus_route_stop_info/stops-shp")
 colored_routes = gpd.read_file("../../../data/bus_route_stop_info/routes_colored-shp")
 
 
-def plot_background(figsize=(12, 12)):
+def plot_background(ax=None, figsize=(12, 12)):
     """
     return an axes object with backgrounds of Madison city and the lakes around Madison
     :param figsize: adjust plot size
@@ -19,8 +19,13 @@ def plot_background(figsize=(12, 12)):
     water = gpd.read_file("../../../data/plot/background/water-shp")
     city = gpd.read_file("../../../data/plot/background/madison-shp")
 
-    ax = water.plot(figsize=figsize, color="lightblue")
-    city.plot(color="0.85", ax=ax)
+    if ax == None:
+        ax = water.plot(figsize=figsize, color="lightblue")
+        city.plot(color="0.85", ax=ax)
+
+    else:
+        water.plot(ax=ax, figsize=figsize, color="lightblue")
+        city.plot(color="0.85", ax=ax)
 
     # ax.set_axis_off() # TODO: uncomment this
     return ax
