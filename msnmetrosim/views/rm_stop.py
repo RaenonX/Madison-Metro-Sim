@@ -93,7 +93,7 @@ def plot_stop_accessibility_diff(subplot, result: CrossStopRemovalResult):
     # Configure plot
     subplot.set_xlabel("Distance to stop (km)", size=14)
     subplot.set_ylabel("Agent count", size=14)
-    subplot.set_title(f"Distance to stop change between before and after removing {result.stop_removed.cross_name}")
+    subplot.set_title(f"Distance to stop between before and after removing {result.stop_removed.cross_name}")
 
     # Plot histograms
     subplot.hist(result.metrics_before.data, bins=20, alpha=0.5, label="Before")
