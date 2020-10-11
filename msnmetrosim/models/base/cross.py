@@ -14,7 +14,11 @@ class HasCrossModelBase(ABC):
 
     @property
     def unique_cross_id(self) -> int:
-        """Unique ID for identifying the street cross."""
+        """
+        Unique ID for identifying the street cross.
+
+        Note that this will change for every start of the application.
+        """
         # timeit.timeit("hash(('A', 'B')) + hash(('B', 'A'))", number=5000000)
         # Out[10]: 0.6956078999999704
         # timeit.timeit("hash(tuple(sorted(('A', 'B'))))", number=5000000)

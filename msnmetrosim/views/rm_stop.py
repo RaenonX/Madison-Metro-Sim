@@ -1,4 +1,5 @@
 """Functions for viewing the data of stop removal."""
+import csv
 from datetime import datetime
 from typing import List, Tuple
 
@@ -46,6 +47,16 @@ TOP_12_NEGATIVE_DUMMY = [
     ("Northern Lights", "Epic Staff C"),
 ]
 
+IMPACT_REPORT_HEADER = [
+    "rank",
+    "cross_1",
+    "cross_2",
+    "impact_index",
+    "generated_time",
+    "agent_range",
+    "agent_interval"
+]
+
 
 # endregion
 
@@ -54,31 +65,48 @@ TOP_12_NEGATIVE_DUMMY = [
 
 
 def generate_stop_removal_report(range_km: float, interval_km: float, /,
-                                 report_path: str = "stop-rm-report.txt", use_population_data: bool = True):
+                                 report_path: str = "stop-rm-report.csv", use_population_data: bool = True):
     """
-    Generate a stop removal report with impact index included.
+    Generate a stop removal report in csv and output it to ``report_path``.
 
-    This uses ``msnmetrosim.utils.generate_points()`` to generate dummy agents
-    for simulating the accessibility difference,
+    Both ``range_km`` and ``interval_km`` will be used for agent spawning.
 
-    The report will be output to ``report_path``.
+    The header of the fenerated report contains:
+
+    - `cross_hash`: Hash code of the cross
+    - `rank`: Rank of the impact index, sorted from the largest
+    - `cross_1`: Name of the cross #1
+    - `cross_2`: Name of the cross #2
+    - `impact_index`: Impact index
+    - `generated_time`: Report generation time
+    - `agent_range`: Range in km used for agent spawning
+    - `agent_interval`: Interval in km used for agent spawning
     """
     # Get a list of results of removing each stops
     results = ctrl_stops_cross.get_all_stop_remove_results(range_km, interval_km,
                                                            ctrl_population if use_population_data else None)
 
     # Generate the report to `report_path`
-    with open(report_path, "w") as f:
-        f.write(f"Report generated at {datetime.now()} (CDT)\n")
-        f.write("\n")
-        f.write(f"Range: {range_km} km / Interval: {interval_km} km\n")
-        f.write("\n")
+    with open(report_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        now = datetime.now()
 
-        # Get each removal results and sort them by impact index
-        # Check the documentation of `impact_index` to get more information
+        # Write header
+        writer.writerow(IMPACT_REPORT_HEADER)
+
+        # Write each data
         for rank, result in enumerate(sorted(results, key=lambda r: r.impact_index, reverse=True), start=1):
-            f.write(f"#{rank} - Remove {result.stop_removed.cross_name}\n")
-            f.write(f"Impact index: {result.impact_index:.4f}\n")
+            writer.writerow(
+                [
+                    rank,
+                    result.stop_removed.primary,
+                    result.stop_removed.secondary,
+                    result.impact_index,
+                    now,
+                    range_km,
+                    interval_km
+                ]
+            )
 
 
 # endregion
