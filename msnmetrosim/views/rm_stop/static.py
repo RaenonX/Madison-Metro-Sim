@@ -48,6 +48,21 @@ TOP_12_POSITIVE_POP_DENSITY = [
     ("Hathaway", "Schroeder")
 ]
 
+TOP_12_NEGATIVE_POP_DENSITY = [
+    ("Northern Lights", "Epic Staff C"),
+    ("Woods", "Mid Town"),
+    ("Moorland", "Manor"),
+    ("W Verona", "Westridge"),
+    ("Airport", "Terminal Door 6"),
+    ("E Verona", "Maple Grove"),
+    ("Mckee", "Commerce Park"),
+    ("Cremer", "Park And Ride"),
+    ("Mid Town", "Hawks Landing"),
+    ("Pinehurst", "S Greenview"),
+    ("Starr Grass", "S High Point"),
+    ("High Crossing", "Cross Hill"),
+]
+
 IMPACT_REPORT_HEADER = [
     "rank",
     "cross_1",
