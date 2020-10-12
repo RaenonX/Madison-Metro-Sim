@@ -1,5 +1,5 @@
 """Functions to visualize the stop removal related data."""
-from .plot_cdf import plot_pop_density_top_12_positive_impact_cdf
+from .plot_cdf import plot_pop_density_top_12_positive_impact_cdf, plot_pop_density_top_12_negative_impact_cdf
 from .plot_hist import (
     plot_dummy_top_12_positive_impact_histogram, plot_dummy_top_12_negative_impact_histogram
 )

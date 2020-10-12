@@ -6,7 +6,9 @@ from matplotlib.pyplot import Subplot
 from msnmetrosim.models.results import CrossStopRemovalResult
 from msnmetrosim.views.controllers import ctrl_stops_cross, ctrl_population
 from .plot_base import get_stops_at_cross, generate_accessibility_plot_canvas
-from .static import TOP_12_POSITIVE_POP_DENSITY
+from .static import TOP_12_POSITIVE_POP_DENSITY, TOP_12_NEGATIVE_POP_DENSITY
+
+__all__ = ("plot_pop_density_top_12_positive_impact_cdf", "plot_pop_density_top_12_negative_impact_cdf")
 
 
 def plot_stop_accessibility_cdf(subplot: Subplot, result: CrossStopRemovalResult):
@@ -73,4 +75,15 @@ def plot_pop_density_top_12_positive_impact_cdf():
     """
     figure = plot_accessibility_impact_cdf(TOP_12_POSITIVE_POP_DENSITY, 4, 3, 0.6, 0.05,
                                            "Top 12 stop removals that brings POSITIVE impacts")
+    figure.show()
+
+
+def plot_pop_density_top_12_negative_impact_cdf():
+    """
+    Plot and show the top 12 negative impact CDFs with population density points.
+
+    ``range_km`` is set to **0.6** and ``interval_km`` is set to **0.05**.
+    """
+    figure = plot_accessibility_impact_cdf(TOP_12_NEGATIVE_POP_DENSITY, 4, 3, 0.6, 0.05,
+                                           "Top 12 stop removals that brings NEGATIVE impacts")
     figure.show()
