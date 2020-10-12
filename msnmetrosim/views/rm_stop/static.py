@@ -19,18 +19,18 @@ TOP_12_POSITIVE_DUMMY = [
 ]
 
 TOP_12_NEGATIVE_DUMMY = [
-    ("Starr Grass", "S High Point"),
-    ("Pinehurst", "S Greenview"),
-    ("Mckee", "Seminole"),
-    ("Mckee", "Commerce Park"),
-    ("Cremer", "Park And Ride"),
-    ("Mid Town", "Hawks Landing"),
-    ("Moorland", "Manor"),
-    ("E Verona", "Maple Grove"),
-    ("Airport", "Terminal Door 6"),
-    ("W Verona", "Westridge"),
-    ("Woods", "Mid Town"),
     ("Northern Lights", "Epic Staff C"),
+    ("Woods", "Mid Town"),
+    ("W Verona", "Westridge"),
+    ("Airport", "Terminal Door 6"),
+    ("E Verona", "Maple Grove"),
+    ("Moorland", "Manor"),
+    ("Mid Town", "Hawks Landing"),
+    ("Cremer", "Park And Ride"),
+    ("Mckee", "Commerce Park"),
+    ("Mckee", "Seminole"),
+    ("Pinehurst", "S Greenview"),
+    ("Starr Grass", "S High Point"),
 ]
 
 TOP_12_POSITIVE_POP_DENSITY = [
