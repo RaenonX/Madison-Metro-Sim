@@ -1,8 +1,6 @@
 import time
 
-from msnmetrosim.views import (
-    generate_map_with_points, print_report_rank_change
-)
+from msnmetrosim.views import generate_map_with_points
 from msnmetrosim.views.controllers import ctrl_population
 
 
@@ -16,10 +14,7 @@ def main():
 
 
 def main2():
-    print_report_rank_change("assets/reports/attachments/1012/impact-idx-pop.csv",
-                             "assets/reports/attachments/0928/impact-idx-dummy.csv", 12)
-    # print_report_rank_change("assets/reports/attachments/0928/impact-idx-dummy.csv",
-    #                          "assets/reports/attachments/1012/impact-idx-pop.csv", 12)
+    pass
 
 
 if __name__ == '__main__':

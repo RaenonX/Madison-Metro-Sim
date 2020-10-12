@@ -3,8 +3,5 @@ from .mapgen import (
     generate_clean_map, generate_map_with_points,
     generate_92_wkd_routes, generate_92_wkd_routes_and_stops, generate_92_wkd_routes_and_grouped_stops
 )
-from .rm_stop import (
-    plot_top_12_positive_impact_results, plot_top_12_negative_impact_results,
-    generate_stop_removal_report, get_report_rank_change, print_report_rank_change,
-    generate_top_12_stops_map
-)
+from .rm_stop import *  # noqa
+from .stop import get_stops_without_ridership, get_distance_to_stop

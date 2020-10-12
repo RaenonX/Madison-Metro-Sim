@@ -1,5 +1,5 @@
 """Stats object of the data."""
-from dataclasses import dataclass, field, InitVar
+from dataclasses import dataclass, field
 from statistics import fmean, median, quantiles
 from typing import List, Optional
 
@@ -16,7 +16,6 @@ class DataMetrics:
     """
 
     data: List[float]
-    quantile_n: InitVar[int] = 10
 
     name: Optional[str] = None
 
@@ -29,10 +28,13 @@ class DataMetrics:
     average: float = field(init=False)
     median: float = field(init=False)
 
-    def __post_init__(self, quantile_n: int):
-        self.cut_points = quantiles(self.data, n=quantile_n)
+    def __post_init__(self):
         self.average = fmean(self.data)  # Faster than `mean()` according to the doc
         self.median = median(self.data)
+
+    def get_quantile(self, n: int) -> List[float]:  # pylint: disable=invalid-name
+        """Call ``statistics.quantiles()`` on the data with count ``n``, and return it."""
+        return quantiles(self.data, n=n)
 
     def print_stats(self):
         """Print the stats of this metric object to ``stdout``."""
