@@ -5,7 +5,7 @@ import pytest
 from msnmetrosim.utils import Progress
 
 
-def test_progress():
+def test_progress(is_github_actions):
     count = 10
     interval = 0.1
 
@@ -15,8 +15,5 @@ def test_progress():
         sleep(interval)
         progress.rec_completed_one()
         assert progress.completed == i + 1
-        assert progress.estimated_time_left == pytest.approx((count - i - 1) * interval, 0.1)
-
-
-if __name__ == '__main__':
-    test_progress()
+        if not is_github_actions:
+            assert progress.estimated_time_left == pytest.approx((count - i - 1) * interval, 0.1)
