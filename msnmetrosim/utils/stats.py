@@ -1,7 +1,7 @@
 """Stats object of the data."""
 from dataclasses import dataclass, field
 from statistics import fmean, median, quantiles
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 __all__ = ("DataMetrics",)
 
@@ -35,6 +35,17 @@ class DataMetrics:
     def get_quantile(self, n: int) -> List[float]:  # pylint: disable=invalid-name
         """Call ``statistics.quantiles()`` on the data with count ``n``, and return it."""
         return quantiles(self.data, n=n)
+
+    def get_quantile_cdf(self, n: int) -> Tuple[List[float], List[float]]:  # pylint: disable=invalid-name
+        """
+        Same as ``get_quantile()``, but the return will be ``(X_ARRAY, Y_ARRAY)`` for easier plotting.
+
+        X will be 0 <= x <= 1, and it will always starts from 0 and ends at 1.
+        """
+        x_array = [i / n for i in range(n)] + [1]
+        y_array = [min(self.data)] + self.get_quantile(n) + [max(self.data)]
+
+        return x_array, y_array
 
     def print_stats(self):
         """Print the stats of this metric object to ``stdout``."""

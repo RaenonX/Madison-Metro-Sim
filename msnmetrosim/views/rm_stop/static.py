@@ -1,5 +1,6 @@
 """Static variables for generating data visualizations related to stop removal."""
 __all__ = ("TOP_12_POSITIVE_DUMMY", "TOP_12_NEGATIVE_DUMMY",
+           "TOP_12_POSITIVE_POP_DENSITY",
            "IMPACT_REPORT_HEADER")
 
 TOP_12_POSITIVE_DUMMY = [
@@ -30,6 +31,21 @@ TOP_12_NEGATIVE_DUMMY = [
     ("W Verona", "Westridge"),
     ("Woods", "Mid Town"),
     ("Northern Lights", "Epic Staff C"),
+]
+
+TOP_12_POSITIVE_POP_DENSITY = [
+    ("W Terrace", "Eastpark"),
+    ("Waldorf", "Mansion Hill"),
+    ("N Thompson", "Jana"),
+    ("N Fair Oaks", "Lexington"),
+    ("N Thompson", "Westwynn"),
+    ("Eastpark", "Broadview"),
+    ("S Whitney", "Gilbert"),
+    ("North Transfer Point", "Huxley"),
+    ("Rayovac", "Exact"),
+    ("S Whitney", "Kroncke"),
+    ("Anniversary", "Forest Run"),
+    ("Hathaway", "Schroeder")
 ]
 
 IMPACT_REPORT_HEADER = [
