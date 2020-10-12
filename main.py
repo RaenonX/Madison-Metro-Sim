@@ -1,12 +1,12 @@
 import time
 
-from msnmetrosim.views import generate_top_12_stops_map_pop_density, plot_pop_density_top_12_positive_impact_cdf
+from msnmetrosim.views import generate_top_12_removal_map_mixed, plot_pop_density_top_12_positive_impact_cdf
 
 
 def main():
     print("Generating map object...")
 
-    folium_map = generate_top_12_stops_map_pop_density()
+    folium_map = generate_top_12_removal_map_mixed()
 
     print("Exporting HTML...")
     folium_map.save("map.html")

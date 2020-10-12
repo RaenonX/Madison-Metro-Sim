@@ -3,24 +3,28 @@ Functions for generating various base maps.
 
 Maps that contain additional information rather than bus routes and stops should be inside a different file.
 """
-from typing import Tuple, List
+from typing import Tuple, List, Optional
 
 from folium import Map as FoliumMap, Icon, Marker, Circle, PolyLine, Popup
 from folium.plugins import MarkerCluster
 
+from msnmetrosim.models import MMTStopsAtCross
 from msnmetrosim.static import MAP_MADISON_CENTER_COORD, MAP_TILE, MAP_ZOOM_START, CONTROL_SCALE
 from msnmetrosim.utils import temporary_func
 from .controllers import ctrl_ridership_stop, ctrl_routes, ctrl_shapes, ctrl_stops, ctrl_stops_cross, ctrl_trips
 
-__all__ = ("generate_clean_map", "generate_map_with_points",
+__all__ = ("generate_clean_map", "generate_map_with_points", "generate_map_given_stops_with_color",
            "generate_92_wkd_routes", "generate_92_wkd_routes_and_stops", "generate_92_wkd_routes_and_grouped_stops",)
 
 
-def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
+def plot_stops_by_cross(folium_map: FoliumMap, /, clustered: bool = True, use_marker: bool = True):
     """
     Plot all the stops grouped by its located cross onto ``folium_map``.
 
-    ``clustered`` determines if the stop will be clustered/expanded upon zoom.
+    ``clustered`` determines if the stop will be clustered/expanded upon zooming.
+
+    ``use_marker`` determines if the stop will be rendered using :class:`Marker`.
+    If ``false``, use :class:`Circle` instead.
 
     Could use customized color in the future for better rendering effect.
     """
@@ -34,16 +38,16 @@ def plot_stops_by_cross(folium_map: FoliumMap, clustered: bool = True):
                       min_width=250, max_width=800)
 
         if stop.wheelchair_accessible:
-            icon_c = "green"
+            color = "green"
         else:
-            icon_c = "lightred"
+            color = "lightred"
 
-        Marker(
-            stop.coordinate,
-            popup=popup,
-            icon=Icon(color=icon_c, icon_color="white", icon="bus", angle=0,
-                      prefix="fa")
-        ).add_to(parent)
+        if use_marker:
+            icon = Icon(color=color, icon_color="white", icon="bus", angle=0, prefix="fa")
+
+            Marker(stop.coordinate, popup=popup, icon=icon).add_to(parent)
+        else:
+            Circle(stop.coordinate, 2, popup=popup, color=color).add_to(parent)
 
 
 def plot_stops(folium_map: FoliumMap, clustered: bool = True):
@@ -79,6 +83,23 @@ def plot_stops(folium_map: FoliumMap, clustered: bool = True):
         ).add_to(parent)
 
 
+def plot_stops_given_with_color(folium_map: FoliumMap, stops: List[Tuple[MMTStopsAtCross, Optional[str]]]):
+    """
+    Plot ``stops`` as markers onto ``folium_map``.
+
+    The :class:`str` in the sub-element is the color to be used on the stop marker.
+    If this is ``None``, then "blue" will be used.
+    """
+    for stop, color in stops:
+        popup = Popup(stop.cross_name, min_width=250, max_width=800)
+
+        Marker(
+            stop.coordinate,
+            popup=popup,
+            icon=Icon(color=color or "blue", icon_color="white", icon="bus", angle=0, prefix="fa")
+        ).add_to(folium_map)
+
+
 def plot_shape(folium_map: FoliumMap, shape_id: int, shape_popup: str, shape_color: str):
     """
     Plot the shape of ``shape_id`` onto ``folium_map``.
@@ -104,6 +125,21 @@ def plot_92_wkd_routes(folium_map: FoliumMap):
         shape_color = ctrl_routes.get_route_by_route_id(last_trip.route_id).route_color
 
         plot_shape(folium_map, shape_id, shape_popup, shape_color)
+
+
+def generate_map_given_stops_with_color(stops: List[Tuple[MMTStopsAtCross, Optional[str]]]):
+    """
+    Generate a map with ``stops`` plotted on it.
+
+    The :class:`str` in the sub-element is the color to be used on the stop marker.
+    If this is ``None``, then "blue" will be used.
+    """
+    folium_map = generate_92_wkd_routes()
+
+    plot_stops_given_with_color(folium_map, stops)
+    plot_stops_by_cross(folium_map, use_marker=False)
+
+    return folium_map
 
 
 def generate_map_with_points(coords: List[Tuple[float, float]],

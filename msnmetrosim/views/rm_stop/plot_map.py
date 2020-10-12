@@ -1,46 +1,49 @@
 """Functions for creating the map for stops involved in the stop removal reports."""
 from typing import List, Tuple
 
-from folium import Map as FoliumMap, Icon, Marker, Popup
+from folium import Map as FoliumMap
 
 from msnmetrosim.models import MMTStopsAtCross
-from msnmetrosim.views.mapgen import generate_92_wkd_routes
+from msnmetrosim.views.mapgen import generate_map_given_stops_with_color
 from .plot_base import get_stops_at_cross
 from .static import (
     TOP_12_POSITIVE_DUMMY, TOP_12_NEGATIVE_DUMMY,
     TOP_12_POSITIVE_POP_DENSITY, TOP_12_NEGATIVE_POP_DENSITY
 )
 
-__all__ = ("generate_top_12_stops_map_dummy", "generate_top_12_stops_map_pop_density")
+__all__ = ("generate_top_12_removal_map_dummy", "generate_top_12_removal_map_pop_density",
+           "generate_top_12_removal_map_mixed")
 
 
-def generate_top_stops_map(pos: List[Tuple[str, str]], neg: List[Tuple[str, str]]):
-    """Plot the locations of the top positive/negative impactful stops on the map."""
-    folium_map = generate_92_wkd_routes()
+def generate_top_12_removal_map_dummy() -> FoliumMap:
+    """Generate a map with top 12 positive/negative impactful stop removals using dummy agents plotted on it."""
+    stops: List[Tuple[MMTStopsAtCross, str]] = []
+    stops.extend([(stop, "green") for stop in get_stops_at_cross(TOP_12_POSITIVE_DUMMY)])
+    stops.extend([(stop, "red") for stop in get_stops_at_cross(TOP_12_NEGATIVE_DUMMY)])
 
-    stops: List[Tuple[MMTStopsAtCross, bool]] = []
-    stops.extend([(stop, True) for stop in get_stops_at_cross(pos)])
-    stops.extend([(stop, False) for stop in get_stops_at_cross(neg)])
-
-    # Plot stops onto map
-    for stop, is_positive in stops:
-        popup = Popup(stop.cross_name, min_width=250, max_width=800)
-
-        Marker(
-            stop.coordinate,
-            popup=popup,
-            icon=Icon(color="green" if is_positive else "red", icon_color="white", icon="bus", angle=0,
-                      prefix="fa")
-        ).add_to(folium_map)
-
-    return folium_map
+    return generate_map_given_stops_with_color(stops)
 
 
-def generate_top_12_stops_map_dummy() -> FoliumMap:
-    """Plot the locations of the top 12 positive/negative impactful stops using dummy agents on the map."""
-    return generate_top_stops_map(TOP_12_POSITIVE_DUMMY, TOP_12_NEGATIVE_DUMMY)
+def generate_top_12_removal_map_pop_density() -> FoliumMap:
+    """Generate a map with top 12 positive/negative impactful stop removals using population density plotted on it."""
+    stops: List[Tuple[MMTStopsAtCross, str]] = []
+    stops.extend([(stop, "green") for stop in get_stops_at_cross(TOP_12_POSITIVE_POP_DENSITY)])
+    stops.extend([(stop, "red") for stop in get_stops_at_cross(TOP_12_NEGATIVE_POP_DENSITY)])
+
+    return generate_map_given_stops_with_color(stops)
 
 
-def generate_top_12_stops_map_pop_density() -> FoliumMap:
-    """Plot the locations of the top 12 positive/negative impactful stops using population density on the map."""
-    return generate_top_stops_map(TOP_12_POSITIVE_POP_DENSITY, TOP_12_NEGATIVE_POP_DENSITY)
+def generate_top_12_removal_map_mixed() -> FoliumMap:
+    """
+    Generate a map with both top 12 pos/neg stop removals using pop density/dummy agents plotted on it.
+
+    Points using population density will be rendered in green/red;
+    dummy agents will be rendered in lightgreen/lightred.
+    """
+    stops: List[Tuple[MMTStopsAtCross, str]] = []
+    stops.extend([(stop, "green") for stop in get_stops_at_cross(TOP_12_POSITIVE_POP_DENSITY)])
+    stops.extend([(stop, "red") for stop in get_stops_at_cross(TOP_12_NEGATIVE_POP_DENSITY)])
+    stops.extend([(stop, "lightgreen") for stop in get_stops_at_cross(TOP_12_POSITIVE_DUMMY)])
+    stops.extend([(stop, "lightred") for stop in get_stops_at_cross(TOP_12_NEGATIVE_DUMMY)])
+
+    return generate_map_given_stops_with_color(stops)
