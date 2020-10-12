@@ -1,22 +1,25 @@
 import time
 
-from msnmetrosim.views import generate_92_wkd_routes_and_grouped_stops, generate_top_12_stops_map
+from msnmetrosim.views import (
+    generate_map_with_points, print_report_rank_change
+)
+from msnmetrosim.views.controllers import ctrl_population
 
 
 def main():
     print("Generating map object...")
-    folium_map = generate_92_wkd_routes_and_grouped_stops()
+
+    folium_map = generate_map_with_points([data.coordinate for data in ctrl_population.all_data])
 
     print("Exporting HTML...")
     folium_map.save("map.html")
 
 
 def main2():
-    print("Generating map object...")
-    folium_map = generate_top_12_stops_map()
-
-    print("Exporting HTML...")
-    folium_map.save("map.html")
+    print_report_rank_change("assets/reports/attachments/1012/impact-idx-pop.csv",
+                             "assets/reports/attachments/0928/impact-idx-dummy.csv", 12)
+    # print_report_rank_change("assets/reports/attachments/0928/impact-idx-dummy.csv",
+    #                          "assets/reports/attachments/1012/impact-idx-pop.csv", 12)
 
 
 if __name__ == '__main__':

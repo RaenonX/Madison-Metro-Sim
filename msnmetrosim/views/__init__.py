@@ -5,5 +5,6 @@ from .mapgen import (
 )
 from .rm_stop import (
     plot_top_12_positive_impact_results, plot_top_12_negative_impact_results,
-    generate_stop_removal_report, generate_top_12_stops_map
+    generate_stop_removal_report, get_report_rank_change, print_report_rank_change,
+    generate_top_12_stops_map
 )
