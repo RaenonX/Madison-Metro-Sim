@@ -1,6 +1,6 @@
 """Static variables for generating data visualizations related to stop removal."""
 __all__ = ("TOP_12_POSITIVE_DUMMY", "TOP_12_NEGATIVE_DUMMY",
-           "TOP_12_POSITIVE_POP_DENSITY",
+           "TOP_12_POSITIVE_POP_DENSITY", "TOP_12_NEGATIVE_POP_DENSITY",
            "IMPACT_REPORT_HEADER")
 
 TOP_12_POSITIVE_DUMMY = [
