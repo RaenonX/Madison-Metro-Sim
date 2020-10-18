@@ -1,0 +1,23 @@
+### more relative data can be found on https://www.transit.dot.gov/ntd/national-transit-database-ntd-glossary
+
+upt:  Unlinked Passenger Trips
+vrm:  Vehicle Revenue Miles
+      - Actual vehicle miles include:
+        • Revenue service
+        • Deadhead
+      - Actual vehicle miles exclude:
+        • Miles for charter service
+        • School bus service
+        • Operator training
+        • Vehicle maintenance testing
+vrh:  Vehicle Revenue Hours
+voms: Vehicles Operated in Annual Maximum Service
+
+# Mode: MB = MotorBus
+#       DR = Demand Response Mode
+
+# Type Of Service:
+# TOS:  TX = Demand Response Mode with Taxi
+#       DO = Directly Operated
+
+# available since JAN02 till APR20, the rest haven't been reported
