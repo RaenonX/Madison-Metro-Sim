@@ -17,7 +17,7 @@ voms: Vehicles Operated in Annual Maximum Service
 #       DR = Demand Response Mode
 
 # Type Of Service:
-# TOS:  TX = Demand Response Mode with Taxi
-#       DO = Directly Operated
+# TOS:  TX = Demand Response Mode contracted with Taxicab
+#       DO = Directly Operated service
 
 # available since JAN02 till APR20, the rest haven't been reported
