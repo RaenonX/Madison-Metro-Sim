@@ -247,7 +247,7 @@ def generate_color_map(threshold, savefig=False, filename=None):
     # plt.colorbar(img, label="Number of Overlaps")
     #
     # if savefig:
-    #     plt.savefig("../report_andy/Oct_5th/" + filename, dpi=300, bbox_inches='tight')
+    #     plt.savefig("../report_andy/Oct_05th/" + filename, dpi=300, bbox_inches='tight')
 
 
 
