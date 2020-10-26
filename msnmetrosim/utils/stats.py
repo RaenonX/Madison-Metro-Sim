@@ -40,10 +40,10 @@ class DataMetrics:
         """
         Same as ``get_quantile()``, but the return will be ``(X_ARRAY, Y_ARRAY)`` for easier plotting.
 
-        X will be 0 <= x <= 1, and it will always starts from 0 and ends at 1.
+        Y will be 0 <= x <= 1, and it will always starts from 0 and ends at 1.
         """
-        x_array = [i / n for i in range(n)] + [1]
-        y_array = [min(self.data)] + self.get_quantile(n) + [max(self.data)]
+        x_array = [min(self.data)] + self.get_quantile(n) + [max(self.data)]
+        y_array = [i / n for i in range(n)] + [1]
 
         return x_array, y_array
 

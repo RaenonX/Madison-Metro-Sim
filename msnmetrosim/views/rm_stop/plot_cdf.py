@@ -16,10 +16,9 @@ def plot_stop_accessibility_cdf(subplot: Subplot, result: CrossStopRemovalResult
     # pylint: disable=invalid-name
 
     # Configure plot
-    subplot.set_xlabel("Percentile")
-    subplot.set_ylabel("Distance to stop (km)")
-    subplot.set_title(f"Distance to stop between before and after removing {result.stop_removed.cross_name}",
-                      size=14)
+    subplot.set_xlabel("Distance to stop (km)", size=20)
+    subplot.set_ylabel("Percentile", size=20)
+    subplot.set_title(result.stop_removed.cross_name, size=24)
 
     # Plot CDF
     x, y = result.metrics_before.get_quantile_cdf(20)
@@ -48,7 +47,7 @@ def plot_accessibility_impact_cdf(stops_name: List[Tuple[str, str]], plot_x: int
     :param interval_km: dummy agents interval in km
     :param title: title of the main plot
     """
-    # pylint: disable=too-many-arguments, too-many-locals)
+    # pylint: disable=too-many-arguments, too-many-locals
 
     # Get metrics between before and after removing the stop
     results: List[CrossStopRemovalResult] = []

@@ -17,7 +17,7 @@ def generate_stop_removal_report(range_km: float, interval_km: float, /,
 
     Both ``range_km`` and ``interval_km`` will be used for agent spawning.
 
-    The header of the fenerated report contains:
+    The header of the generated report contains:
 
     - `cross_hash`: Hash code of the cross
     - `rank`: Rank of the impact index, sorted from the largest

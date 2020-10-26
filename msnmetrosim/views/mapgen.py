@@ -137,7 +137,7 @@ def generate_map_given_stops_with_color(stops: List[Tuple[MMTStopsAtCross, Optio
     folium_map = generate_92_wkd_routes()
 
     plot_stops_given_with_color(folium_map, stops)
-    plot_stops_by_cross(folium_map, use_marker=False)
+    # plot_stops_by_cross(folium_map, use_marker=False)
 
     return folium_map
 
