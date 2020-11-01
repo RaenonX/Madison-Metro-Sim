@@ -1,10 +1,11 @@
 """Controller of the MMT GTFS stops grouped by its located cross."""
-from typing import Dict, Optional, List, Tuple, Iterable
+from typing import Dict, Optional, List, Tuple
 
 from msnmetrosim.models import MMTStop, MMTStopsAtCross
 from msnmetrosim.models.results import CrossStopRemovalResult
-from msnmetrosim.utils import generate_points
+from msnmetrosim.utils import generate_points, Progress
 from .base import LocationalDataController
+from .population import PopulationDataController
 from .stop import MMTStopDataController
 
 __all__ = ("MMTStopsAtCrossDataController",)
@@ -42,14 +43,21 @@ class MMTStopsAtCrossDataController(LocationalDataController):
         """
         return self._dict_street.get(MMTStopsAtCross.calculate_hash(street_1, street_2))
 
-    def get_metrics_of_single_stop_removal(self, street_1: str, street_2: str, agents: Iterable[Tuple[float, float]]) \
+    def get_metrics_of_single_stop_removal(self, street_1: str, street_2: str, agents: List[Tuple[float, float]],
+                                           weights: Optional[List[float]] = None) \
             -> CrossStopRemovalResult:
         """
         Get the accessibility difference metrics of removing a single stop at ``(street_1, street_2)``.
 
         ``agents`` is a list of coordinates representing each agent for calculating the distance metrics.
 
-        :raises ValueError: if no stop is located at `(street_1, street_2)`
+        Each ``weight`` corresponds to an ``agent``,
+        so the length of ``agents`` must equal to the length of ``weights``.
+
+        If ``agents`` is ``None``, it will be 1 for all ``agents``.
+
+        :raises ValueError: if the length of `coords` and `weights` are not the same
+                            or no stop is located at `(street_1, street_2)`
         """
         # Get the stop to be removed
         target_stop = self.get_grouped_stop_by_street_names(street_1, street_2)
@@ -60,15 +68,19 @@ class MMTStopsAtCrossDataController(LocationalDataController):
 
         # Get the distance metrics
         metrics_before = self.get_distance_metrics_to_closest(
-            agents, f"Before removing {target_stop.cross_name}")
+            agents, weights=weights, name=f"Before removing {target_stop.cross_name}")
         metrics_after = self_no_target.get_distance_metrics_to_closest(
-            agents, f"After removing {target_stop.cross_name}")
+            agents, weights=weights, name=f"After removing {target_stop.cross_name}")
 
         return CrossStopRemovalResult(target_stop, metrics_before, metrics_after)
 
-    def get_all_stop_remove_results(self, range_km: float, interval_km: float) -> List[CrossStopRemovalResult]:
+    def get_all_stop_remove_results(self, range_km: float, interval_km: float,
+                                    pop_data: Optional[PopulationDataController] = None) \
+            -> List[CrossStopRemovalResult]:
         """
         Try to remove each stops one by one, and return the results of the removal.
+
+        Specify ``pop_data`` to use the population data instead of dummy agents for calculating the distances.
 
         This function uses ``msnmetrosim.utils.generate_points()``
          to generate simulated agents and to calculate the accessibility impact.
@@ -84,19 +96,34 @@ class MMTStopsAtCrossDataController(LocationalDataController):
         """
         # ThreadPoolExecutor won't help on performance boosting
         # OPTIMIZE: Try to reduce the calculation time of this
+        #   - Each agent is expanding its circle to find the closest stop
+        #   - Change the above to each stop expanding its circle to "touch" the closest agent instead?
+        #   - Any possible use of numpy for performance boost?
         ret: List[CrossStopRemovalResult] = []
 
         total_count = len(self.all_data)
+        progress = Progress(total_count)
+        progress.start()
 
-        for idx, stop in enumerate(self.all_data):
-            print(f"{idx} / {total_count} ({idx / total_count:.2%})")
-
+        for stop in self.all_data:
             stop: MMTStopsAtCross
-            agents = generate_points(stop.coordinate, range_km, interval_km)
+            agents: List[Tuple[float, float]]
+            weights: Optional[List[float]]
 
-            rm_result = self.get_metrics_of_single_stop_removal(stop.primary, stop.secondary, agents)
+            if pop_data:
+                lat, lon = stop.coordinate
+
+                agents, weights = pop_data.get_population_points(lat, lon, range_km, interval_km)
+            else:
+                agents = generate_points(stop.coordinate, range_km, interval_km)
+                weights = None
+
+            rm_result = self.get_metrics_of_single_stop_removal(stop.primary, stop.secondary, agents, weights)
 
             ret.append(rm_result)
+
+            progress.rec_completed_one()
+            print(progress)
 
         return ret
 

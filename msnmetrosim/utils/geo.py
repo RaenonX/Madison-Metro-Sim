@@ -1,7 +1,7 @@
 """Geographical helper functions."""
 from decimal import Decimal
 from math import asin, sin, cos, sqrt, atan2, radians, degrees
-from typing import Tuple, Set
+from typing import Tuple, List, Set
 
 __all__ = ("distance", "offset", "generate_points")
 
@@ -59,7 +59,7 @@ def offset(coord: Tuple[float, float], offset_km: float, bearing: float) -> Tupl
 
 
 def generate_points(center_coord: Tuple[float, float], range_km: float, interval_km: float) \
-        -> Set[Tuple[float, float]]:
+        -> List[Tuple[float, float]]:
     """
     Generates coordinates within ``range_km`` km centered at ``center_coord`` in ``interval_km``.
 
@@ -86,7 +86,7 @@ def generate_points(center_coord: Tuple[float, float], range_km: float, interval
 
     center_lat, center_lon = center_coord
 
-    ret: Set[Tuple[float, float]] = {center_coord}
+    ret: Set[Tuple[float, float]] = {center_coord}  # Duplicated points might be generated
 
     # Using/casting numbers to :class:`Decimal` to prevent precision lose on generating the circle
     range_km = Decimal(str(range_km))
@@ -106,4 +106,4 @@ def generate_points(center_coord: Tuple[float, float], range_km: float, interval
         cur_range += Decimal(str(interval_km))
         cur_layer += 1
 
-    return ret
+    return list(ret)

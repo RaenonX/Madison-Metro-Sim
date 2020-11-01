@@ -2,7 +2,7 @@
 from abc import ABC
 from dataclasses import dataclass, InitVar, field
 from math import isqrt
-from typing import List, Tuple, TypeVar, Iterable, Optional
+from typing import List, Tuple, TypeVar, Optional
 
 from msnmetrosim.models.base import LocationalModelBase
 from msnmetrosim.utils import DataMetrics
@@ -114,20 +114,43 @@ class LocationalDataController(DataListHolder, ABC):
 
         return data_in_box
 
-    def get_distance_metrics_to_closest(self, coords: Iterable[Tuple[float, float]], name: Optional[str] = None) \
+    def get_distance_metrics_to_closest(self, coords: List[Tuple[float, float]], /,
+                                        weights: Optional[List[float]] = None, name: Optional[str] = None) \
             -> DataMetrics:
-        """Get the distance metrics of ``coords`` to the closest data."""
+        """
+        Get the distance metrics of ``coords`` to the closest data.
+
+        Each ``weight`` corresponds to a ``coord``,
+        so the length of ``coords`` must equal to the length of ``weights``.
+
+        ``weights`` will be rounded during the calculation.
+
+        If ``weights`` is ``None``, it will be 1 for all ``coords``.
+
+        :raises ValueError: if the length of `coords` and `weights` are not the same
+        """
+        # Auto-fill weights if not specified
+        if not weights:
+            weights = [1] * len(list(coords))
+        elif len(list(coords)) != len(list(weights)):
+            raise ValueError(f"The length of `coords` ({len(list(coords))}) "
+                             f"is not the same as `weights` ({len(list(weights))})")
+
         # Get the distances from the coords to the closest location/data
         distances = []
 
-        for coord in coords:
-            distances.append(self.find_closest_data(*coord).distance)
+        for coord, weight in zip(coords, weights):
+            distances.extend([self.find_closest_data(*coord).distance] * round(weight))
 
         # Calculate and metrics
         return DataMetrics(distances, name=name)
 
-    def find_closest_data(self, lat: float, lon: float) -> ClosestDataResult:
-        """Find the data closest to the location at ``(lat, lon)``."""
+    def find_closest_data_num(self, lat: float, lon: float, count: int) -> List[ClosestDataResult]:
+        """
+        Find the ``count`` closest data to the location at ``(lat, lon)``.
+
+        :raises ValueError: if no locational data is loaded
+        """
         # Early terminate on no valid locational data loaded (not possible to find the closest data)
         if not self._data:
             raise ValueError("No locational data loaded")
@@ -138,12 +161,20 @@ class LocationalDataController(DataListHolder, ABC):
         # Find the candidate stops
         candidate_data: List[T] = self.get_data_within_range(lat, lon, search_range)
 
-        # Expand the search range by the 1.5x of the original range if no valid candidate data found
-        while not candidate_data:
+        # Expand the search range by the 1.5x of the original range if count candidate data found is less than desired
+        while len(candidate_data) < count:
             search_range *= 1.5
             candidate_data = self.get_data_within_range(lat, lon, search_range)
 
         # Get the closest data and return it as a result object
         candidate_data: List[ClosestDataResult] = [ClosestDataResult(candidate, lat, lon)
                                                    for candidate in candidate_data]
-        return min(candidate_data, key=lambda data: data.distance)
+        return sorted(candidate_data, key=lambda data: data.distance)[:count]
+
+    def find_closest_data(self, lat: float, lon: float) -> ClosestDataResult:
+        """
+        Find the data closest to the location at ``(lat, lon)``.
+
+        :raises ValueError: if no locational data is loaded
+        """
+        return self.find_closest_data_num(lat, lon, 1)[0]
