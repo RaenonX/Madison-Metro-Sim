@@ -6,3 +6,6 @@ matplotlib
 
 # Calculation
 numpy
+
+geopandas
+descartes

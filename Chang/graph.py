@@ -92,12 +92,13 @@ class Graph:
         df = pd.DataFrame(
             rows, columns=['stop_id', 'stop_lon', 'stop_lat', 'radius'])
         gdf = gpd.GeoDataFrame(
-            df, geometry=gpd.points_from_xy(df.stop_lon, df.stop_lat), crs={'init': 'epsg:4326'})
+            df, geometry=gpd.points_from_xy(df.stop_lon, df.stop_lat), crs="EPSG:4326")
+        gdf['geometry_centriod'] = gdf.geometry
 
         # https://epsg.io/3174
-        gdf = gdf.to_crs({'init': 'epsg:3174'})
+        gdf = gdf.to_crs(epsg=3174)
         gdf['geometry'] = gdf.geometry.buffer(gdf['radius'])
-        gdf = gdf.to_crs({'init': 'epsg:4326'})
+        gdf = gdf.to_crs(epsg=4326)
 
         return gdf
 
