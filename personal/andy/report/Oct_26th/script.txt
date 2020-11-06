@@ -1,0 +1,46 @@
+Since we are doing an analysis on Madison Metro Transit,
+we want to not only consider stop removals by filtering overlaps to improve travel time,
+but also take the operating budget of Madison Metro Transit into consideration
+in terms of the revenue and expense every year
+in order to optimize fare revenue with the available resource we have.
+(fare revenue is generally the money you pay for riding a bus)
+Also because we want to find out routes that are not making the money,
+given the expense like salaries, maintenance, and see if we can consolidate routes like this
+and in the meantime not causing the inconvenience to commuters in Madison.
+
+Here in figure 1 is the comparison of ridership between Madison and the average of Wisconsin State and the US.
+
+As we can see, Madison has a higher volume of ridership because Madison is the second largest city in Wisconsin State.
+However, ridership in Madison also fluctuates more than others because school season greatly affects the number of
+boardings.
+
+
+In WI overall, ridership is 6.7% lower in July than January on average;
+whereas in Madison, ridership is 26.4% lower.
+
+In the right plot of the figure 1, we can look more closely to the recent months.
+We see the increasing number of boardings in Madison has a lot to do with the opening of the school.
+On January 30th, 2020 was when WHO informed the world about the outbreak,
+and March 11th was when quarantine started.
+These two factors both contributed to the decreasing trend.
+Some number of ridership in Madison reached a peak of 1,278,838 in February
+but then dropped drastically to a troughs of 110,054 in April according to National Transit Database.
+
+COVID-19 has especially affected Madison ridership;
+WI and US have seen 69.56% and 69.51% declines from February through April respectively,
+however, Madison has seen a 91.39% decline.
+
+---------------------------------------------------------------------------------------------
+Looking at the figure 2 is the plot showing the revenue and expense over the past 10 years.
+
+We see the two largest earnings are Local Share, and State Funds, which account for 31.32% and 31.85% respectively;
+while Fare Revenue only accounts for less than a quarter, more specifically 23.85% on an average of the annual revenue over the past 10 years.
+
+From this we want to find the correlation among between annual revenue and expense and factors like ridership (or unlinked passenger trips),
+vehicle revenue miles, vehicle revenue hours, and vehicles operated in annual maximum service, to see what are the main
+causes and effects that increase or decrease net income and expense of Madison Metro Transit.
+
+State Funds:
+Financial assistance obtained from a state government(s) to assist with paying the costs of providing transit services.
+Local Funds:
+Financial assistance from local entities that support the operation of the transit system.
