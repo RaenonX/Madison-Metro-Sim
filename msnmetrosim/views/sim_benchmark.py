@@ -104,6 +104,8 @@ def benchmark_gen_map(start_dt: datetime, travel_time_list: Iterable[float], sta
     :param max_wait_time: maximum waiting time in seconds
     :param map_action: action to be executed on the map.
     """
+    # pylint: disable=too-many-locals
+
     result = []
 
     for travel_time in travel_time_list:
@@ -132,7 +134,6 @@ def benchmark_gen_map(start_dt: datetime, travel_time_list: Iterable[float], sta
 
 def plot_travel_time_x_proc_time_n_count(results: List[BenchmarkResult]):
     """Generate a plot which X is the travel time and Y is the benchmarking time and the point count."""
-
     # Sort data
     travel_time = []
     total_time = []
@@ -150,7 +151,6 @@ def plot_travel_time_x_proc_time_n_count(results: List[BenchmarkResult]):
 
 def plot_point_x_proc_time(results: List[BenchmarkResult]):
     """Generate a plot which X is the point count and Y is the time spent on the whole benchmarking process."""
-
     # Sort data
     point_count = []
     total_time = []
@@ -165,7 +165,6 @@ def plot_point_x_proc_time(results: List[BenchmarkResult]):
 
 def plot_point_x_t_each_point(results: List[BenchmarkResult]):
     """Generate a plot which X is the point count and Y is the average time spent on a single point."""
-
     # Sort data
     point_count = []
     each_point = []
@@ -180,7 +179,6 @@ def plot_point_x_t_each_point(results: List[BenchmarkResult]):
 
 def plot_point_count_x_proc_time_detailed(results: List[BenchmarkResult]):
     """Generate a plot which X is the point count and Y is the benchmarking time in details."""
-
     # Sort data
     point_count = []
     t_static = []
@@ -208,7 +206,6 @@ def plot_point_count_x_proc_time_detailed(results: List[BenchmarkResult]):
 
 def plot_point_count_x_gen_static(results: List[BenchmarkResult]):
     """Generate a plot which X is the point count and Y is time spent on generating static points."""
-
     # Sort data
     travel_time = []
     t_static = []

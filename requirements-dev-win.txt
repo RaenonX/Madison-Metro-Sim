@@ -9,4 +9,4 @@ pylint
 pytest
 
 # Other necessary requirements
--r requirements.txt
+-r requirements-win.txt

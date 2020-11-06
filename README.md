@@ -19,37 +19,23 @@ The intended group of users of this program is its developers and technical user
 
 ### Usage
 
-1. Generate a map.
-
-    ```bash
-    py main.py
-    ```
-
-2. Open the generated `map.html` file.
-
-------
-
-More map generating functions can be called from `msnmetrosim.views`.
-   
-```python
-from msnmetrosim.views import *
-
-generate_clean_map().save("my_map.html")
-```
-
-------
-
 If you are first time running this program, execute the below first
 
 ```bash
 pip install -r requirements-dev.txt
 ```
 
+------
+
+Check `test_run()` in `msnmetrosim/views/simulate` for the example usage.
+
+- Documentation and APIs currently not fully developed, even a prototype or a draft.
+
 ### Environment Variables
 
 `TEST_PERFORMANCE_TOLERANCE`
 
-- This is **optional**.
+- This is **optional**. You only need this if you are running the tests.
 
 - This determines the performance test tolerance in terms of time.
 

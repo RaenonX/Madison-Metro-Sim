@@ -53,6 +53,7 @@ class MMTStopDataController(LocationalDataController, CSVLoadableController):
         return ret
 
     def get_stop_by_id(self, stop_id: int) -> Optional[MMTStop]:
+        """Get the stop by its ``stop_id``."""
         return self._dict_by_id.get(stop_id)
 
     def find_closest_stop(self, lat: float, lon: float):

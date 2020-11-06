@@ -30,6 +30,6 @@ def test_run():
     sim_points = SimulationStaticPoints(config_points, ctrl_calendar, ctrl_stops, ctrl_stop_schedule, ctrl_trips)
     sim_map = SimulationMap(config_sim, sim_points, ctrl_stops)
 
-    # TODO: simulate something?
+    # TODO: simulate something?  # pylint: disable=fixme
 
     print(sim_map)

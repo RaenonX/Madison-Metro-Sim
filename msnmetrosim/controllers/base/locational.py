@@ -159,6 +159,9 @@ class LocationalDataController(DataListHolder, ABC):
 
         # Find the candidate data
         candidates: List[T] = self.get_data_within_range(lat, lon, search_range)
+        while not candidates:
+            search_range *= 1.5
+            candidates = self.get_data_within_range(lat, lon, search_range)
 
         # Set for preventing returning duplicated data
         candidate_data_ids: Set[int] = {id(candidate) for candidate in candidates}

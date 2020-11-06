@@ -76,27 +76,17 @@ class MMTStopScheduleController(CSVLoadableController):
 
         return ret
 
-    def get_stop_schedule_sim_by_arrival(self, start_dt: datetime, time_range: float, /,
-                                         trip_ids: Iterable[int] = None) \
+    def _get_sims_hr(self, start_dt: datetime, time_range: float, /, trip_ids: Iterable[int] = None) \
             -> List[MMTStopScheduleSim]:
-        """
-        Get all stop schedules which arrival time is between ``start_dt`` and ``(start_dt + time_range)``.
-
-        ``time_range`` is in seconds.
-
-        The return will be sorted by the arrival time.
-
-        If ``trip_ids`` is set, only stop schedules which trip ID is in ``trip_ids`` will be returned.
-        """
+        # pylint: disable=cell-var-from-loop
         ret: List[MMTStopScheduleSim] = []
 
-        # Blocks to "include all"
-        for hr in range(start_dt.hour, start_dt.hour + int(time_range // 3600)):
+        for hour in range(start_dt.hour, start_dt.hour + int(time_range // 3600)):
             # Modding 24 since the start time and the end time is cross-day is possible
-            data_block = self._get_stop_schedules(hr % 24, trip_ids)
+            data_block = self._get_stop_schedules(hour % 24, trip_ids)
 
             start_date = start_dt.date()
-            if hr > 23:
+            if hour > 23:
                 start_date += timedelta(days=1)
 
             # --- Find the next stop and add it if exists
@@ -113,7 +103,7 @@ class MMTStopScheduleController(CSVLoadableController):
                 next_raw = self._by_trip_id[tid][seq]
 
                 # Check if the arrival time is in the range
-                if next_raw.arrival_time.hour == hr:
+                if next_raw.arrival_time.hour == hour:
                     next_sim = fill_next_cache(tid, seq + 1)
                     next_cache[(tid, seq)] = MMTStopScheduleSim.from_raw(next_raw, start_date, next_stop=next_sim)
 
@@ -123,16 +113,34 @@ class MMTStopScheduleController(CSVLoadableController):
 
             for stop_schedule in data_block:
                 trip_id = stop_schedule.trip_id
-                trip_stops = self._by_trip_len[trip_id]
                 next_seq = stop_schedule.stop_sequence
                 next_cache_key = (trip_id, stop_schedule.stop_sequence)
 
                 # If the next stop is not yet generated, generate it and store it to the cache for later use
-                if next_cache_key not in next_cache and next_seq < trip_stops:
+                if next_cache_key not in next_cache and next_seq < self._by_trip_len[trip_id]:
                     fill_next_cache(trip_id, next_seq)
 
-                next_stop = next_cache.get(next_cache_key)
-                ret.append(MMTStopScheduleSim.from_raw(stop_schedule, start_date, next_stop=next_stop))
+                ret.append(
+                    MMTStopScheduleSim.from_raw(stop_schedule, start_date,
+                                                next_stop=next_cache.get(next_cache_key))
+                )
+
+        return ret
+
+    def get_stop_schedule_sim_by_arrival(self, start_dt: datetime, time_range: float, /,
+                                         trip_ids: Iterable[int] = None) \
+            -> List[MMTStopScheduleSim]:
+        """
+        Get all stop schedules which arrival time is between ``start_dt`` and ``(start_dt + time_range)``.
+
+        ``time_range`` is in seconds.
+
+        The return will be sorted by the arrival time.
+
+        If ``trip_ids`` is set, only stop schedules which trip ID is in ``trip_ids`` will be returned.
+        """
+        # Blocks to "include all"
+        ret: List[MMTStopScheduleSim] = self._get_sims_hr(start_dt, time_range, trip_ids=trip_ids)
 
         # Blocks to selectively included
         end_time = start_dt + timedelta(seconds=time_range)

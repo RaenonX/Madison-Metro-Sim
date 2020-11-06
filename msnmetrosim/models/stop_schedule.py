@@ -20,8 +20,6 @@ class MMTStopSchedule:
         `timepoint` means that the bus will depart at the scheduled time if it arrives earlier.
     """
 
-    # pylint: disable=too-many-instance-attributes
-
     trip_id: int
 
     stop_sequence: int
@@ -37,9 +35,6 @@ class MMTStopSchedule:
     @staticmethod
     def parse_from_row(row: List[str]):
         """Parse a single entry into :class:`MMTStopSchedule` from a row of ``mmt_gtfs/stop_times.csv``."""
-
-        # pylint: disable=too-many-instance-attributes
-
         def parse_time(time_str: str):
             hour, minute, second = time_str.split(":", 2)
 

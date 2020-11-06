@@ -3,14 +3,10 @@ name: Madison Metro Sim - CQA
 on: [ push ]
 
 jobs:
-  cqa:
-    name: CQA
+  cqa-win:
+    name: CQA (Windows)
 
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ macos-latest, windows-latest ]
+    runs-on: windows-latest
 
     continue-on-error: true
 
@@ -23,7 +19,38 @@ jobs:
 
       - name: Install required packages
         run: |
-          pip install -r requirements.txt
+          pip install -r requirements-dev-win.txt
+
+      - name: Install CQA checkers
+        run: |
+          pip install pylint pydocstyle
+
+      - name: pydocstyle checks (metro sim)
+        run: |
+          pydocstyle msnmetrosim --count
+
+      - name: pylint checks (metro sim)
+        run: |
+          pylint msnmetrosim
+
+  cqa-mac:
+    name: CQA (macOS)
+
+    runs-on: macos-latest
+
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install required packages
+        run: |
+          brew install gdal
+          pip install -r requirements-dev-mac.txt
 
       - name: Install CQA checkers
         run: |

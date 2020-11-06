@@ -20,8 +20,6 @@ class MMTCalendar:
         `service_id` service ID contains special characters like "#" and "=".
     """
 
-    # pylint: disable=too-many-instance-attributes
-
     service_id: str
     service_name: str
 
@@ -47,7 +45,6 @@ class MMTCalendar:
     @classmethod
     def parse_from_row(cls, row: List[str]):
         """Parse a single entry into :class:`MMTCalendar` from a row of ``mmt_gtfs/calendar.csv``."""
-        # pylint: disable=too-many-instance-attributes
         service_id = row[0]
         service_name = row[1]
 

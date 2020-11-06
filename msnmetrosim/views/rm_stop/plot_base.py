@@ -42,7 +42,7 @@ def generate_accessibility_plot_canvas(plot_x: int, plot_y: int,
     .. note::
         https://matplotlib.org/3.1.0/gallery/subplots_axes_and_figures/subplots_demo.html
     """
-    # pylint: disable=invalid-name, duplicate-code
+    # pylint: disable=invalid-name
 
     figure, axs = plt.subplots(plot_x, plot_y, figsize=(plot_x * fig_size, plot_y * fig_size))
 

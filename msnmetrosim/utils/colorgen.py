@@ -1,15 +1,15 @@
-"""Randomly generate a color and return it."""
+"""Generate a color and return it."""
 
 __all__ = ("get_color",)
 
 # Based on https://www.oberlo.com/blog/color-combinations-cheat-sheet
-_palette = [
+COLOR_PALETTE = [
     "#E1A730", "#2879C0", "#AB3910", "#2B5615", "#F8CF2C", "#DB55D4", "#9B948A",
     "#FF0BAC", "#490034", "#F6B405", "#FDBCFD", "#284E60", "#F99B45", "#63AAC0",
     "#D95980", "#425F06", "#0352A0", "#EF3340", "#A16AE8", "#B19FF9", "#0E3506",
     "#FEA303"
 ]  # pylint: disable=invalid-name
-_counter: int = -1  # pylint: disable=invalid-name
+_COUNTER: int = -1  # pylint: disable=invalid-name
 
 
 def get_color():
@@ -18,9 +18,9 @@ def get_color():
 
     Currently not used in any place, but may be used in the future.
     """
-    global _palette, _counter  # pylint: disable=global-statement
+    global _COUNTER  # pylint: disable=global-statement
 
-    _counter += 1
-    _counter %= len(_palette)
+    _COUNTER += 1
+    _COUNTER %= len(COLOR_PALETTE)
 
-    return _palette[_counter]
+    return COLOR_PALETTE[_COUNTER]

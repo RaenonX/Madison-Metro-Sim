@@ -47,8 +47,6 @@ def plot_accessibility_impact_cdf(stops_name: List[Tuple[str, str]], plot_x: int
     :param interval_km: dummy agents interval in km
     :param title: title of the main plot
     """
-    # pylint: disable=too-many-arguments, too-many-locals
-
     # Get metrics between before and after removing the stop
     results: List[CrossStopRemovalResult] = []
 

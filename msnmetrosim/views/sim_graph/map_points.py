@@ -81,9 +81,9 @@ class SimulationStaticPoints:
                 self._stop_by_arrival_hr[static_point.stop_sim.arrival_time.hour].append(static_point)
 
         # Sort the data in the "boxes"
-        for hr in range(24):
-            self._stop_by_arrival_hr[hr] = list(sorted(self._stop_by_arrival_hr[hr],
-                                                       key=lambda data: data.stop_sim.arrival_time))
+        for hour in range(24):
+            self._stop_by_arrival_hr[hour] = list(sorted(self._stop_by_arrival_hr[hour],
+                                                         key=lambda data: data.stop_sim.arrival_time))
 
     def __init__(self, config: StaticPointConfig, ctrl_calendar: MMTCalendarController,
                  ctrl_stop: MMTStopDataController, ctrl_stop_schedule: MMTStopScheduleController,
@@ -115,6 +115,7 @@ class SimulationStaticPoints:
 
     @property
     def config(self) -> StaticPointConfig:
+        """Get the static point template configuration."""
         return self._config
 
     @property

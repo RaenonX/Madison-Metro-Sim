@@ -27,6 +27,7 @@ class StaticPoint(TimeableMixin):
         return (self._dt_out - self._dt_in).total_seconds()
 
     def add_next_point(self, event_move: MoveEvent, point: "StaticPoint"):
+        """Add the next :class:`StaticPoint` transitioned by the movement event ``event_move``."""
         self._next_points.append((event_move, point))
 
     def __hash__(self):
@@ -87,6 +88,7 @@ class ScheduledStop(StopBase):
 
     @staticmethod
     def from_stop_schedule_sim(stop_schedule: MMTStopScheduleSim, coordinate: Tuple[float, float]) -> "StaticPoint":
+        """Create a :class:`StaticPoint` from :class:`MMTStopScheduleSim`."""
         return ScheduledStop(stop_schedule.arrival_time, stop_schedule.departure_time, stop_schedule, coordinate)
 
     def __str__(self):

@@ -1,6 +1,6 @@
 """Main simulation map."""
 from dataclasses import dataclass
-from datetime import timedelta
+from datetime import timedelta, datetime
 from typing import Tuple, Set, Dict, List
 
 from msnmetrosim.controllers import MMTStopDataController
@@ -62,15 +62,12 @@ class SimulationMap:
         the actual simulation map containing the events is :class:`SimulationMap`.
     """
 
-    def _init_handle_frontier_stop(self, stop: ScheduledStop, config: SimulationConfig,
-                                   static_points: SimulationStaticPoints, ctrl_stop: MMTStopDataController) \
+    def _init_frontier_sequential(self, start_dt: datetime, end_dt: datetime, stop: ScheduledStop,
+                                  config: SimulationConfig, static_points: SimulationStaticPoints,
+                                  ctrl_stop: MMTStopDataController) \
             -> Dict[int, ScheduledStop]:
         ret: Dict[int, ScheduledStop] = {}
 
-        start_dt = stop.stop_sim.departure_time
-        end_dt = static_points.config.end_dt
-
-        # Sequential (on bus to next)
         if next_stop := stop.stop_sim.next_stop:
             next_stop_data = ctrl_stop.get_stop_by_id(next_stop.stop_id)
             if not next_stop_data:
@@ -86,10 +83,16 @@ class SimulationMap:
                 self._point_count += 2
                 ret[id(next_scheduled_stop)] = next_scheduled_stop
 
-        # Wait until the next bus
+        return ret
+
+    def _init_frontier_wait(self, start_dt: datetime, end_dt: datetime, stop: ScheduledStop,
+                            config: SimulationConfig, static_points: SimulationStaticPoints) \
+            -> Dict[int, ScheduledStop]:
+        ret: Dict[int, ScheduledStop] = {}
+
         wait_end_dt = min(
             stop.stop_sim.departure_time + timedelta(seconds=config.max_wait_time),
-            static_points.config.end_dt
+            end_dt
         )
         if scheduled_stop := static_points.get_next_scheduled_stop(start_dt, wait_end_dt, stop.stop_id):
             wait_time = (scheduled_stop.stop_sim.arrival_time - stop.stop_sim.arrival_time).total_seconds()
@@ -105,7 +108,16 @@ class SimulationMap:
 
                 ret[id(scheduled_stop)] = scheduled_stop
 
-        # Walk to closest
+        return ret
+
+    def _init_frontier_closest(self, start_dt: datetime, end_dt: datetime, stop: ScheduledStop,
+                               config: SimulationConfig, static_points: SimulationStaticPoints,
+                               ctrl_stop: MMTStopDataController) \
+            -> Dict[int, ScheduledStop]:
+        # pylint: disable=too-many-locals
+
+        ret: Dict[int, ScheduledStop] = {}
+
         for stop_dist_data in ctrl_stop.find_data_order_by_dist(*stop.coordinate):
             if stop_dist_data.distance > config.max_walk_distance:
                 break  # Beyond max walking distance
@@ -118,7 +130,6 @@ class SimulationMap:
                 continue  # Next scheduled stop unavailable
 
             walk_time = travel_time(config.walk_speed, stop_dist_data.distance)
-            walk_event = MoveEvent(MoveEventType.WALK, walk_time, stop_dist_data.distance)
 
             # Time of the agent arrived at the closest stop
             stop_arrival_dt = stop.stop_sim.departure_time + timedelta(seconds=walk_time)
@@ -143,7 +154,7 @@ class SimulationMap:
                                      scheduled_stop.stop_sim, scheduled_stop.coordinate)
 
                 parent_pt = stop_wait
-                stop.add_next_point(walk_event, stop_wait)
+                stop.add_next_point(MoveEvent(MoveEventType.WALK, walk_time, stop_dist_data.distance), stop_wait)
                 self._point_count += 1
 
             parent_pt.add_next_point(wait_event, scheduled_stop)
@@ -152,16 +163,30 @@ class SimulationMap:
 
         return ret
 
-    def __init__(self, config: SimulationConfig, static_points: SimulationStaticPoints,
-                 ctrl_stop: MMTStopDataController):
-        self._start = StaticPoint(static_points.start_dt, static_points.start_dt)
+    def _init_handle_frontier_stop(self, stop: ScheduledStop, config: SimulationConfig,
+                                   static_points: SimulationStaticPoints, ctrl_stop: MMTStopDataController) \
+            -> Dict[int, ScheduledStop]:
+        ret: Dict[int, ScheduledStop] = {}
 
-        self._point_count = 1  # For statistical purpose only
+        start_dt = stop.stop_sim.departure_time
+        end_dt = static_points.config.end_dt
 
-        # Get the starting stops of the simulation
-        starting_stops: List[MMTStop] = ctrl_stop.get_stops_within_range(*config.start_coord, config.max_walk_distance)
-        frontier_past: Set[int] = set()
+        # Sequential (on bus to next)
+        ret.update(self._init_frontier_sequential(start_dt, end_dt, stop, config, static_points, ctrl_stop))
+
+        # Wait until the next bus
+        ret.update(self._init_frontier_wait(start_dt, end_dt, stop, config, static_points))
+
+        # Walk to closest
+        ret.update(self._init_frontier_closest(start_dt, end_dt, stop, config, static_points, ctrl_stop))
+
+        return ret
+
+    def _init_starting_frontier(self, config: SimulationConfig, static_points: SimulationStaticPoints,
+                                ctrl_stop: MMTStopDataController):
         frontier: Dict[int, StaticPoint] = {}
+
+        starting_stops: List[MMTStop] = ctrl_stop.get_stops_within_range(*config.start_coord, config.max_walk_distance)
 
         # Agents walk to the stops and wait for the bus
         # -- Even if the starting point is right on a stop, a walking event will still being created
@@ -175,22 +200,30 @@ class SimulationMap:
             if next_scheduled_stop := static_points.get_next_scheduled_stop(stop_arrival_dt, end_dt, stop.stop_id):
                 next_scheduled_stop: ScheduledStop
 
-                # Walk parameters
-                walk_event = MoveEvent(MoveEventType.WALK, walk_time, walk_distance)
-
                 # Wait parameters
                 stop_wait = StopWait(stop_arrival_dt, next_scheduled_stop.stop_sim.arrival_time,
                                      next_scheduled_stop.stop_sim, next_scheduled_stop.coordinate)
                 wait_time = (next_scheduled_stop.stop_sim.arrival_time - stop_arrival_dt).total_seconds()
-                wait_event = MoveEvent(MoveEventType.WAIT, wait_time, 0)
 
                 # The agent walks to the stop
-                self._start.add_next_point(walk_event, stop_wait)
+                self._start.add_next_point(MoveEvent(MoveEventType.WALK, walk_time, walk_distance), stop_wait)
 
                 # The agent waits at the stop
-                stop_wait.add_next_point(wait_event, next_scheduled_stop)
+                stop_wait.add_next_point(MoveEvent(MoveEventType.WAIT, wait_time, 0), next_scheduled_stop)
 
                 frontier[id(next_scheduled_stop)] = next_scheduled_stop
+
+        return frontier
+
+    def __init__(self, config: SimulationConfig, static_points: SimulationStaticPoints,
+                 ctrl_stop: MMTStopDataController):
+        self._start = StaticPoint(static_points.start_dt, static_points.start_dt)
+
+        self._point_count = 1  # For statistical purpose only
+
+        # Get the starting stops of the simulation
+        frontier: Dict[int, StaticPoint] = self._init_starting_frontier(config, static_points, ctrl_stop)
+        frontier_past: Set[int] = set(frontier.keys())
 
         # Generate other edges
         while frontier:
@@ -198,7 +231,10 @@ class SimulationMap:
 
             if isinstance(stop, ScheduledStop):
                 frontiers = self._init_handle_frontier_stop(stop, config, static_points, ctrl_stop)
-                [frontiers.pop(id_past, None) for id_past in frontier_past]  # Remove already-traversed entries
+
+                # Remove already-traversed entries
+                for id_past in frontier_past:
+                    frontiers.pop(id_past, None)
 
                 frontier_past.update(frontiers.keys())  # Record that the frontiers are traversed
                 frontier.update(frontiers)

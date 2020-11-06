@@ -25,8 +25,6 @@ class PopulationWard(LocationalModelBase):
         which is its ``stop_id``.
     """
 
-    # pylint: disable=too-many-instance-attributes
-
     lat: float
     lon: float
 
