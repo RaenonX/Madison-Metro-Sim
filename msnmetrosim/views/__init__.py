@@ -4,4 +4,5 @@ from .mapgen import (
     generate_92_wkd_routes, generate_92_wkd_routes_and_stops, generate_92_wkd_routes_and_grouped_stops
 )
 from .rm_stop import *  # noqa
+from .simulate import test_run, benchmark_map
 from .stop import get_stops_without_ridership, get_distance_to_stop

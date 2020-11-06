@@ -2,7 +2,7 @@
 from abc import ABC
 from dataclasses import dataclass, InitVar, field
 from math import isqrt
-from typing import List, Tuple, TypeVar, Optional
+from typing import List, Tuple, TypeVar, Optional, Generator, Set
 
 from msnmetrosim.models.base import LocationalModelBase
 from msnmetrosim.utils import DataMetrics
@@ -145,6 +145,41 @@ class LocationalDataController(DataListHolder, ABC):
         # Calculate and metrics
         return DataMetrics(distances, name=name)
 
+    def find_data_order_by_dist(self, lat: float, lon: float) -> Generator[ClosestDataResult, None, None]:
+        """
+        Find the data sorted by the distance from the data itself to ``(lat, lon)``.
+
+        Immediately stops if the data is not loaded.
+        """
+        if not self._data:
+            return
+
+        # Set the initial search range to be 0.002 deg of latitude (~0.222 km / ~0.138 mi)
+        search_range = 0.002
+
+        # Find the candidate data
+        candidates: List[T] = self.get_data_within_range(lat, lon, search_range)
+
+        # Set for preventing returning duplicated data
+        candidate_data_ids: Set[int] = {id(candidate) for candidate in candidates}
+
+        # Expand the search range by the 1.5x each iteration
+        while candidates:
+            # Cast to :class:`ClosestDataResult` for later sorting
+            candidates: List[ClosestDataResult] = [ClosestDataResult(data, lat, lon) for data in candidates]
+
+            # Iterate through data
+            for candidate in sorted(candidates, key=lambda data: data.distance):
+                yield candidate
+
+            # Expand search range
+            search_range *= 1.5
+
+            # Search for new candidate data
+            candidates: List[T] = [data for data in self.get_data_within_range(lat, lon, search_range)
+                                   if id(data) not in candidate_data_ids]
+            candidate_data_ids.update({id(candidate) for candidate in candidates})
+
     def find_closest_data_num(self, lat: float, lon: float, count: int) -> List[ClosestDataResult]:
         """
         Find the ``count`` closest data to the location at ``(lat, lon)``.
@@ -155,21 +190,7 @@ class LocationalDataController(DataListHolder, ABC):
         if not self._data:
             raise ValueError("No locational data loaded")
 
-        # Set the initial search range to be 0.002 deg of latitude (~0.222 km / ~0.138 mi)
-        search_range = 0.002
-
-        # Find the candidate stops
-        candidate_data: List[T] = self.get_data_within_range(lat, lon, search_range)
-
-        # Expand the search range by the 1.5x of the original range if count candidate data found is less than desired
-        while len(candidate_data) < count:
-            search_range *= 1.5
-            candidate_data = self.get_data_within_range(lat, lon, search_range)
-
-        # Get the closest data and return it as a result object
-        candidate_data: List[ClosestDataResult] = [ClosestDataResult(candidate, lat, lon)
-                                                   for candidate in candidate_data]
-        return sorted(candidate_data, key=lambda data: data.distance)[:count]
+        return [data for _, data in zip(range(count), self.find_data_order_by_dist(lat, lon))]
 
     def find_closest_data(self, lat: float, lon: float) -> ClosestDataResult:
         """

@@ -1,8 +1,12 @@
-# Interactive map
+# Calculation
+numpy
+
+# Map plotting
 folium
+pandas
+./dep/Fiona-1.8.17-cp38-cp38-win_amd64.whl
+./dep/GDAL-3.1.4-cp38-cp38-win_amd64.whl
+./dep/geopandas-0.8.1-py3-none-any.whl
 
 # Graph plotting
 matplotlib
-
-# Calculation
-numpy

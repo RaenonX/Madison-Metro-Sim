@@ -4,7 +4,7 @@ Controller of the MMT GTFS stop data.
 The complete MMT GTFS dataset can be downloaded here:
 http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 """
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from msnmetrosim.models import MMTStop
 from .base import CSVLoadableController, LocationalDataController
@@ -33,7 +33,7 @@ class MMTStopDataController(LocationalDataController, CSVLoadableController):
         for stop in stops:
             self._init_dict_by_id(stop)
 
-    def get_stops_within_range(self, center_lat: float, center_lon: float, search_range: float) \
+    def get_stops_within_range(self, center_lat: float, center_lon: float, range_km: float) \
             -> List[MMTStop]:
         """
         Form a search box and return the stops inside it, including the stop right on the border of the box.
@@ -41,9 +41,19 @@ class MMTStopDataController(LocationalDataController, CSVLoadableController):
         The search box will be centered at ``(center_lat, center_lon)``,
         with the offset of ``search_range`` degree at max.
 
-        Unit of ``search_range`` is degree (in latitude and longitude).
+        Unit of ``range_km`` is **km**.
         """
-        return self.get_data_within_range(center_lat, center_lon, search_range)
+        ret: List[MMTStop] = []
+
+        for close_data in self.find_data_order_by_dist(center_lat, center_lon):
+            if close_data.distance > range_km:
+                break
+            ret.append(close_data.data)
+
+        return ret
+
+    def get_stop_by_id(self, stop_id: int) -> Optional[MMTStop]:
+        return self._dict_by_id.get(stop_id)
 
     def find_closest_stop(self, lat: float, lon: float):
         """Find the closest stop around the location at ``(lat, lon)``."""
