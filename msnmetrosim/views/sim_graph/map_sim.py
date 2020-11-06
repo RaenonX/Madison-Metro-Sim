@@ -203,6 +203,11 @@ class SimulationMap:
                 frontier_past.update(frontiers.keys())  # Record that the frontiers are traversed
                 frontier.update(frontiers)
 
+    @property
+    def point_count(self) -> int:
+        """Get the estimated count of points in the map."""
+        return self._point_count
+
     def __str__(self):
         return f"<Simulation map: {self._point_count}>"
 
