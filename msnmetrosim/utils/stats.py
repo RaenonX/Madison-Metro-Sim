@@ -19,12 +19,6 @@ class DataMetrics:
 
     name: Optional[str] = None
 
-    cut_points: List[float] = field(init=False)
-    """
-    Cut points that separate the data equally in terms of count.
-
-    This excludes the minimum and the maximum.
-    """
     average: float = field(init=False)
     median: float = field(init=False)
 
@@ -48,9 +42,9 @@ class DataMetrics:
         return x_array, y_array
 
     def print_stats(self):
-        """Print the stats of this metric object to ``stdout``."""
-        print(f"Distance metrics - {self.name}")
+        """Print the stats of this metric object to ``sys.stdout``."""
+        print(f"Data metrics - {self.name or '(No name)'}")
         print("================================")
-        print(f"Cut Points: {self.cut_points}")
         print(f"Average: {self.average} / Median: {self.median}")
+        print(f"Decile: {self.get_quantile(10)}")
         print()

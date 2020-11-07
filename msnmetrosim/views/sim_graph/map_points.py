@@ -52,6 +52,16 @@ class SimulationStaticPoints:
         the actual simulation map containing the events is :class:`SimulationMap`.
     """
 
+    @property
+    def config(self) -> StaticPointConfig:
+        """Get the static point template configuration."""
+        return self._config
+
+    @property
+    def start_dt(self) -> datetime:
+        """The starting datetime of the simulation."""
+        return self._config.start_dt
+
     def _init_static_points(self, config: StaticPointConfig, ctrl_calendar: MMTCalendarController,
                             ctrl_stop: MMTStopDataController, ctrl_stop_schedule: MMTStopScheduleController,
                             ctrl_trips: MMTTripDataController):
@@ -96,6 +106,12 @@ class SimulationStaticPoints:
         self._stop_by_arrival_hr: List[List[ScheduledStop]] = [[] for _ in range(24)]
         self._init_stop_by_arrival_hr()
 
+    def __str__(self):
+        return f"<Sim Static Points: {len(self._static_points)}>"
+
+    def __repr__(self):
+        return self.__str__()
+
     def get_next_scheduled_stop(self, start_dt: datetime, end_dt: datetime, stop_id: int) -> Optional[ScheduledStop]:
         """
         Get the next scheduled stop that arrives between ``start_dt`` and ``end_dt`` at ``stop_id``.
@@ -112,19 +128,3 @@ class SimulationStaticPoints:
             current_dt += timedelta(hours=1)
 
         return None
-
-    @property
-    def config(self) -> StaticPointConfig:
-        """Get the static point template configuration."""
-        return self._config
-
-    @property
-    def start_dt(self) -> datetime:
-        """The starting datetime of the simulation."""
-        return self._config.start_dt
-
-    def __str__(self):
-        return f"<Sim Static Points: {len(self._static_points)}>"
-
-    def __repr__(self):
-        return self.__str__()

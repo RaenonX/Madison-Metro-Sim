@@ -1,14 +1,15 @@
 """Main simulation map."""
 from dataclasses import dataclass
 from datetime import timedelta, datetime
-from typing import Tuple, Set, Dict, List
+from typing import Tuple, Set, Dict, List, Optional
 
 from msnmetrosim.controllers import MMTStopDataController
 from msnmetrosim.models import MMTStop
-from msnmetrosim.utils import travel_time, distance
+from msnmetrosim.utils import travel_time, distance, DataMetrics
 from .event_move import MoveEvent, MoveEventType
 from .event_static import StaticPoint, ScheduledStop, StopWait
 from .map_points import SimulationStaticPoints
+from .path import SimPath
 
 __all__ = ("SimulationMap", "SimulationConfig")
 
@@ -61,6 +62,11 @@ class SimulationMap:
         Stop schedules are in :class:`SimulationStaticPoints`;
         the actual simulation map containing the events is :class:`SimulationMap`.
     """
+
+    @property
+    def point_count(self) -> int:
+        """Get the estimated count of points in the map."""
+        return self._point_count
 
     def _init_frontier_sequential(self, start_dt: datetime, end_dt: datetime, stop: ScheduledStop,
                                   config: SimulationConfig, static_points: SimulationStaticPoints,
@@ -217,7 +223,7 @@ class SimulationMap:
 
     def __init__(self, config: SimulationConfig, static_points: SimulationStaticPoints,
                  ctrl_stop: MMTStopDataController):
-        self._start = StaticPoint(static_points.start_dt, static_points.start_dt)
+        self._start = StaticPoint(static_points.start_dt, static_points.start_dt, config.start_coord)
 
         self._point_count = 1  # For statistical purpose only
 
@@ -239,13 +245,29 @@ class SimulationMap:
                 frontier_past.update(frontiers.keys())  # Record that the frontiers are traversed
                 frontier.update(frontiers)
 
-    @property
-    def point_count(self) -> int:
-        """Get the estimated count of points in the map."""
-        return self._point_count
-
     def __str__(self):
         return f"<Simulation map: {self._point_count}>"
 
     def __repr__(self):
         return str(self)
+
+    def get_possible_paths(self) -> List[SimPath]:
+        """Get all possible paths of the map."""
+        # BFS is used
+        ret: List[SimPath] = []
+        cur: List[SimPath] = [SimPath.from_single_point(self._start)]
+
+        while cur:
+            cur_path = cur.pop(0)
+
+            if next_paths := cur_path.get_possible_next_paths():
+                cur.extend(next_paths)
+            else:
+                ret.append(cur_path)
+
+        return ret
+
+    @staticmethod
+    def accessibility_metrics(paths: List[SimPath], /, name: Optional[str] = None) -> DataMetrics:
+        """Get the metrics of the accessibility."""
+        return DataMetrics([path.traveled_distance for path in paths], name)
