@@ -268,6 +268,27 @@ class SimulationMap:
         return ret
 
     @staticmethod
-    def accessibility_metrics(paths: List[SimPath], /, name: Optional[str] = None) -> DataMetrics:
-        """Get the metrics of the accessibility."""
+    def distance_metrics(paths: List[SimPath], /, name: Optional[str] = None) -> DataMetrics:
+        """
+        Get the metrics of the traveled distance.
+
+        .. note::
+            The difference between distance and displacement is that distance counts for every bends, whereas
+            displacement only calculates the distance between the start point and the end point.
+
+            Demo image: https://i.imgur.com/gORT9Sy.png
+        """
         return DataMetrics([path.traveled_distance for path in paths], name)
+
+    @staticmethod
+    def displacement_metrics(paths: List[SimPath], /, name: Optional[str] = None) -> DataMetrics:
+        """
+        Get the metrics of the displacements of the paths.
+
+        .. note::
+            The difference between distance and displacement is that distance counts for every bends, whereas
+            displacement only calculates the distance between the start point and the end point.
+
+            Demo image: https://i.imgur.com/gORT9Sy.png
+        """
+        return DataMetrics([path.displacement for path in paths], name)

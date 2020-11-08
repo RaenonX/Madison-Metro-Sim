@@ -30,20 +30,28 @@ def test_run():
     sim_points = SimulationStaticPoints(config_points, ctrl_calendar, ctrl_stops, ctrl_stop_schedule, ctrl_trips)
     sim_map = SimulationMap(config_sim, sim_points, ctrl_stops)
 
-    # Get the possible paths and its related metrics
+    # Get the possible paths
     possible_paths = sim_map.get_possible_paths()
-    metrics = SimulationMap.accessibility_metrics(possible_paths, name="Distance traveled for each simulated path")
-    farthest_points = {path.path_tail_coord for path in possible_paths}  # Using set to get distince values
 
-    # Print out the results
     print(f"The map contains {sim_map.point_count} points. There are {len(possible_paths)} possible paths.")
     print()
 
-    metrics.print_stats()
+    # Get distance metrics and print it
+    name_dist = "Distance traveled for each simulated path"
+    metrics_dist = SimulationMap.distance_metrics(possible_paths, name=name_dist)
+    metrics_dist.print_stats()
 
-    print("Random 10 farthest points reached among the paths:")
-    for _, point in zip(range(10), farthest_points):
-        # Refer to the prototype for plotting these points
-        #   https://github.com/RaenonX/Madison-Metro-Sim/blob/prototype/Chang/test.ipynb
-        #   https://github.com/RaenonX/Madison-Metro-Sim/blob/prototype/Chang/graph.py
-        print(point)
+    # ---- > 1 km only
+    name_dist += " (> 1 km)"
+    metrics_dist = metrics_dist.filtered(lambda data: data >= 1, name_dist)
+    metrics_dist.print_stats()
+
+    # Get displacement metrics and print it
+    name_disp = "Displacement for each simulated path"
+    metrics_disp = SimulationMap.displacement_metrics(possible_paths, name=name_disp)
+    metrics_disp.print_stats()
+
+    # ---- > 1 km only
+    name_disp += " (> 1 km)"
+    metrics_disp = metrics_disp.filtered(lambda data: data >= 1, name_disp)
+    metrics_disp.print_stats()
