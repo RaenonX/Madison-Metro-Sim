@@ -1,4 +1,5 @@
 import pandas as pd
+import geopandas as gpd
 from datetime import datetime
 from graph import Graph
 import os
@@ -18,15 +19,33 @@ class BusSim:
                            elapse_time, self.max_walking_distance, avg_walking_speed)
 
     def get_gdf(self, start_stop):
-        return self.graph.get_gdf(start_stop)
+        gdf = self.graph.get_gdf(start_stop)
+
+        gdf['geometry_centriod'] = gdf.geometry
+
+        # https://epsg.io/3174
+        gdf = gdf.to_crs(epsg=3174)
+        gdf['geometry'] = gdf.geometry.buffer(gdf['radius'])
+        gdf = gdf.to_crs(epsg=4326)
+        return gdf
+
+    def get_area(self, gdf):
+        # the area returned is in meters^2
+        lakes = gpd.read_file("../data/plot/background/water-shp")
+        lakes = lakes.to_crs(epsg=3174)
+        gdf = gdf.to_crs(epsg=3174)
+        return gdf.unary_union.difference(lakes.unary_union).area
 
     def _gen_final_df(self, data_path):
-        stops_df = pd.read_csv(os.path.join(data_path, "stops.csv"), sep=",")
-        trips_df = pd.read_csv(os.path.join(data_path, "trips.csv"), sep=",")
+        mmt_gtfs_path = os.path.join(data_path, "mmt_gtfs")
+        stops_df = pd.read_csv(os.path.join(
+            mmt_gtfs_path, "stops.csv"), sep=",")
+        trips_df = pd.read_csv(os.path.join(
+            mmt_gtfs_path, "trips.csv"), sep=",")
         stopTimes_df = pd.read_csv(os.path.join(
-            data_path, "stop_times.csv"), sep=",")
+            mmt_gtfs_path, "stop_times.csv"), sep=",")
         calendar_df = pd.read_csv(os.path.join(
-            data_path, "calendar.csv"), sep=",")
+            mmt_gtfs_path, "calendar.csv"), sep=",")
 
         # get valid service_ids
         calendar_df['start_date'] = pd.to_datetime(
