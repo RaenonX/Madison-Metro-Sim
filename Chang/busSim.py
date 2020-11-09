@@ -7,14 +7,14 @@ import os
 
 class BusSim:
 
-    def __init__(self, data_path, day, start_time, elapse_time, avg_walking_speed, max_walking_min):
+    def __init__(self, data_path, day, start_time, elapse_time, avg_walking_speed, max_walking_min, route_remove=[]):
         self.day = day
         self.start_time = start_time
         self.elapse_time = elapse_time
         self.avg_walking_speed = avg_walking_speed
         self.max_walking_min = max_walking_min
         self.max_walking_distance = max_walking_min * 60.0 * avg_walking_speed
-        self.stopTimes_final_df = self._gen_final_df(data_path)
+        self.stopTimes_final_df = self._gen_final_df(data_path, route_remove)
         self.graph = Graph(self.stopTimes_final_df, start_time,
                            elapse_time, self.max_walking_distance, avg_walking_speed)
 
@@ -36,7 +36,7 @@ class BusSim:
         gdf = gdf.to_crs(epsg=3174)
         return gdf.unary_union.difference(lakes.unary_union).area
 
-    def _gen_final_df(self, data_path):
+    def _gen_final_df(self, data_path, route_remove):
         mmt_gtfs_path = os.path.join(data_path, "mmt_gtfs")
         stops_df = pd.read_csv(os.path.join(
             mmt_gtfs_path, "stops.csv"), sep=",")
@@ -57,7 +57,9 @@ class BusSim:
         service_ids = calendar_filtered_df["service_id"].tolist()
 
         # get valid trips
-        trips_filtered_df = trips_df[trips_df["service_id"].isin(service_ids)]
+        trips_df = trips_df[trips_df["service_id"].isin(service_ids)]
+        trips_filtered_df = trips_df[~trips_df["route_short_name"].isin(
+            route_remove)]
 
         # get valid stop_times
         stopTimes_filtered_df = trips_filtered_df.merge(
