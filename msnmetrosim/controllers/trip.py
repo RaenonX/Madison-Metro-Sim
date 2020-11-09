@@ -4,7 +4,7 @@ Controller of the MMT GTFS trip data.
 The complete MMT GTFS dataset can be downloaded here:
 http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip
 """
-from typing import List, Dict
+from typing import List, Dict, Set, Union
 
 from msnmetrosim.controllers.base import CSVLoadableController
 from msnmetrosim.models import MMTTrip
@@ -73,6 +73,13 @@ class MMTTripDataController(CSVLoadableController):
             ret[trip.shape_id] = trip
 
         return ret
+
+    def get_trip_ids(self, service_ids: Union[List[str], str]) -> Set[int]:
+        """Get all the trip IDs of service plans ``service_ids``."""
+        if isinstance(service_ids, str):
+            service_ids = [service_ids]
+
+        return {trip.trip_id for service_id in service_ids for trip in self._dict_by_serv_id[service_id]}
 
     def get_all_service_ids(self) -> Dict[str, int]:
         """

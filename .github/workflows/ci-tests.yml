@@ -6,14 +6,10 @@ env:
   TEST_PERFORMANCE_TOLERANCE: 3.0
 
 jobs:
-  pytest:
-    name: Run tests
+  pytest-win:
+    name: Run tests (Windows)
 
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ macos-latest, windows-latest ]
+    runs-on: windows-latest
 
     continue-on-error: true
 
@@ -26,7 +22,34 @@ jobs:
 
       - name: Install required packages
         run: |
-          pip install -r requirements.txt
+          pip install -r requirements-dev-win.txt
+
+      - name: Install pytest
+        run: |
+          pip install pytest
+
+      - name: Run tests
+        run: |
+          pytest
+
+  pytest-mac:
+    name: Run tests (macOS)
+
+    runs-on: macos-latest
+
+    continue-on-error: true
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install required packages
+        run: |
+          brew install gdal
+          pip install -r requirements-dev-mac.txt
 
       - name: Install pytest
         run: |

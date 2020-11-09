@@ -22,6 +22,10 @@
 
 good-names=_,T,f,i,j,k,s,v,dt,ex,fn,tz
 
+[DESIGN]
+
+max-args=10
+
 [FORMAT]
 
 max-line-length=119
