@@ -1,5 +1,5 @@
 # Calculation
-numpy
+numpy==1.19.2
 
 # Map plotting
 folium

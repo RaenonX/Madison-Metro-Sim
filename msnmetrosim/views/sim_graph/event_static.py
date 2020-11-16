@@ -6,7 +6,7 @@ from msnmetrosim.models import MMTStopScheduleSim
 from msnmetrosim.utils import TimeableMixin
 from .event_move import MoveEvent
 
-__all__ = ("StaticPoint", "ScheduledStop", "StopWait")
+__all__ = ("StaticPoint", "ScheduledStop", "StopWait", "StopBase")
 
 
 class StaticPoint(TimeableMixin):
@@ -29,6 +29,16 @@ class StaticPoint(TimeableMixin):
     def coordinate(self) -> Tuple[float, float]:
         """Get the coordinate of the stop."""
         return self._coordinate
+
+    @property
+    def dt_in(self) -> datetime:
+        """Get the timestamp of an agent get into this point."""
+        return self._dt_in
+
+    @property
+    def dt_out(self) -> datetime:
+        """Get the timestamp of an agent get out of this point."""
+        return self._dt_out
 
     def __init__(self, dt_in: datetime, dt_out: datetime, coordinate: Tuple[float, float],
                  next_points: Optional[List[Tuple[MoveEvent, "StaticPoint"]]] = None):
@@ -60,6 +70,11 @@ class StopBase(StaticPoint):
     """
 
     @property
+    def trip_id(self) -> int:
+        """Get the trip ID."""
+        return self._stop_sim.trip_id
+
+    @property
     def stop_id(self) -> int:
         """Get the stop ID."""
         return self._stop_sim.stop_id
@@ -81,6 +96,10 @@ class StopBase(StaticPoint):
 
     def __repr__(self):
         return self.__str__()
+
+    def is_same_stop(self, other: StaticPoint):
+        """Check if ``other`` is the same stop as this stop by checking the type of ``other`` and its stop ID."""
+        return isinstance(other, StopBase) and other.stop_id == self.stop_id
 
 
 class ScheduledStop(StopBase):

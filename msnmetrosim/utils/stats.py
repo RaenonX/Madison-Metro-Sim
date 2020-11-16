@@ -36,7 +36,7 @@ class DataMetrics:
 
     def get_quantile_cdf(self, n: int) -> Tuple[List[float], List[float]]:  # pylint: disable=invalid-name
         """
-        Same as ``get_quantile()``, but the return will be ``(X_ARRAY, Y_ARRAY)`` for easier plotting.
+        Same as ``get_quantile()``, but the return will be ``(X_ARRAY, Y_ARRAY)`` for plotting.
 
         Y will be 0 <= x <= 1, and it will always starts from 0 and ends at 1.
         """

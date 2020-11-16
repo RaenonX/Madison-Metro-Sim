@@ -145,8 +145,32 @@ class MMTStopScheduleController(CSVLoadableController):
         # Blocks to selectively included
         end_time = start_dt + timedelta(seconds=time_range)
 
+        # --- Find the next stop and add it if exists
+
+        # Cache to store the converted next :class:`MMTStopScheduleSim`
+        # Key is (trip_id, stop_sequence), value is the next stop for the corresponding stop
+        next_cache: Dict[Tuple[int, int]] = {}
+
+        # In-line function to fill the next stop cache
+        def fill_next_cache(tid, seq):
+            if seq >= self._by_trip_len[tid]:
+                return None
+
+            next_raw = self._by_trip_id[tid][seq]
+
+            # Check if the arrival time is in the range
+            next_sim = fill_next_cache(tid, seq + 1)
+            next_cache[(tid, seq)] = MMTStopScheduleSim.from_raw(next_raw, start_dt.date(), next_stop=next_sim)
+
+            return next_sim
+
         for data in self._get_stop_schedules(end_time.hour, trip_ids):
-            schedule_sim = MMTStopScheduleSim.from_raw(data, end_time.date())
+            cache_key = (data.trip_id, data.stop_sequence)
+
+            if cache_key not in next_cache:
+                fill_next_cache(data.trip_id, data.stop_sequence)
+
+            schedule_sim = MMTStopScheduleSim.from_raw(data, end_time.date(), next_stop=next_cache.get(cache_key))
             if schedule_sim.arrival_time <= end_time:
                 ret.append(schedule_sim)
 

@@ -1,38 +1,14 @@
 """Classes for the simluation map containing stop schedules at a moment."""
-from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import List, Optional
 
 from msnmetrosim.controllers import (
     MMTCalendarController, MMTStopScheduleController, MMTTripDataController, MMTStopDataController
 )
+from .config import StaticPointConfig
 from .event_static import StaticPoint, ScheduledStop
 
-__all__ = ("SimulationStaticPoints", "StaticPointConfig")
-
-
-@dataclass
-class StaticPointConfig:
-    """
-    Configurations for initializing simulation static points.
-
-    ``start_dt`` is the starting time in the simulation. This is **NOT** the simulation execution starting time.
-
-    ``max_travel_time`` is the maximum travel time for the whole trip in seconds.
-    """
-
-    start_dt: datetime
-
-    max_travel_time: float
-
-    @property
-    def end_dt(self) -> datetime:
-        """
-        Get the ending time in the simulation.
-
-        This is **NOT** the simulation execution ending time.
-        """
-        return self.start_dt + timedelta(seconds=self.max_travel_time)
+__all__ = ("SimulationStaticPoints",)
 
 
 class SimulationStaticPoints:

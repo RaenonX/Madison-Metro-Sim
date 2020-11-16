@@ -16,23 +16,27 @@ def test_run():
     # Configure the simulation
     config_points = StaticPointConfig(
         start_dt=datetime(2020, 9, 2, 15),
-        max_travel_time=1800
+        max_travel_time=2700
     )
     config_sim = SimulationConfig(
         start_coord=(43.069451, -89.401168),
-        bus_speed=30,
+        prune_non_sense=True,
         walk_speed=4.2,
         max_walk_distance=1,
         max_wait_time=900
     )
 
     # Generate static points and the simulation map
+    print("Generating the points...")
     sim_points = SimulationStaticPoints(config_points, ctrl_calendar, ctrl_stops, ctrl_stop_schedule, ctrl_trips)
+    print("Generating the map...")
     sim_map = SimulationMap(config_sim, sim_points, ctrl_stops)
 
     # Get the possible paths
-    possible_paths = sim_map.get_possible_paths()
+    print("Getting possible paths...")
+    possible_paths = sim_map.get_possible_paths_top_down().paths
 
+    print()
     print(f"The map contains {sim_map.point_count} points. There are {len(possible_paths)} possible paths.")
     print()
 

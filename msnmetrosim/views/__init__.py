@@ -5,5 +5,6 @@ from .mapgen import (
 )
 from .rm_stop import *  # noqa
 from .sim_benchmark import *  # noqa
+from .sim_graph import SimulationMap
 from .simulate import test_run
 from .stop import get_stops_without_ridership, get_distance_to_stop

@@ -1,51 +1,145 @@
 """Main simulation map."""
-from dataclasses import dataclass
+from collections import Counter
+from dataclasses import dataclass, field
 from datetime import timedelta, datetime
-from typing import Tuple, Set, Dict, List, Optional
+from typing import Set, Dict, List, Optional, Counter as CounterType
 
 from msnmetrosim.controllers import MMTStopDataController
 from msnmetrosim.models import MMTStop
-from msnmetrosim.utils import travel_time, distance, DataMetrics
+from msnmetrosim.utils import travel_time, distance, normalize_cumulate_vector, DataMetrics
+from .config import SimulationConfig, PathDiscoveryConfig
 from .event_move import MoveEvent, MoveEventType
 from .event_static import StaticPoint, ScheduledStop, StopWait
 from .map_points import SimulationStaticPoints
-from .path import SimPath
+from .path import SimPath, PathDiscoveryResult as SimPathDiscoveryResult
 
-__all__ = ("SimulationMap", "SimulationConfig")
+__all__ = ("SimulationMap", "PathDiscoveryResult")
 
 
 @dataclass
-class SimulationConfig:
-    """
-    Configuration for a simulation.
+class PathDiscoveryResult:
+    """Result of the path discovery of a :class:`SimulationMap`."""
 
-    ``start_coord`` is the coordinate where the simulation starts.
+    # pylint: disable=too-many-instance-attributes
 
-    For movement event - bus trip
-    =============================
-    ``bus_speed`` is the bus traveling speed in **km/h**.
+    paths: List[SimPath] = field(default_factory=list)
+    path_move_distribution: CounterType[MoveEventType] = field(default_factory=Counter)
+    trip_count_distribution: CounterType[int] = field(default_factory=Counter)
 
-    For movement event - walk
-    =========================
-    ``walk_speed`` is the walking speed of an agent in **km/h**.
-    ``max_walk_distance`` is the distance that an agent will walk to a stop in **km**.
+    count_discovered: int = 0
+    count_frontier: int = 0
 
-    For movement event - wait
-    =========================
-    ``max_wait_time`` is the maximum wait time at a single stop in **seconds**.
-    """
+    total_pruned: int = 0
+    total_detoured: int = -1  # -1 means not completed. This will only being updated upon completed (attach_path)
 
-    start_coord: Tuple[float, float]
+    prev_discovered: int = field(init=False, default=0)
+    prev_frontier: int = field(init=False, default=0)
 
-    # Movement - bus trip
-    bus_speed: float
+    @property
+    def trip_count_distribution_cdf(self):
+        """Get the trip count distribution as CDF data in ``(X_ARRAY, Y_ARRAY)`` for plotting."""
+        x_array = list(range(max(self.trip_count_distribution) + 1))
+        y_array = [self.trip_count_distribution[trip_count] for trip_count in x_array]
 
-    # Movement - walk
-    walk_speed: float
-    max_walk_distance: float
+        return x_array, normalize_cumulate_vector(y_array)
 
-    # Movement - wait
-    max_wait_time: float
+    def __repr__(self):
+        edge_count = sum(self.path_move_distribution.values())
+
+        struct_entries = [f'- {move_event}: {count} ({count / edge_count:.2%})'
+                          for move_event, count in self.path_move_distribution.items()]
+        struct_str = '\n'.join(struct_entries)
+
+        return (f"{self.count_discovered} paths discovered.\t"
+                f"{self.total_pruned} paths pruned.\t"
+                f"{self.total_detoured} paths are detouring.\n"
+                "------------------------------------------\n"
+                f"Move event ratio:\n{struct_str}")
+
+    def print_result(self, in_progress: bool = True):
+        """Print the result. ``in_progress`` indicates if the discovery is still in progress."""
+        if in_progress:
+            self.print_in_progress()
+        else:
+            self.print_completed()
+
+    def print_in_progress(self):
+        """Print method to be called if the discovery is still in progress."""
+        print(f"{self.count_discovered} paths discovered.\t"
+              f"{self.count_frontier} paths in the frontier.\t"
+              f"{self.count_discovered + self.count_frontier} paths guaranteed to be returned.\t"
+              f"{self.total_pruned} paths pruned.")
+
+    def print_completed(self):
+        """Print method to be called if the discovery is completed."""
+        print(self)
+
+    def complete(self, paths: List[SimPath]):
+        """
+        Method to be called upon completion.
+
+        This method will record the ``paths`` discovered and update some statistical parameters.
+        """
+        self.paths = paths
+
+        self.count_discovered = len(paths)
+        self.count_frontier = 0
+
+        # Update path moving structure
+        for path in paths:
+            self.path_move_distribution.update(path.event_counter)
+            self.trip_count_distribution[path.trip_count] += 1
+
+        # Update detouring count
+        self.total_detoured = sum(path.detouring for path in self.paths)
+
+    def update(self, result: SimPathDiscoveryResult):
+        """
+        Update the path discovery result.
+
+        This should be executed for each sim path discovery.
+        """
+        self.total_pruned += result.pruned
+
+    def update_print(self, discovered: int, frontier: int, result: SimPathDiscoveryResult):
+        """
+        Update the path discovery result and print the result.
+
+        This should be executed each time the result should be printed.
+
+        The updated things are **not** overlapped with ``update()``, which means that if the result
+        should be updated and printed, both this method and ``update()`` should be called.
+        """
+        self.prev_discovered = self.count_discovered
+        self.prev_frontier = self.count_frontier
+
+        self.count_discovered = discovered
+        self.count_frontier = frontier
+
+        self.total_pruned += result.pruned
+
+        self.print_result(in_progress=True)
+
+    @property
+    def code_stats(self) -> str:
+        """
+        Get the code to recover this result for statistical purposes.
+
+        The code assumes the discovery has been completed, and no actual paths will be included.
+        """
+        move_counter_item_str = [f"MoveEventType.{event_type.name}: {count}"
+                                 for event_type, count in self.path_move_distribution.items()]
+        move_counter = f"Counter({{{', '.join(move_counter_item_str)}}})"
+
+        trip_counter_item_str = [f'{trip_count}: {path_count}'
+                                 for trip_count, path_count in self.trip_count_distribution.items()]
+        trip_counter = f"Counter({{{', '.join(trip_counter_item_str)}}})"
+
+        return f"PathDiscoveryResult(" \
+               f"path_move_distribution={move_counter}, trip_count_distribution={trip_counter}, " \
+               f"count_discovered={self.count_discovered}, " \
+               f"total_pruned={self.total_pruned}, total_detoured={self.total_detoured}" \
+               f")"
 
 
 class SimulationMap:
@@ -69,8 +163,7 @@ class SimulationMap:
         return self._point_count
 
     def _init_frontier_sequential(self, start_dt: datetime, end_dt: datetime, stop: ScheduledStop,
-                                  config: SimulationConfig, static_points: SimulationStaticPoints,
-                                  ctrl_stop: MMTStopDataController) \
+                                  static_points: SimulationStaticPoints, ctrl_stop: MMTStopDataController) \
             -> Dict[int, ScheduledStop]:
         ret: Dict[int, ScheduledStop] = {}
 
@@ -83,10 +176,14 @@ class SimulationMap:
                 # Unit in speed is km/h, but the distance traveled here is mile
                 move_dist = (next_stop.shape_dist_traveled - stop.stop_sim.shape_dist_traveled) * 1.609
 
-                trip_event = MoveEvent(MoveEventType.BUS_TRIP, travel_time(config.bus_speed, move_dist), move_dist)
+                trip_event = MoveEvent(
+                    MoveEventType.BUS_TRIP,
+                    (next_scheduled_stop.dt_in - stop.dt_out).total_seconds(),
+                    move_dist
+                )
 
                 stop.add_next_point(trip_event, next_scheduled_stop)
-                self._point_count += 2
+                self._point_count += 1
                 ret[id(next_scheduled_stop)] = next_scheduled_stop
 
         return ret
@@ -105,12 +202,8 @@ class SimulationMap:
 
             if 0 < wait_time < config.max_wait_time:
                 # The agent wait at the same place and ready to take the next bus
-                stop_wait = StopWait(stop.stop_sim.arrival_time, scheduled_stop.stop_sim.arrival_time,
-                                     stop.stop_sim, stop.coordinate)
-
-                stop.add_next_point(MoveEvent(MoveEventType.WALK, 0, 0), stop_wait)
-                stop_wait.add_next_point(MoveEvent(MoveEventType.WAIT, wait_time, 0), scheduled_stop)
-                self._point_count += 2
+                stop.add_next_point(MoveEvent(MoveEventType.WAIT, wait_time, 0), scheduled_stop)
+                self._point_count += 1
 
                 ret[id(scheduled_stop)] = scheduled_stop
 
@@ -177,8 +270,11 @@ class SimulationMap:
         start_dt = stop.stop_sim.departure_time
         end_dt = static_points.config.end_dt
 
+        # Path discovery pruning will not be performed here.
+        # Instead, the pruning process will be executed during ``get_possible_paths_top_down()``.
+
         # Sequential (on bus to next)
-        ret.update(self._init_frontier_sequential(start_dt, end_dt, stop, config, static_points, ctrl_stop))
+        ret.update(self._init_frontier_sequential(start_dt, end_dt, stop, static_points, ctrl_stop))
 
         # Wait until the next bus
         ret.update(self._init_frontier_wait(start_dt, end_dt, stop, config, static_points))
@@ -227,12 +323,19 @@ class SimulationMap:
 
         self._point_count = 1  # For statistical purpose only
 
+        self._config = config
+
         # Get the starting stops of the simulation
         frontier: Dict[int, StaticPoint] = self._init_starting_frontier(config, static_points, ctrl_stop)
         frontier_past: Set[int] = set(frontier.keys())
 
+        counter: int = 0  # For progress reporting
+
         # Generate other edges
         while frontier:
+            if counter % 20 == 0:  # Report every 20 iterations
+                print(f"Generating the map... (#{counter} / {len(frontier)} in frontier)")
+
             _, stop = frontier.popitem()
 
             if isinstance(stop, ScheduledStop):
@@ -245,27 +348,67 @@ class SimulationMap:
                 frontier_past.update(frontiers.keys())  # Record that the frontiers are traversed
                 frontier.update(frontiers)
 
+            counter += 1
+
     def __str__(self):
         return f"<Simulation map: {self._point_count}>"
 
     def __repr__(self):
         return str(self)
 
-    def get_possible_paths(self) -> List[SimPath]:
-        """Get all possible paths of the map."""
+    def get_possible_paths_top_down(self, /, config: Optional[PathDiscoveryConfig] = None) \
+            -> PathDiscoveryResult:
+        """
+        Get all possible paths of the map.
+
+        Path discovery will be executed top-down, which means that the path discovery starts from the root.
+
+        Advantages:
+
+        - All paths are guaranteed to be found.
+
+        Disadvantages:
+
+        - Expensive.
+
+        :param config: path discovery config
+        """
+        discovery_result = PathDiscoveryResult()
+
+        # Build config
+        if not config:
+            config = PathDiscoveryConfig()
+        config.update_with_sim_config(self._config)
+
         # BFS is used
         ret: List[SimPath] = []
         cur: List[SimPath] = [SimPath.from_single_point(self._start)]
 
+        counter = 0  # Iteration counter
+
         while cur:
             cur_path = cur.pop(0)
 
-            if next_paths := cur_path.get_possible_next_paths():
-                cur.extend(next_paths)
+            # Find paths
+            result = cur_path.get_possible_next_paths(config)
+
+            # Add paths
+            if result.paths:
+                cur.extend(result.paths)
             else:
                 ret.append(cur_path)
 
-        return ret
+            # Progress reporting
+            discovery_result.update(result)
+
+            if counter % 2000 == 0:
+                discovery_result.update_print(len(ret), len(cur), result)
+            counter += 1
+
+        # Attach paths to the result to be returned
+        discovery_result.complete(ret)
+
+        return discovery_result
 
     @staticmethod
     def distance_metrics(paths: List[SimPath], /, name: Optional[str] = None) -> DataMetrics:

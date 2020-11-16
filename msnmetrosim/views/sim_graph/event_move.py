@@ -44,7 +44,7 @@ class MoveEvent(TimeableMixin):
         return self.event_time
 
     def __str__(self):
-        return f"<Move - {self.event_type} - {self.traveled_dist} km in {self.event_time} secs>"
+        return f"<Move - {self.event_type} - {self.traveled_dist:.3f} km in {self.event_time:.2f} secs>"
 
     def __repr__(self):
         return self.__str__()
