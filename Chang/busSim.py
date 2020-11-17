@@ -7,14 +7,51 @@ import os
 
 class BusSim:
 
-    def __init__(self, data_path, day, start_time, elapse_time, avg_walking_speed, max_walking_min, route_remove=[]):
+    def __init__(
+        self,
+        data_path,
+        day,
+        start_time,
+        elapse_time,
+        avg_walking_speed,
+        max_walking_min,
+        route_remove=[],
+        trip_delays=[]
+    ):
+        """The constructor of the BusSim class
+
+        Args:
+            data_path (str): The path to the directory of the data files
+                (contains both mmt_gtfs and plot subdirectories)
+
+            day (str): the day in a week to perform simulation on
+
+            start_time (str): the starting time to perform simulation on
+                (HH:MM:SS)
+
+            elapse_time (str): the elapse time from starting time to perform
+                simulation on (HH:MM:SS)
+
+            avg_walking_speed (float): the assumed average walking speed
+
+            max_walking_min (float): the maximum allowed walking time minutes
+
+            route_remove (:obj:`list` of :obj:`int`, optional): the list
+                of routes to remove
+
+            trip_delays (:obj:`list` of :obj:`Tuple`, optional): the list
+                of trip-delay pairs to add the tuple should be in the format of
+                `(trip_id, delay in HH:MM:SS)`
+
+        """
+        self.data_path = data_path
         self.day = day
         self.start_time = start_time
         self.elapse_time = elapse_time
         self.avg_walking_speed = avg_walking_speed
         self.max_walking_min = max_walking_min
         self.max_walking_distance = max_walking_min * 60.0 * avg_walking_speed
-        self.stopTimes_final_df = self._gen_final_df(data_path, route_remove)
+        self.stopTimes_final_df = self._gen_final_df(route_remove, trip_delays)
         self.graph = Graph(self.stopTimes_final_df, start_time,
                            elapse_time, self.max_walking_distance, avg_walking_speed)
 
@@ -31,13 +68,15 @@ class BusSim:
 
     def get_area(self, gdf):
         # the area returned is in meters^2
-        lakes = gpd.read_file("../data/plot/background/water-shp")
+        lake_path = os.path.join(
+            self.data_path, "plot", "background", "water-shp")
+        lakes = gpd.read_file(lake_path)
         lakes = lakes.to_crs(epsg=3174)
         gdf = gdf.to_crs(epsg=3174)
         return gdf.unary_union.difference(lakes.unary_union).area
 
-    def _gen_final_df(self, data_path, route_remove):
-        mmt_gtfs_path = os.path.join(data_path, "mmt_gtfs")
+    def _gen_final_df(self, route_remove, trip_delays):
+        mmt_gtfs_path = os.path.join(self.data_path, "mmt_gtfs")
         stops_df = pd.read_csv(os.path.join(
             mmt_gtfs_path, "stops.csv"), sep=",")
         trips_df = pd.read_csv(os.path.join(
@@ -58,6 +97,8 @@ class BusSim:
 
         # get valid trips
         trips_df = trips_df[trips_df["service_id"].isin(service_ids)]
+
+        # remove routes
         trips_filtered_df = trips_df[~trips_df["route_short_name"].isin(
             route_remove)]
 
@@ -82,6 +123,11 @@ class BusSim:
             stopTimes_merged_df.arrival_time.str.replace('29', '05')
         stopTimes_merged_df['arrival_time'] = pd.to_timedelta(
             stopTimes_merged_df['arrival_time'])
+
+        # add trip_delays
+        for (trip_id, delay) in trip_delays:
+            stopTimes_merged_df.loc[stopTimes_merged_df["trip_id"]
+                                    == trip_id, "arrival_time"] += pd.to_timedelta(delay)
 
         stopTimes_final_df = self._get_valid_stopTime(
             stopTimes_merged_df, self.start_time, self.elapse_time).sort_values(by="arrival_time")
