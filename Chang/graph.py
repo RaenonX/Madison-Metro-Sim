@@ -1,5 +1,6 @@
 from datetime import timedelta
-from math import sin, cos, asin, sqrt, pi
+from math import sin, cos, asin, sqrt, pi, ceil, floor
+from collections import defaultdict
 import heapq
 import pandas as pd
 import geopandas as gpd
@@ -66,7 +67,7 @@ class Graph:
         self.max_walking_distance = max_walking_distance
         self.avg_walking_speed = avg_walking_speed
         self.nodes = []
-        self._constuct_graph()
+        self._constuct_graph(max_walking_distance)
 
     def get_gdf(self, start_stop):
         start = self._find_start(start_stop)
@@ -116,40 +117,77 @@ class Graph:
                     child.walking_distance = distance
                     heapq.heappush(pq, (distance, child))
 
-    def _constuct_graph(self):
+    def _constuct_graph(self, max_walking_distance):
         # gen nodes
+        trip_node_dict = defaultdict(list)
+        stop_node_dict = defaultdict(list)
+
+        map_grid = []
+        lat_stepsize = max_walking_distance / 11.1 * 0.0001
+        lon_stepsize = max_walking_distance / 8.1 * 0.0001
+        min_lat = self.df.stop_lat.min()
+        max_lat = self.df.stop_lat.max()
+        min_lon = self.df.stop_lon.min()
+        max_lon = self.df.stop_lon.max()
+
+        lat_num = ceil((max_lat - min_lat) / lat_stepsize)
+        lon_num = ceil((max_lon - min_lon) / lon_stepsize)
+        for i in range(lat_num):
+            lat_list = []
+            for j in range(lon_num):
+                lat_list.append([])
+            map_grid.append(lat_list)
+
         for index, row in self.df.iterrows():
             node = Node(row["trip_id"], row["stop_sequence"], row["stop_id"], row["stop_lat"],
                         row["stop_lon"], row["arrival_time"], self.max_walking_distance)
             self.nodes.append(node)
+            trip_node_dict[row["trip_id"]].append(node)
+            stop_node_dict[row["stop_id"]].append(node)
+            lat_bucket = floor((row["stop_lat"] - min_lat) / lat_stepsize)
+            lon_bucket = floor((row["stop_lon"] - min_lon) / lon_stepsize)
+            map_grid[lat_bucket][lon_bucket].append(node)
 
         # gen edges
-        for start in self.nodes:
-            for end in self.nodes:
-                # unreachable for sure (can't go back in time)
-                if start.arrival_time >= end.arrival_time:
-                    continue
+        # direct sequence
+        for trip_id, nodes in trip_node_dict.items():
+            for i in range(len(nodes)-1):
+                start = nodes[i]
+                end = nodes[i+1]
+                nodeCostPair = NodeCostPair(end, 0)
+                start.children.append(nodeCostPair)
 
-                # direct sequence
-                if start.trip_id == end.trip_id:
-                    if start.stop_sequence == end.stop_sequence - 1:
-                        nodeCostPair = NodeCostPair(end, 0)
-                        start.children.append(nodeCostPair)
-                    continue
-
-                # wait on the stop
-                if start.stop_id == end.stop_id:
+        # wait on the stop
+        for stop_id, nodes in stop_node_dict.items():
+            for i in range(len(nodes)):
+                for j in range(i+1, len(nodes)):
+                    start = nodes[i]
+                    end = nodes[j]
                     nodeCostPair = NodeCostPair(end, 0)
                     start.children.append(nodeCostPair)
-                    continue
 
-                # walk
-                distance = start.distance(end)
-                time_delta = distance / self.avg_walking_speed
-                time_delta = timedelta(seconds=time_delta)
-                if distance < self.max_walking_distance and start.arrival_time + time_delta < end.arrival_time:
-                    nodeCostPair = NodeCostPair(end, distance)
-                    start.children.append(nodeCostPair)
+        # walk
+        for lat in range(lat_num):
+            for lon in range(lon_num):
+                start_bucket = map_grid[lat][lon]
+                end_buckets = []
+                for lat_end in range(max(0, lat-1), min(lat_num, lat+2)):
+                    for lon_end in range(max(0, lon-1), min(lon_num, lon+2)):
+                        end_buckets.append(map_grid[lat_end][lon_end])
+
+                for start in start_bucket:
+                    for end_bucket in end_buckets:
+                        for end in end_bucket:
+                            if start.arrival_time >= end.arrival_time:
+                                continue
+
+                            # walk
+                            distance = start.distance(end)
+                            time_delta = distance / self.avg_walking_speed
+                            time_delta = timedelta(seconds=time_delta)
+                            if distance < self.max_walking_distance and start.arrival_time + time_delta < end.arrival_time:
+                                nodeCostPair = NodeCostPair(end, distance)
+                                start.children.append(nodeCostPair)
 
     def _find_start(self, start_stop):
         start = None
