@@ -1,0 +1,280 @@
+Path discovery result (top-down)
+945929 paths discovered.    1178798 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 4731621 (21.54%)
+- MoveEventType.WAIT: 4731621 (21.54%)
+- MoveEventType.BUS_TRIP: 12500697 (56.91%)
+
+================================================== RESULTS ==================================================
+
+==================== Max transfer = 0
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 47
+- T point generation: 0.025930 secs
+- T map generation: 16.330218 secs
+- T path generation (top-down): 0.059839 secs
+- T map action: 0.000000 secs
+- T total: 16.356148 secs
+- T for each point: 0.001419 secs
+- T for each path: 0.001273 secs
+
+# Path discovery result (top-down)
+
+47 paths discovered.    644 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 47 (8.44%)
+- MoveEventType.WAIT: 47 (8.44%)
+- MoveEventType.BUS_TRIP: 463 (83.12%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 47, MoveEventType.WAIT: 47, MoveEventType.BUS_TRIP: 463}), trip_count_distribution=Counter({1: 47}), count_discovered=47, total_pruned=644, total_detoured=0), 0.025929927825927734, 16.330217599868774, 0.05983877182006836, 0)
+
+==================== Max transfer = 1
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 3781
+- T point generation: 0.024965 secs
+- T map generation: 18.837224 secs
+- T path generation (top-down): 3.009407 secs
+- T map action: 0.000000 secs
+- T total: 18.862190 secs
+- T for each point: 0.001637 secs
+- T for each path: 0.000796 secs
+
+# Path discovery result (top-down)
+
+3781 paths discovered.    20114 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 8832 (9.62%)
+- MoveEventType.WAIT: 8832 (9.62%)
+- MoveEventType.BUS_TRIP: 74170 (80.77%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 8832, MoveEventType.WAIT: 8832, MoveEventType.BUS_TRIP: 74170}), trip_count_distribution=Counter({1: 10, 2: 3771}), count_discovered=3781, total_pruned=20114, total_detoured=0), 0.024965286254882812, 18.83722448348999, 3.009406805038452, 0)
+
+==================== Max transfer = 2
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 51083
+- T point generation: 0.042885 secs
+- T map generation: 22.999388 secs
+- T path generation (top-down): 32.787349 secs
+- T map action: 0.000000 secs
+- T total: 23.042272 secs
+- T for each point: 0.002000 secs
+- T for each path: 0.000642 secs
+
+# Path discovery result (top-down)
+
+51083 paths discovered.    183622 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 153299 (13.91%)
+- MoveEventType.WAIT: 153299 (13.91%)
+- MoveEventType.BUS_TRIP: 795523 (72.18%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 153299, MoveEventType.WAIT: 153299, MoveEventType.BUS_TRIP: 795523}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 48926}), count_discovered=51083, total_pruned=183622, total_detoured=0), 0.04288458824157715, 22.999387502670288, 32.787349224090576, 0)
+
+==================== Max transfer = 3
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 256166
+- T point generation: 0.296179 secs
+- T map generation: 22.393416 secs
+- T path generation (top-down): 92.970933 secs
+- T map action: 0.000000 secs
+- T total: 22.689595 secs
+- T for each point: 0.001969 secs
+- T for each path: 0.000363 secs
+
+# Path discovery result (top-down)
+
+256166 paths discovered.    628151 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 969644 (17.61%)
+- MoveEventType.WAIT: 969644 (17.61%)
+- MoveEventType.BUS_TRIP: 3565491 (64.77%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 969644, MoveEventType.WAIT: 969644, MoveEventType.BUS_TRIP: 3565491}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 35320, 4: 218689}), count_discovered=256166, total_pruned=628151, total_detoured=0), 0.29617905616760254, 22.39341640472412, 92.97093272209167, 0)
+
+==================== Max transfer = 4
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 556526
+- T point generation: 1.203755 secs
+- T map generation: 25.617624 secs
+- T path generation (top-down): 210.402379 secs
+- T map action: 0.000000 secs
+- T total: 26.821379 secs
+- T for each point: 0.002327 secs
+- T for each path: 0.000378 secs
+
+# Path discovery result (top-down)
+
+556526 paths discovered.    1022982 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 2444598 (20.14%)
+- MoveEventType.WAIT: 2444598 (20.14%)
+- MoveEventType.BUS_TRIP: 7246476 (59.71%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 2444598, MoveEventType.WAIT: 2444598, MoveEventType.BUS_TRIP: 7246476}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 35320, 4: 175639, 5: 343410}), count_discovered=556526, total_pruned=1022982, total_detoured=0), 1.2037553787231445, 25.617623567581177, 210.4023790359497, 0)
+
+==================== Max transfer = 5
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 794439
+- T point generation: 0.040891 secs
+- T map generation: 19.290058 secs
+- T path generation (top-down): 307.701277 secs
+- T map action: 0.000000 secs
+- T total: 19.330949 secs
+- T for each point: 0.001677 secs
+- T for each path: 0.000387 secs
+
+# Path discovery result (top-down)
+
+794439 paths discovered.    1130568 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 3794449 (21.10%)
+- MoveEventType.WAIT: 3794449 (21.10%)
+- MoveEventType.BUS_TRIP: 10393059 (57.80%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 3794449, MoveEventType.WAIT: 3794449, MoveEventType.BUS_TRIP: 10393059}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 35320, 4: 175639, 5: 293719, 6: 287604}), count_discovered=794439, total_pruned=1130568, total_detoured=0), 0.040891408920288086, 19.29005789756775, 307.7012765407562, 0)
+
+==================== Max transfer = 6
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 900648
+- T point generation: 0.048202 secs
+- T map generation: 23.616358 secs
+- T path generation (top-down): 377.644781 secs
+- T map action: 0.000000 secs
+- T total: 23.664560 secs
+- T for each point: 0.002054 secs
+- T for each path: 0.000419 secs
+
+# Path discovery result (top-down)
+
+900648 paths discovered.    1165624 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 4438954 (21.40%)
+- MoveEventType.WAIT: 4438954 (21.40%)
+- MoveEventType.BUS_TRIP: 11862588 (57.20%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 4438954, MoveEventType.WAIT: 4438954, MoveEventType.BUS_TRIP: 11862588}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 35320, 4: 175639, 5: 293719, 6: 270471, 7: 123342}), count_discovered=900648, total_pruned=1165624, total_detoured=0), 0.0482020378112793, 23.616357564926147, 377.64478063583374, 0)
+
+==================== Max transfer = 7
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 927469
+- T point generation: 0.041916 secs
+- T map generation: 20.389803 secs
+- T path generation (top-down): 384.189475 secs
+- T map action: 0.000000 secs
+- T total: 20.431719 secs
+- T for each point: 0.001773 secs
+- T for each path: 0.000414 secs
+
+# Path discovery result (top-down)
+
+927469 paths discovered.    1177843 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 4607771 (21.48%)
+- MoveEventType.WAIT: 4607771 (21.48%)
+- MoveEventType.BUS_TRIP: 12233542 (57.04%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 4607771, MoveEventType.WAIT: 4607771, MoveEventType.BUS_TRIP: 12233542}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 35320, 4: 175639, 5: 293719, 6: 270471, 7: 118154, 8: 32009}), count_discovered=927469, total_pruned=1177843, total_detoured=0), 0.0419161319732666, 20.389803171157837, 384.1894745826721, 0)
+
+==================== Max transfer = 8
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 941398
+- T point generation: 0.043916 secs
+- T map generation: 18.575807 secs
+- T path generation (top-down): 370.374887 secs
+- T map action: 0.000000 secs
+- T total: 18.619722 secs
+- T for each point: 0.001616 secs
+- T for each path: 0.000393 secs
+
+# Path discovery result (top-down)
+
+941398 paths discovered.    1178803 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 4700765 (21.53%)
+- MoveEventType.WAIT: 4700765 (21.53%)
+- MoveEventType.BUS_TRIP: 12434395 (56.94%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 4700765, MoveEventType.WAIT: 4700765, MoveEventType.BUS_TRIP: 12434395}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 35320, 4: 175639, 5: 293719, 6: 270471, 7: 118154, 8: 29729, 9: 16209}), count_discovered=941398, total_pruned=1178803, total_detoured=0), 0.043915510177612305, 18.575806617736816, 370.37488651275635, 0)
+
+==================== Max transfer = 9
+
+Benchmarking result @ travel time = 2700 secs
+
+# Summary
+
+- Map point #: 11524
+- Map path # (top-down): 945929
+- T point generation: 0.039893 secs
+- T map generation: 18.374258 secs
+- T path generation (top-down): 387.385141 secs
+- T map action: 0.000000 secs
+- T total: 18.414151 secs
+- T for each point: 0.001598 secs
+- T for each path: 0.000410 secs
+
+# Path discovery result (top-down)
+
+945929 paths discovered.    1178798 paths pruned.    0 paths are detouring.
+------------------------------------------
+Move event ratio:
+- MoveEventType.WALK: 4731621 (21.54%)
+- MoveEventType.WAIT: 4731621 (21.54%)
+- MoveEventType.BUS_TRIP: 12500697 (56.91%)
+
+Easycode: BenchmarkResult(2700, 11524, PathDiscoveryResult(path_move_distribution=Counter({MoveEventType.WALK: 4731621, MoveEventType.WAIT: 4731621, MoveEventType.BUS_TRIP: 12500697}), trip_count_distribution=Counter({1: 10, 2: 2147, 3: 35320, 4: 175639, 5: 293719, 6: 270471, 7: 118154, 8: 29729, 9: 16042, 10: 4698}), count_discovered=945929, total_pruned=1178798, total_detoured=0), 0.039893150329589844, 18.374257564544678, 387.38514137268066, 0)
+Time spent: 2378593.957 ms

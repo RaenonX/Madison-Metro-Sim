@@ -141,7 +141,7 @@ class SimPath:
 
         Check the documentation of :class:`SimulationConfig` for the definition of detouring.
         """
-        return self.traveled_distance > self.displacement * 2
+        return self.traveled_distance > self.displacement * 3
 
     @property
     def event_counter(self) -> Counter:

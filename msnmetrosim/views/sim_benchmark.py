@@ -71,7 +71,7 @@ class BenchmarkResult:
     @property
     def t_total(self) -> float:
         """Get the total time spent on the whole simulation process in seconds."""
-        return self.t_gen_static + self.t_gen_map + self.t_map_action
+        return self.t_gen_static + self.t_gen_map + self.t_path_top_down + self.t_map_action
 
     @property
     def t_each_point(self) -> float:
