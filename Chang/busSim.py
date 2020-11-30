@@ -55,8 +55,8 @@ class BusSim:
         self.graph = Graph(self.stopTimes_final_df, start_time,
                            elapse_time, self.max_walking_distance, avg_walking_speed)
 
-    def get_gdf(self, start_stop):
-        gdf = self.graph.get_gdf(start_stop)
+    def get_gdf(self, start_stop=None, start_point=None):
+        gdf = self.graph.get_gdf(start_stop, start_point)
 
         gdf['geometry_centriod'] = gdf.geometry
 
