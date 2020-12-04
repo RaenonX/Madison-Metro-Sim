@@ -202,8 +202,8 @@ class Graph:
                 if start is None or node.arrival_time < start.arrival_time:
                     start = node
 
-        start.walking_distance = 0
-        return start
+        start_point = (start.stop_lat, start.stop_lon)
+        return self._find_start_point(start_point)
 
     def _find_start_point(self, start_point):
         lat, lon = start_point
