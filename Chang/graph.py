@@ -196,14 +196,10 @@ class Graph:
             return self._find_start_point(start_point)
 
     def _find_start_stop(self, start_stop):
-        start = None
         for node in self.nodes:
             if node.stop_id == start_stop:
-                if start is None or node.arrival_time < start.arrival_time:
-                    start = node
-
-        start_point = (start.stop_lat, start.stop_lon)
-        return self._find_start_point(start_point)
+                start_point = (node.stop_lat, node.stop_lon)
+                return self._find_start_point(start_point)
 
     def _find_start_point(self, start_point):
         lat, lon = start_point
