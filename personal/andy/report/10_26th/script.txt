@@ -15,7 +15,7 @@ However, ridership in Madison also fluctuates more than others because school se
 boardings.
 
 
-In WI overall, ridership is 6.7% lower in July than January on average;
+In WI overall, ridership is 6.7% lower in July than in January on average;
 whereas in Madison, ridership is 26.4% lower.
 
 In the right plot of the figure 1, we can look more closely to the recent months.
@@ -24,8 +24,7 @@ On January 30th, 2020 was when WHO informed the world about the outbreak,
 and March 11th was when quarantine started.
 These two factors both contributed to the decreasing trend.
 Some number of ridership in Madison reached a peak of 1,278,838 in February
-but then dropped drastically to a troughs of 110,054 in April according to National Transit Database.
-
+but then dropped drastically to a troughs of 110,054 in April.
 COVID-19 has especially affected Madison ridership;
 WI and US have seen 69.56% and 69.51% declines from February through April respectively,
 however, Madison has seen a 91.39% decline.

@@ -55,8 +55,8 @@ class BusSim:
         self.graph = Graph(self.stopTimes_final_df, start_time,
                            elapse_time, self.max_walking_distance, avg_walking_speed)
 
-    def get_gdf(self, start_stop):
-        gdf = self.graph.get_gdf(start_stop)
+    def get_gdf(self, start_stop=None, start_point=None):
+        gdf = self.graph.get_gdf(start_stop, start_point)
 
         gdf['geometry_centriod'] = gdf.geometry
 
@@ -76,7 +76,7 @@ class BusSim:
         return gdf.unary_union.difference(lakes.unary_union).area
 
     def _gen_final_df(self, route_remove, trip_delays):
-        mmt_gtfs_path = os.path.join(self.data_path, "mmt_gtfs")
+        mmt_gtfs_path = os.path.join(self.data_path, "mmt")
         stops_df = pd.read_csv(os.path.join(
             mmt_gtfs_path, "stops.csv"), sep=",")
         trips_df = pd.read_csv(os.path.join(

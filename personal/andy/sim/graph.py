@@ -69,8 +69,8 @@ class Graph:
         self.nodes = []
         self._constuct_graph(max_walking_distance)
 
-    def get_gdf(self, start_stop):
-        start = self._find_start(start_stop)
+    def get_gdf(self, start_stop=None, start_point=None):
+        start = self._find_start(start_stop, start_point)
         self._clear_graph()
         self._dijkstra(start)
 
@@ -99,7 +99,6 @@ class Graph:
             node.walking_distance = self.max_walking_distance
 
     def _dijkstra(self, start):
-        start.walking_distance = 0
         pq = [(0, start)]
         while len(pq) > 0:
             curr_distance, curr_node = heapq.heappop(pq)
@@ -189,10 +188,36 @@ class Graph:
                                 nodeCostPair = NodeCostPair(end, distance)
                                 start.children.append(nodeCostPair)
 
-    def _find_start(self, start_stop):
-        start = None
+    def _find_start(self, start_stop, start_point):
+        if start_stop is not None:
+            return self._find_start_stop(start_stop)
+
+        elif start_point is not None:
+            return self._find_start_point(start_point)
+
+    def _find_start_stop(self, start_stop):
         for node in self.nodes:
             if node.stop_id == start_stop:
-                if start is None or node.arrival_time < start.arrival_time:
-                    start = node
+                start_point = (node.stop_lat, node.stop_lon)
+                return self._find_start_point(start_point)
+
+    def _find_start_point(self, start_point):
+        lat, lon = start_point
+        start = Node(None, None, None, lat, lon,
+                     pd.to_timedelta(self.start_time), 0)
+
+        # gen edges by walking
+        for end in self.nodes:
+            # unreachable for sure (can't go back in time)
+            if start.arrival_time >= end.arrival_time:
+                continue
+
+            # walk
+            distance = start.distance(end)
+            time_delta = distance / self.avg_walking_speed
+            time_delta = timedelta(seconds=time_delta)
+            if distance < self.max_walking_distance and start.arrival_time + time_delta < end.arrival_time:
+                nodeCostPair = NodeCostPair(end, distance)
+                start.children.append(nodeCostPair)
+
         return start
