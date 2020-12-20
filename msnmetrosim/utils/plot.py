@@ -1,5 +1,5 @@
 """Helper functions for plotting the data."""
-from typing import Iterable, Tuple, Optional, Union, Dict, Sequence
+from typing import Dict, Iterable, Optional, Sequence, Tuple, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -19,7 +19,7 @@ def plot_base(fn):
         if 'axe' not in kwargs or kwargs['axe'] is None:
             auto_gen = True
             fig, axe = plt.subplots()
-            fig.tight_layout()  # otherwise the right y-label is slightly clipped
+            fig.tight_layout(pad=2)  # otherwise the right y-label is slightly clipped
 
             kwargs['axe'] = axe
 

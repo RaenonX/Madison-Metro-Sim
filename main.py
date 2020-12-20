@@ -1,12 +1,12 @@
 import time
 from datetime import datetime
 
+from msnmetrosim.utils import plot_multiple
 from msnmetrosim.views import (
     # test_run,
     # Simulation graph benchmarking
     benchmark_map_construction,
     # Simulation benchmark plotting
-    plot_trip_count_cdf, post_152f1000_pruned_no_detouring
 )
 
 
@@ -48,7 +48,26 @@ def main2():
 
 
 def main3():
-    plot_trip_count_cdf(post_152f1000_pruned_no_detouring)
+    plot_multiple(
+        list(range(10, 100, 10)),
+        "Simulation time (mins)",
+        [
+            (
+                "Graph Generation", "dashdot", [
+                    1.564986, 1.821449, 2.485040, 3.429946, 4.576142, 5.923128, 7.881356, 9.760332, 11.980241
+                ]
+            ),
+            (
+                "Data Loading", "dashed", [
+                    0.441076, 0.454345, 0.514306, 0.580983, 0.649454, 0.815186, 0.790881, 0.847786, 0.901834
+                ]
+            )
+        ],
+        "Time spent (secs)",
+        "Process",
+        title="Simulation Performance",
+        legend_loc="upper left",
+    )
 
 
 if __name__ == '__main__':
