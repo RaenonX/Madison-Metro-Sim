@@ -36,10 +36,10 @@ class BusSim:
 
             max_walking_min (float): the maximum allowed walking time minutes
 
-            route_remove (:obj:`list` of :obj:`int`, optional): the list
+            route_remove (list[int], optional): the list
                 of routes to remove
 
-            trip_delays (:obj:`list` of :obj:`Tuple`, optional): the list
+            trip_delays (list[Tuple], optional): the list
                 of trip-delay pairs to add the tuple should be in the format of
                 `(trip_id, delay in HH:MM:SS)`
 
@@ -56,6 +56,18 @@ class BusSim:
                            elapse_time, self.max_walking_distance, avg_walking_speed)
 
     def get_gdf(self, start_stop=None, start_point=None):
+        """Given a starting point(lat, lon) or a starting stop_id, compute the region covered in geopandas.Geodataframe
+
+        Args:
+            start_stop (str, optional): The path to the directory of the data files
+                (contains both mmt_gtfs and plot subdirectories)
+
+            start_point (str, optional): the day in a week to perform simulation on
+
+        Returns:
+            geopandas.GeoDataFrame: the GeoDataFrame of the region covered
+
+        """
         gdf = self.graph.get_gdf(start_stop, start_point)
 
         gdf['geometry_centriod'] = gdf.geometry
@@ -67,6 +79,15 @@ class BusSim:
         return gdf
 
     def get_area(self, gdf):
+        """This is a util method to compute the total area in meters^2 given a geopandas.Geodataframe
+
+        Args:
+            gdf (geopandas.GeoDataFrame): The Geodataframe used to compute the total area
+
+        Returns:
+            float: the total area in meters^2
+
+        """
         # the area returned is in meters^2
         lake_path = os.path.join(
             self.data_path, "plot", "background", "water-shp")
@@ -92,7 +113,7 @@ class BusSim:
         calendar_df['end_date'] = pd.to_datetime(
             calendar_df['end_date'], format='%Y%m%d')
         calendar_filtered_df = calendar_df[self._is_service_valid(
-            calendar_df[self.day], calendar_df["start_date"], calendar_df["end_date"])]
+            calendar_df[self.day], calendar_df["service_id"])]
         service_ids = calendar_filtered_df["service_id"].tolist()
 
         # get valid trips
@@ -134,8 +155,8 @@ class BusSim:
 
         return stopTimes_final_df
 
-    def _is_service_valid(self, day, start_date, end_date):
-        return (day == 1) & (datetime.now() >= start_date) & (datetime.now() <= end_date)
+    def _is_service_valid(self, day, service_id):
+        return (day == 1) & (service_id.str.startswith("94"))
 
     def _get_valid_stopTime(self, df, start_time, elapse_time):
         start_time = pd.to_timedelta(start_time)
